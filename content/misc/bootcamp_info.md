@@ -1,6 +1,7 @@
-The IBIEM bootcamp and the CSP1 and CSP2 courses depend heavily on
-computing so please read this information carefully. This document is
-also available at
+As soon as possible please read this email carefully and completely, and
+complete the tasks requested.
+
+This document is also available at
 <a href="https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_info.md" class="uri">https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_info.md</a>
 
 Computer
