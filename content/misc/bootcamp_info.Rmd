@@ -1,9 +1,9 @@
 ---
-title: "IBIEM Computing"
+title: "IBIEM Information"
 output:
+  html_document: default
   md_document:
     variant: markdown_github
-  html_document: default
 ---
 
 As soon as possible please read this email carefully and completely, and complete the tasks requested.
