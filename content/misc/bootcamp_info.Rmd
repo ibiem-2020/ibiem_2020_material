@@ -6,7 +6,7 @@ output:
   html_document: default
 ---
 
-The IBIEM bootcamp and the CSP1 and CSP2 courses depend heavily on computing so please read this information carefully.  This document is also available at https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_email.md
+The IBIEM bootcamp and the CSP1 and CSP2 courses depend heavily on computing so please read this information carefully.  This document is also available at https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_info.md
 
 
 # Computer
@@ -33,7 +33,7 @@ To access your RStudio instance:
 5. If you do not see this link, scroll down until you find the section “IBIEM2020 - RStudio for bootcamp, CSP1, and CSP2 2020" and Click on the link that says “Click here to create your personal IBIEM2020 environment”
    - Important: Be sure that you select IBIEM2020! There are versions of the IBIEM environment from previous years!  You do not want these!!
 
-# IBIEM Login confirmation
+## IBIEM Login confirmation
 In order to catch and fix any problems ahead of time, you *must* log into the IBIEM Computing Environment as soon as possible and confirm your successful login.  You will be recieving an email later today with a link for a "Login Confirmation" form.  To complete this process please do the following:
 
 1. Follow the instructions above for logging into the IBIEM Computing Environment
@@ -66,3 +66,18 @@ You *should* get an error message that says `Error in file(con, "r") : cannot op
 ```{r eval=FALSE, echo=TRUE}
 cat(file = path.expand("~/test_account.txt"), "Account accessed\n")
 ```
+
+# Virtual Classroom Guidelines
+We will be using Zoom for bootcamp. Zoom details and the bootcamp agenda will be sent in a separate email.
+
+Below are recommended guidelines for the IBIEM virtual classroom. We understand that many of us are not working in ideal circumstances so not all of these are possible for everyone (I will definitely be interupted by my children on occassion), just do your best.
+
+- Find a quiet place to attend each session where you won’t be interrupted. If you can't be in a quiet place, please keep your microphone muted when you are not talking.
+- Please log in 5 minutes before the session is schedule to start
+- Please leave your camera ON during the session if possible
+- Always remember to treat the virtual classroom like the real classroom
+  - Dress for virtual class the same way you would for in-person class
+  - Turn off cell phones, TVs, YouTube, and other distractions
+  - We encourage questions by voice or chat
+
+

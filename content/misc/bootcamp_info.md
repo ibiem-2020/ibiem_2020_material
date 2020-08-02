@@ -1,0 +1,124 @@
+The IBIEM bootcamp and the CSP1 and CSP2 courses depend heavily on
+computing so please read this information carefully. This document is
+also available at
+<a href="https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_info.md" class="uri">https://github.com/ibiem-2020/ibiem_2020_material/tree/master/content/misc/bootcamp_info.md</a>
+
+Computer
+========
+
+Many bootcamp sessions and CSP1 and CSP2 class will involve computer
+work, so you *must* have a computing device available. You do not need a
+brand-new, super-fast computer. As discussed below, all of our
+computational work will be in a web-browser based environment, so you
+just need to be able to run an up-to-date web browser. You *may* be able
+to get away with a tablet. If you do not have access to a computing
+device please contact us as soon as possible so we can make arrangements
+for a loaner computer.
+
+IBIEM computing environment
+===========================
+
+All computational work for the IBIEM will be done through a web
+browser-based version of RStudio. Our RStudio instances are being run by
+the Duke Office of Information Technology, so all you need on your
+computer is an up-to-date version of Firefox, Chrome, or Safari.
+
+Accessing the IBIEM computing environment
+-----------------------------------------
+
+### Non-Duke Students
+
+You can try the instructions below, but the “VM-Manage” system does not
+usually work with guest NetIDs. You should have already received an
+email from me with instructions on how to access your RStudio instance
+
+### Duke Students
+
+To access your RStudio instance:
+
+1.  Go to
+    <a href="https://vm-manage.oit.duke.edu/" class="uri">https://vm-manage.oit.duke.edu/</a>
+2.  Logon with your NetID and Password
+3.  Click on “Docker” in the top right.
+4.  You should see a link that says “Click here to log in to your
+    IBIEM2020 environment”. You should click on that link.
+5.  If you do not see this link, scroll down until you find the section
+    “IBIEM2020 - RStudio for bootcamp, CSP1, and CSP2 2020” and Click on
+    the link that says “Click here to create your personal IBIEM2020
+    environment”
+    -   Important: Be sure that you select IBIEM2020! There are versions
+        of the IBIEM environment from previous years! You do not want
+        these!!
+
+IBIEM Login confirmation
+------------------------
+
+In order to catch and fix any problems ahead of time, you *must* log
+into the IBIEM Computing Environment as soon as possible and confirm
+your successful login. You will be recieving an email later today with a
+link for a “Login Confirmation” form. To complete this process please do
+the following:
+
+1.  Follow the instructions above for logging into the IBIEM Computing
+    Environment
+
+2.  Once RStudio is open in your web browser, type or paste the
+    following command into the *Console* pane (on the left side of the
+    RStudio window), then hit the *return* key on your keyboard:
+
+``` r
+readLines("/data/confirm.md")
+```
+
+You should see the following output:
+
+    [1] "The login confirmation number is: #####"
+
+where \#\#\#\#\# is a 5 digit number.
+
+1.  You will need to type or paste the 5 digit number into the “Login
+    Confirmation” form and submit it.
+
+2.  Once you do that, you should receive a message “IBIEM Login
+    Confirmed! Thank you!”
+
+3.  Next type or paste the following command into the *Console* pane ,
+    then hit the *return* key on your keyboard:
+
+``` r
+readLines(path.expand("~/test_account.txt"))
+```
+
+You *should* get an error message that says
+`Error in file(con, "r") : cannot open the connection`. If you *do not*
+get this error message, please email me *immediately* to let me know
+
+1.  Finally you should type or paste the following command into the
+    *Console* pane , then hit the *return* key on your keyboard:
+
+``` r
+cat(file = path.expand("~/test_account.txt"), "Account accessed\n")
+```
+
+Virtual Classroom Guidelines
+============================
+
+We will be using Zoom for bootcamp. Zoom details and the bootcamp agenda
+will be sent in a separate email.
+
+Below are recommended guidelines for the IBIEM virtual classroom. We
+understand that many of us are not working in ideal circumstances so not
+all of these are possible for everyone (I will definitely be interupted
+by my children on occassion), just do your best.
+
+-   Find a quiet place to attend each session where you won’t be
+    interrupted. If you can’t be in a quiet place, please keep your
+    microphone muted when you are not talking.
+-   Please log in 5 minutes before the session is schedule to start
+-   Please leave your camera ON during the session if possible
+-   Always remember to treat the virtual classroom like the real
+    classroom
+    -   Dress for virtual class the same way you would for in-person
+        class
+    -   Turn off cell phones, TVs, YouTube, and other distractions
+    -   We encourage questions by voice or chat
