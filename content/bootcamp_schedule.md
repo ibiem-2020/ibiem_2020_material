@@ -1,8 +1,3 @@
-Bootcamp Daily Group Assignments
-================================
-
-[Group Assignments](misc/random_groups.md)
-
 Bootcamp Syllabus
 =================
 
@@ -32,7 +27,7 @@ Bootcamp Syllabus
 | 13-Aug | 9:00-10:15  |           | No Session                                                                                                           | [Challenge \#2](https://github.com/ibiem-master/challenge_2) |
 |        | 10:30-11:45 | Granek    | [R: Exploring Data Frames](http://swcarpentry.github.io/r-novice-gapminder/05-data-structures-part2/index.html)      |                                                              |
 |        |             |           | [R: Subsetting Data](http://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html)                  |                                                              |
-|        | 1:00-2:15   | Murray    | Strength Finder Overview                                                                                             |                                                              |
+|        | 1:00-2:15   | Murray    | Strength Finder                                                                                                      |                                                              |
 | 14-Aug | 9:00-10:15  | Granek    | [R: Control Flow](http://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html)                        |                                                              |
 |        | 10:30-11:45 | Granek    | [R: Data Visualization](http://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)                  |                                                              |
 |        | 12:15-1:00  | Granek    | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)                      |                                                              |
