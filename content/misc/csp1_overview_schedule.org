@@ -51,3 +51,22 @@
 | 22-Nov                  |      10-11 | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                             |                 |       |          |
 |                         |      11-12 | [Git: Collaborating](lessons/bootcamp/040_git_overview.md#collaborating)                                   |                 |       |          |
 |                         |       12-1 | Office Hours                                                                                               |                 |       |          |
+
+
+
+* Leftovers from Bootcamp
+
+
+  
+|        |   2:30-3:45 | Granek       | [Challenge #2](https://github.com/ibiem-master/challenge_2) Workshop                                            |
+| 12-Aug |  9:00-10:15 | Granek       |                                                                                                                 |
+|        |  12:15-1:00 | Gunsch/Kelly | Building Dynamic Research Teams                                                                                 |
+|        |   2:30-3:45 | Granek       |
+| 13-Aug |  9:00-10:15 | Granek       |
+|        |  12:15-1:00 | Weintraub    | Micro-TED Talks                                                                                                 |
+|        |   2:30-3:45 | Weintraub    | Micro-TED Talks                                                                                                 |
+| 14-Aug |  9:00-10:15 | Granek       | [R: dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)                                 |
+|        | 10:30-11:45 | Granek       | [R: tidyr](http://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html)                                 |
+
+
+|            |         2:30-3:45 | Murray       | Strengths Finder Activity                                                                                        |

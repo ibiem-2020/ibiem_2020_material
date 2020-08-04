@@ -24,6 +24,14 @@ library(readr)
 library(dplyr)
 read_lines("misc/bootcamp_overview.org") %>%
   cat(fill=TRUE)
+
+# Knitr basically copies the org-mode table into markdown, unless it has issues
+# The following lines (when uncommented) demonstrate the problem. 
+# The first is OK, but the second causes knitr to render everything as ugly html because the 4th column is one character longer than it likes
+# It seems to be an issue of total line length (not per column) that is the issue
+# | 10-Aug     |        9:00-10:15 | Singleton | Maximum Line length before knitr freaks out 123                                                                     |                                                             |
+# | 10-Aug     |        9:00-10:15 | Singleton | Too long, knitr will freak out 1234567890 123456                                                                    |                                                             |
+
 ```
 
 
