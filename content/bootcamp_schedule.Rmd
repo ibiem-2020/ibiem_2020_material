@@ -20,7 +20,7 @@ library(readr)
 [Group Assignments](misc/random_groups.md)
 ```
 
-# Bootcamp Syllabus
+# Bootcamp Agenda
 ```{r eval=TRUE, echo=FALSE, include=TRUE, results="asis"}
 library(readr)
 library(dplyr)
