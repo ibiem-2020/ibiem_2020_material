@@ -16,6 +16,11 @@ library(knitr)
 # opts_chunk$set(echo=TRUE, results='hide')
 ```
 
+To download this file, paste the following code in the console and run it with the "return" key.
+```{r echo=TRUE, eval=FALSE}
+download.file(url="http://duke.is/JUfw8a", destfile = path.expand("~/unvotes.Rmd"))
+```
+
 Let's take a look at the voting history of countries in the United Nations 
 General Assembly. We will be using data from the __unvotes__ package. 
 Additionally, we will make use of the __tidyverse__ and __lubridate__ packages 
@@ -115,7 +120,7 @@ un_votes %>%
     labs(
       title = "Percentage of 'Yes' votes in the UN General Assembly",
       subtitle = "1946 to 2015",
-      y = "% Yes",
+      y = "'Yes' Proportion",
       x = "Year",
       color = "Country"
     )
