@@ -1,7 +1,7 @@
 ---
 title: "Reproducible Analysis"
 author: "Josh Granek"
-date: "August 7, 2019"
+date: "August 6, 2020"
 output:
   ioslides_presentation: default
   beamer_presentation: default
@@ -18,6 +18,8 @@ library(tibble)
 # Start Docker Demo
 
 # Overview
+
+## Reproducible Research Poll
 
 ## What is Reproducible Analysis? {.build}
   "Reproducible Analysis is an important part of reproducible research.  Reproducible analysis requires that all components of the analysis be archived so that _anyone_ can independently repeat the analysis and arrive at exactly the same results" 
@@ -59,11 +61,11 @@ library(tibble)
 ## Care and Handling of Raw Data
   1. Download
   2. Provenance
-    - Verify checksum 
-    - Generate checksum if it didn't come with the data
+      - Verify checksum 
+      - Generate checksum if it didn't come with the data
   3. Protection
-    - Set *READ-ONLY* permissions on data files and data directory
-    - Archive ASAP
+      - Set *READ-ONLY* permissions on data files and data directory
+      - Archive ASAP
 
 ## Switch to RStudio
 
@@ -151,6 +153,16 @@ chmod -R a+w $RAWDATA_DIR
 rm -rf $RAWDATA_DIR
 ```
 
+## Care and Handling of Raw Data
+  1. Download
+  2. Provenance
+      - Verify checksum 
+      - Generate checksum if it didn't come with the data
+  3. Protection
+      - Set *READ-ONLY* permissions on data files and data directory
+      - <div class="red2"> Archive ASAP </div>
+
+    
 ## Archiving Data @ Duke
 - [Duke Data Service](https://dataservice.duke.edu/)
     - [DukeDSClient](https://github.com/Duke-GCB/DukeDSClient)
@@ -223,13 +235,7 @@ rm -rf $RAWDATA_DIR
   - Documentation
   - Manuscript (optional)
   
-## Version Control {.build}
-### Heard of Version Control?
-### Heard of Github? 
-
-```{r, out.height = "600px"}
-knitr::include_graphics("./github_news.png")
-```
+## Version Control Poll
 
 ## What is Version Control?
 ```{r, out.width = "400px"}
