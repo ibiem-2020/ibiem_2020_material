@@ -10,16 +10,18 @@ Bootcamp Agenda
 |        | 10:30-11:45 | Graves    | Evolution                                                                                                            |               |
 |        | 12:15-1:00  | Granek    | [Tour of Rstudio](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html)                       |               |
 |        |             |           | [Intro to Knitr](http://swcarpentry.github.io/r-novice-gapminder/15-knitr-markdown/index.html)                       |               |
-| 7-Aug  | 9:00-10:15  | Granek    | [Intro to Git \#1](lessons/bootcamp/040_git_overview.md)                                                             | Challenge \#1 |
-|        | 10:30-11:45 | Granek    | [Intro to Git \#2](lessons/bootcamp/040_git_overview.md#ignoring-things)                                             |               |
+| 7-Aug  | 9:00-10:15  | Granek    | [Intro to Git \#1](lessons/bootcamp/040_git_overview.md)                                                             |               |
+|        | 10:30-11:45 | Granek    | [Intro to Git \#2](lessons/bootcamp/040_git_overview.md#tracking-changes)                                            |               |
 |        | 12:15-1:00  | Gunsch    | Defining your Goals                                                                                                  |               |
 |        |             | Kelly     | Introduction to Rubrics                                                                                              |               |
 | 10-Aug | 9:00-10:15  | Singleton | Behind the Microbiome: Biology & Exp. Design                                                                         |               |
 |        | 10:30-11:45 | Singleton | Behind the Microbiome: Biology & Exp. Design                                                                         |               |
-|        | 12:15-1:00  | Granek    | [R: Introduction \#1](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html#introduction-to-r) |               |
+|        | 12:15-1:00  | Granek    | [Intro to Git \#3](lessons/bootcamp/040_git_overview.md#remote-git-repository)                                       | Challenge \#1 |
+|        |             |           | [Tour of Rstudio](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html)                       |               |
+|        |             |           | [Intro to Knitr](http://swcarpentry.github.io/r-novice-gapminder/15-knitr-markdown/index.html)                       |               |
 | 11-Aug | 9:00-10:15  | Weintraub | Science Communication Overview + 3 audiences                                                                         |               |
 |        | 10:30-11:45 | Weintraub | Story Telling and Science Communication                                                                              |               |
-|        | 12:15-1:00  | Granek    | [R: Introduction \#2](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html#vectorization)     |               |
+|        | 12:15-1:00  | Granek    | [R: Introduction \#1](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html#introduction-to-r) |               |
 | 12-Aug | 9:00-10:15  | Granek    | [R: Project Management](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)                 |               |
 |        |             |           | [R: Seeking Help](http://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html)                        |               |
 |        | 10:30-11:45 | Davenport | IBIEM Alum Presentation                                                                                              |               |
