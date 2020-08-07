@@ -237,6 +237,7 @@ If you entered a passphrase when you generated your SSH key, you will be prompte
 7. Notice that near the top of the **Review Changes** dialog it now says "Your branch is ahead of 'origin/master' by 1 commit.".  This is because we have commited local changes, but haven't updated our remote repo (on Github).  Let's sync the remote repo by clicking the **Push** button.  Check on Github for the changes!
 
 Do the following challenges from the bottom of [Version Control with Git: 7. Remotes in GitHub](http://swcarpentry.github.io/git-novice/07-github/):
+
   * GitHub GUI
   * Push vs. Commit
 
