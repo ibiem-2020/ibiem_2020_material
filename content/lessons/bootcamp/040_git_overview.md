@@ -82,15 +82,14 @@ Intro to Git in RStudio
 1.  Replace
     “<a href="mailto:you@example.com" class="email">you@example.com</a>”
     and “Your Name” with your information, then copy the revised text.
-2.  Open the RStudio Shell (under the **Tools** menu)
+2.  Open the RStudio Terminal (under the **Tools** menu)
 3.  Paste the revised text at the command prompt, then hit the
     **return** key on your keyboard
 4.  You can confirm that you successful configured your name and email
     with this command: `git config --list`
-5.  Type `exit` in the shell to close it
-6.  Now go back to the **Review Changes** dialog and close the **Git
+5.  Now go back to the **Review Changes** dialog and close the **Git
     Commit** message.
-7.  Click **Commit** again, then close the **Git Commit** and **Review
+6.  Click **Commit** again, then close the **Git Commit** and **Review
     Changes** dialog boxes.
 
 ### Tracking Changes
@@ -235,8 +234,8 @@ Git is super powerful! It will let you do all sorts of things. For
 example, you can revert some or all files back to any previous commit .
 . . but you cannot access all of git’s features with the RStudio
 interface. To do fancier things you have to use the command line
-interface. Within RStudio you can do this using the **Shell** under the
-**Tools** menu. The Software Carpentry module [Version Control with
+interface. Within RStudio you can do this using the **Terminal** under
+the **Tools** menu. The Software Carpentry module [Version Control with
 Git](http://swcarpentry.github.io/git-novice/) covers this, and google
 will help you figure out how to do just about anything with git.
 
@@ -331,7 +330,7 @@ Remotes in GitHub
 3.  Below that, copy the text in the section **. . . or push an existing
     repository from the command line** by clicking on the “copy to
     clipboard” button on the right side.
-4.  In RStudio, open the shell (in the **Tools** menu)
+4.  In RStudio, open the Terminal (in the **Tools** menu)
 5.  Paste the command you copied from Github. It should look like this
     (except your github username should be there instead of
     “GITHUB\_USER\_NAME”):

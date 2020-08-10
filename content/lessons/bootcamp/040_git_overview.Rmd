@@ -55,15 +55,14 @@ git config --global user.name "Your Name"
 ```
 10. Replace "you@example.com" and "Your Name" with your information,
 then copy the revised text.
-11. Open the RStudio Shell (under the **Tools** menu)
+11. Open the RStudio Terminal (under the **Tools** menu)
 12. Paste the revised text at the command prompt, then hit the
 **return** key on your keyboard
 13. You can confirm that you successful configured your name and email
 with this command: `git config --list`
-14. Type `exit` in the shell to close it
-15. Now go back to the **Review Changes** dialog and close the **Git
+14. Now go back to the **Review Changes** dialog and close the **Git
 Commit** message.
-16. Click **Commit** again, then close the **Git Commit** and **Review
+15. Click **Commit** again, then close the **Git Commit** and **Review
     Changes** dialog boxes.
 
 ### Tracking Changes
@@ -169,7 +168,7 @@ revert line 4, but commit line 5!
    message and commit
 
 #### Going Further Back
-Git is super powerful!  It will let you do all sorts of things.  For example, you can revert some or all files back to any previous commit . . . but you cannot access all of git's features with the RStudio interface.  To do fancier things you have to use the command line interface.  Within RStudio you can do this using the **Shell** under the **Tools** menu.  The Software Carpentry module [Version Control with Git](http://swcarpentry.github.io/git-novice/) covers this, and google will help you figure out how to do just about anything with git.
+Git is super powerful!  It will let you do all sorts of things.  For example, you can revert some or all files back to any previous commit . . . but you cannot access all of git's features with the RStudio interface.  To do fancier things you have to use the command line interface.  Within RStudio you can do this using the **Terminal** under the **Tools** menu.  The Software Carpentry module [Version Control with Git](http://swcarpentry.github.io/git-novice/) covers this, and google will help you figure out how to do just about anything with git.
 
 ### Ignoring Things
 
@@ -223,7 +222,7 @@ Now let's work through the challenges at the end of [Version Control with Git: 6
 1. Follow  [Version Control with Git: 7. Remotes in GitHub](http://swcarpentry.github.io/git-novice/07-github/) through where it says "The next step is to connect the two repositories. We do this by making the GitHub repository a remote for the local repository. The home page of the repository on GitHub includes the string we need to identify it:"
 2. In Github, under "Quick setup — if you’ve done this kind of thing before", click on "SSH"
 3. Below that, copy the text in the section **. . . or push an existing repository from the command line** by clicking on the "copy to clipboard" button on the right side.
-3. In RStudio, open the shell (in the **Tools** menu)
+3. In RStudio, open the Terminal (in the **Tools** menu)
 4. Paste the command you copied from Github.  It should look like this (except your github username should be there instead of "GITHUB_USER_NAME"):
 ```
 git remote add origin git@github.com:GITHUB_USER_NAME/planets.git
