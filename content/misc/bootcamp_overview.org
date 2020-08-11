@@ -19,10 +19,8 @@
 | 11-Aug     |        9:00-10:15 | Weintraub | Science Communication Overview + 3 audiences                                                                     |                        |
 |            |       10:30-11:45 | Weintraub | Story Telling and Science Communication                                                                          |                        |
 |            |        12:15-1:00 | Granek    | [R: Introduction](http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html#introduction-to-r) |                        |
-|            |                   |           | [R: Project Management](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)             |                        |
-|            |                   |           | [R: Seeking Help](http://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html)                    |                        |
-|            |                   |           | [R: Data Structures](http://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1/index.html)        |                        |
 | 12-Aug     |        9:00-10:15 | Granek    | [R: Project Management](http://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html)             |                        |
+|            |                   |           | [R: Seeking Help](http://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html)                    |                        |
 |            |       10:30-11:45 | Davenport | IBIEM Alum Presentation                                                                                          |                        |
 |            |        12:15-1:00 | Granek    | [R: Data Structures](http://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1/index.html)        |                        |
 | 13-Aug     |        9:00-10:15 |           | No Session                                                                                                       | Challenge #2           |
