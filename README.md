@@ -8,5 +8,6 @@ This website can be reached at: http://duke.is/m6CqCi
 -->
 
 - [Bootcamp Schedule](content/bootcamp_schedule.md)
+- [IBIEM Discussion Board](https://github.com/ibiem-master/community)
 - [Miscellany](content/reference_info.md)
 - [Downloading](content/misc/downloading.md)
