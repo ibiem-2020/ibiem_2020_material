@@ -55,7 +55,13 @@
 
 
 * Leftovers from Bootcamp
+JOry 8/21 @ 10am
+Glenda Rubrics 8/28
 
+
+|            |                   | Granek    | [R: Data Visualization](http://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)                                 |                        |
+|            |                   | Granek    | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)                                     |                        |
+|            |                   |           | [R: Functions](http://swcarpentry.github.io/r-novice-gapminder/10-functions/index.html)                                             |                        |
 
   
 |        |   2:30-3:45 | Granek       | [Challenge #2](https://github.com/ibiem-master/challenge_2) Workshop                                            |

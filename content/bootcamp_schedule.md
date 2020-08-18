@@ -31,8 +31,5 @@ Bootcamp Agenda
 |        | 11:45-12:30 | Granek    | [R: Exploring Data Frames \#1](http://swcarpentry.github.io/r-novice-gapminder/05-data-structures-part2/index.html)                  |                        |
 |        | 1:00-2:15   | Murray    | Strength Finder                                                                                                                      |                        |
 | 14-Aug | 9:00-10:15  | Granek    | [R: Exploring Data Frames \#2](http://swcarpentry.github.io/r-novice-gapminder/05-data-structures-part2/index.html#removing-columns) | Challenge \#2          |
-|        |             | Granek    | [R: Subsetting Data](http://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html)                                  |                        |
-|        |             | Granek    | [R: Control Flow](http://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html)                                        |                        |
-|        | 10:30-11:45 | Granek    | [R: Data Visualization](http://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)                                  |                        |
-|        | 12:15-1:00  | Granek    | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)                                      |                        |
-|        |             |           | [R: Functions](http://swcarpentry.github.io/r-novice-gapminder/10-functions/index.html)                                              |                        |
+|        | 10:30-11:45 | Granek    | [R: Subsetting Data](http://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html)                                  |                        |
+|        | 12:15-1:00  | Granek    | [R: Control Flow](http://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html)                                        |                        |
