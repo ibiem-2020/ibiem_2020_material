@@ -1,78 +1,62 @@
-| Date&nbsp;&nbsp; &nbsp; | Time&nbsp; | Topic                                                                                                      | Assignment      | Due   | Location |
-|-------------------------+------------+------------------------------------------------------------------------------------------------------------+-----------------+-------+----------|
-| 30-Aug                  |      10-11 | [R: Writing Good Code](http://swcarpentry.github.io/r-novice-gapminder/16-wrap-up/index.html)              | Challenge 2     | 9/6   | Duke     |
-|                         |            | [Bash: Intro](http://swcarpentry.github.io/shell-novice/01-intro/index.html)                               |                 |       |          |
-|                         |            | [Bash: Navigating Files and Directories](http://swcarpentry.github.io/shell-novice/02-filedir/index.html)  |                 |       |          |
-|                         |      11-12 | [Bash: Working With Files and Directories](http://swcarpentry.github.io/shell-novice/03-create/index.html) |                 |       |          |
-|                         |            | [Bash: Permissions](http://swcarpentry.github.io/shell-extras/04-permissions/)                             |                 |       |          |
-|                         |            | Bash: Shell Variables                                                                                      |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 6-Sep                   |      10-11 | [Lecture: HTS Sequencing](lectures/hts_background.pdf)                                                     | Challenge 3     | 9/20  | Duke     |
-|                         |      11-12 | Claudia Gunsch (Duke)                                                                                      |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 13-Sep                  |      10-11 | [Lecture: HTS Sequencing (continued)](lectures/hts_background.pdf)                                         | Challenge 4     | 9/27  | Duke     |
-|                         |            | [Lecture: Bioinformatics Background](lectures/bioinformatics_background.pdf)                               |                 |       |          |
-|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #1](lectures/dada2_pipeline.pdf)                                |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 20-Sep                  |      10-11 | [Lecture: Amplicon Bioinformatics Analysis #2](lectures/dada2_pipeline.pdf)                                | Challenge 5     | 10/4  | Duke     |
-|                         |            | [Hands-on: Demultiplexing #1](lessons/demultiplex_tutorial.md)                                             |                 |       |          |
-|                         |      11-12 | Glenda Kelly: Learner Centered Rubrics: A Progression for your IBIEM Goals                                 |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 27-Sep                  |      10-11 | [Hands-on: Demultiplexing #2](lessons/demultiplex_tutorial.md)                                             | Challenge 6     | 10/18 | Duke     |
-|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #3](lectures/dada2_pipeline.pdf)                                |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 4-Oct                   |      10-11 | [Hands-on: DADA2 #1](lessons/dada2_tutorial_1_6.md)                                                        |                 |       | Duke     |
-|                         |      11-12 | Jessica Maia (BD)                                                                                          |                 |       |          |
-|                         |       12-1 | Lunch with Jessica Maia                                                                                    |                 |       |          |
-| 11-Oct                  |      10-11 | [Hands-on: DADA2 #2](lessons/dada2_tutorial_1_6.md)                                                        | Challenge 7     | 11/1  | Duke     |
-|                         |      11-12 | David Singleton: Giving a Research Presentation                                                            | Graves readings | 10/25 |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 18-Oct                  |      10-11 | [Lecture: Abundance and Diversity](lectures/statistical_analysis_1.pdf)                                    | Challenge 8     | 11/8  | Duke     |
-|                         |            | [Hands-on: Absolute Abundance #1](lessons/absolute_abundance_plots.md)                                     | Graves readings | 10/25 |          |
-|                         |      11-12 | Matthew Biggs - AgBiome                                                                                    |                 |       |          |
-|                         |       12-1 | Lunch with Matthew Biggs                                                                                   |                 |       |          |
-| 25-Oct                  |      10-11 | Joe Graves (readings on Google Drive)                                                                      | Challenge 9     | 11/22 | JSNN     |
-|                         |      11-12 | [Hands-on: Absolute Abundance #2](lessons/absolute_abundance_plots.md)                                     |                 |       |          |
-|                         |            | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                    |                 |       |          |
-|                         |            | [Hands-on: Relative Abundance #1](lessons/relative_abundance.md)                                           |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 1-Nov                   |      10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md)                                           | Challenge 10    | 11/22 | Duke     |
-|                         |            | [Lecture: Beta Diversity: Basics #1](lectures/statistical_analysis_2.pdf)                                  |                 |       |          |
-|                         |      11-12 | Benjamin Callahan (NCSU)                                                                                   |                 |       |          |
-|                         |       12-1 | Lunch with Benjamin Callahan                                                                               |                 |       |          |
-| 8-Nov                   |      10-11 | [Lecture: Beta Diversity: Basics #2](lectures/statistical_analysis_2.pdf)                                  |                 |       |          |
-|                         |            | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                 |                 |       |          |
-|                         |            |                                                                                                            |                 |       |          |
-|                         |      11-12 | IBIEM Alums #1                                                                                             |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
-| 15-Nov                  |      10-11 | Class Cancelled for Food Symposium                                                                         |                 |       |          |
-|                         |      11-12 |                                                                                                            |                 |       |          |
-|                         |       12-1 |                                                                                                            |                 |       |          |
-| 22-Nov                  |      10-11 | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                             |                 |       |          |
-|                         |      11-12 | [Git: Collaborating](lessons/bootcamp/040_git_overview.md#collaborating)                                   |                 |       |          |
-|                         |       12-1 | Office Hours                                                                                               |                 |       |          |
+| Date&nbsp;&nbsp; &nbsp; | Time&nbsp; | Topic                                                                                                      | Assignment  | Due   |
+|-------------------------+------------+------------------------------------------------------------------------------------------------------------+-------------+-------|
+| 21-Aug                  |      10-11 | SciComm: Recruitment Video Review                                                                          |             |       |
+|                         |      11-12 | [R: Data Visualization](http://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)        |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 28-Aug                  |      10-11 | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)            | Challenge 3 | 9/11  |
+|                         |            | [R: Functions](http://swcarpentry.github.io/r-novice-gapminder/10-functions/index.html)                    |             |       |
+|                         |      11-12 | Glenda Kelly: Learner Centered Rubrics                                                                     |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 4-Sep                   |      10-11 | [R: dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)                            |             |       |
+|                         |      11-12 | [R: tidyr](http://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html)                            |             |       |
+|                         |            | [R: Writing Data](http://swcarpentry.github.io/r-novice-gapminder/11-writing-data/)                        |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 11-Sep                  |      10-11 | [R: Writing Good Code](http://swcarpentry.github.io/r-novice-gapminder/16-wrap-up/index.html)              | Challenge 4 | 9/25  |
+|                         |            | [Bash: Intro](http://swcarpentry.github.io/shell-novice/01-intro/index.html)                               |             |       |
+|                         |            | [Bash: Navigating Files and Directories](http://swcarpentry.github.io/shell-novice/02-filedir/index.html)  |             |       |
+|                         |      11-12 | [Bash: Working With Files and Directories](http://swcarpentry.github.io/shell-novice/03-create/index.html) |             |       |
+|                         |            | [Bash: Permissions](http://swcarpentry.github.io/shell-extras/04-permissions/)                             |             |       |
+|                         |            | Bash: Shell Variables                                                                                      |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 18-Sep                  |      10-11 | [Lecture: HTS Sequencing](lectures/hts_background.pdf)                                                     | Challenge 5 | 10/2  |
+|                         |      11-12 | Claudia Gunsch (Duke)                                                                                      |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 25-Sep                  |      10-11 | [Lecture: HTS Sequencing (continued)](lectures/hts_background.pdf)                                         |             |       |
+|                         |            | [Lecture: Bioinformatics Background](lectures/bioinformatics_background.pdf)                               |             |       |
+|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #1](lectures/dada2_pipeline.pdf)                                |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 2-Oct                   |      10-11 | [Lecture: Amplicon Bioinformatics Analysis #2](lectures/dada2_pipeline.pdf)                                |             |       |
+|                         |            | [Hands-on: Demultiplexing #1](lessons/demultiplex_tutorial.md)                                             |             |       |
+|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 9-Oct                   |      10-11 | [Hands-on: Demultiplexing #2](lessons/demultiplex_tutorial.md)                                             | Challenge 6 | 10/23 |
+|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #3](lectures/dada2_pipeline.pdf)                                |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 16-Oct                  |      10-11 | [Hands-on: DADA2 #1](lessons/dada2_tutorial_1_6.md)                                                        |             |       |
+|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 23-Oct                  |      10-11 | [Hands-on: DADA2 #2](lessons/dada2_tutorial_1_6.md)                                                        | Challenge 7 | 11/6  |
+|                         |      11-12 | David Singleton: Giving a Research Presentation                                                            |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 30-Oct                  |      10-11 | [Lecture: Abundance and Diversity](lectures/statistical_analysis_1.pdf)                                    | Challenge 8 | 11/13 |
+|                         |            | [Hands-on: Absolute Abundance #1](lessons/absolute_abundance_plots.md)                                     |             |       |
+|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 6-Nov                   |      11-12 | [Hands-on: Absolute Abundance #2](lessons/absolute_abundance_plots.md)                                     |             |       |
+|                         |            | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                    |             |       |
+|                         |            | [Hands-on: Relative Abundance #1](lessons/relative_abundance.md)                                           |             |       |
+|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
+| 13-Nov                  |      10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md)                                           |             |       |
+|                         |            | [Lecture: Beta Diversity: Basics #1](lectures/statistical_analysis_2.pdf)                                  |             |       |
+|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |       12-1 | Office Hours                                                                                               |             |       |
 
 
 
-* Leftovers from Bootcamp
-JOry 8/21 @ 10am
-Glenda Rubrics 8/28
 
 
-|            |                   | Granek    | [R: Data Visualization](http://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)                                 |                        |
-|            |                   | Granek    | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)                                     |                        |
-|            |                   |           | [R: Functions](http://swcarpentry.github.io/r-novice-gapminder/10-functions/index.html)                                             |                        |
-
-  
-|        |   2:30-3:45 | Granek       | [Challenge #2](https://github.com/ibiem-master/challenge_2) Workshop                                            |
-| 12-Aug |  9:00-10:15 | Granek       |                                                                                                                 |
-|        |  12:15-1:00 | Gunsch/Kelly | Building Dynamic Research Teams                                                                                 |
-|        |   2:30-3:45 | Granek       |
-| 13-Aug |  9:00-10:15 | Granek       |
-|        |  12:15-1:00 | Weintraub    | Micro-TED Talks                                                                                                 |
-|        |   2:30-3:45 | Weintraub    | Micro-TED Talks                                                                                                 |
-| 14-Aug |  9:00-10:15 | Granek       | [R: dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)                                 |
-|        | 10:30-11:45 | Granek       | [R: tidyr](http://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html)                                 |
 
 
-|            |         2:30-3:45 | Murray       | Strengths Finder Activity                                                                                        |
+
+
