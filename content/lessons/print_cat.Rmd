@@ -1,0 +1,103 @@
+---
+title: "Print Cat"
+output:
+  md_document:
+     variant: markdown_github
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Cat and Print
+## Print
+A simple message
+```{r}
+print("Hello")
+```
+
+Now let's personalize it
+```{r, error = TRUE}
+name = "Josh"
+print("Hello, my name is", name)
+```
+
+Hmm, why didn't that work?
+```{r}
+help(print)
+```
+
+Beacuse `print` needs everything that you want printed as the first argument.  We can do that with `paste`!
+
+```{r}
+name = "Josh"
+print(paste("Hello, my name is", name))
+```
+
+Let's output some more information.  To make it easy to read let's put it on a new line by printing the _newline_ character `\n`.
+
+```{r}
+name = "Josh"
+print(paste("Hello, my name is", name, ". \nToday we are learning some awesome R."))
+```
+
+That didn't work right. And also there is a space between "Josh" and the period, that's ugly.
+We can fix all that . . .
+
+```{r}
+name = "Josh"
+print(paste("Hello, my name is ", name, ".", sep=""))
+print("Today we are learning some awesome R.")
+```
+. . . but it is starting to make our code more complicated.  And the "[1]" at the beginning of each line is kind of ugly.  Maybe it is time for a more powerful tool . . .
+
+## Cat
+`cat` is similar to `print`, but different.  It is more of a power tool, it gives you more control, but with that control comes a bit more work on your part.
+```{r}
+cat("Hello")
+```
+
+```{r}
+name = "Josh"
+cat("Hello, my name is", name)
+```
+
+```{r}
+name = "Josh"
+cat("Hello, my name is", name, ". \nToday we are learning some awesome R.")
+```
+
+## Print vs Cat
+So why use `print` at all?  For a lot of day to day stuff it is more convenient.
+```{r}
+print("Hello! Let's do some math.")
+1+1
+print("That should equal 2")
+```
+
+```{r}
+cat("Hello! Let's do some math.")
+1+1
+cat("That should equal 2")
+```
+
+All along `print` has been quietly putting a newline at the end of whatever it prints, that is _usually_ what we want.  `cat` doesn't do that automatically.  More _control_ also usually means more _work_ because control is usually the opposite of automatic.
+
+We can get `cat` to do what we want, its just a bit more work:
+
+```{r}
+cat("Hello! Let's do some math.", fill=TRUE)
+1+1
+cat("That should equal 2")
+```
+ 
+ Of course more control also means more options . . .
+
+```{r}
+cat("Hello! Let's do some math.\n", 1+1, "\nThat should equal 2", fill=TRUE)
+```
+
+ 
