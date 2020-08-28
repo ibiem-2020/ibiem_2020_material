@@ -5,6 +5,7 @@
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 28-Aug   | 10-11 | [R: Vectorization](http://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html)            | Challenge 3 | 9/11  |
 |          |       | [R: Functions](http://swcarpentry.github.io/r-novice-gapminder/10-functions/index.html)                    |             |       |
+|          |       | [R: Print Cat](lessons/print_cat.md)                                                                       |             |       |
 |          | 11-12 | Glenda Kelly: Learner Centered Rubrics                                                                     |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 4-Sep    | 10-11 | [R: dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)                            |             |       |
