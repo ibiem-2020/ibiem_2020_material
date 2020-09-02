@@ -41,7 +41,7 @@
 |                         |       12-1 | Office Hours                                                                                               |             |       |
 | 30-Oct                  |      10-11 | [Lecture: Abundance and Diversity](lectures/statistical_analysis_1.pdf)                                    | Challenge 8 | 11/13 |
 |                         |            | [Hands-on: Absolute Abundance #1](lessons/absolute_abundance_plots.md)                                     |             |       |
-|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |      11-12 | Dr. Frances Tong                                                                                           |             |       |
 |                         |       12-1 | Office Hours                                                                                               |             |       |
 | 6-Nov                   |      11-12 | [Hands-on: Absolute Abundance #2](lessons/absolute_abundance_plots.md)                                     |             |       |
 |                         |            | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                    |             |       |
@@ -50,7 +50,7 @@
 |                         |       12-1 | Office Hours                                                                                               |             |       |
 | 13-Nov                  |      10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md)                                           |             |       |
 |                         |            | [Lecture: Beta Diversity: Basics #1](lectures/statistical_analysis_2.pdf)                                  |             |       |
-|                         |      11-12 | Guest Speaker                                                                                              |             |       |
+|                         |      11-12 | Dr. Matthew Kelly                                                                                          |             |       |
 |                         |       12-1 | Office Hours                                                                                               |             |       |
 
 
