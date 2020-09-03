@@ -28,7 +28,7 @@
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 2-Oct    | 10-11 | [Lecture: Amplicon Bioinformatics Analysis \#2](lectures/dada2_pipeline.pdf)                               |             |       |
 |          |       | [Hands-on: Demultiplexing \#1](lessons/demultiplex_tutorial.md)                                            |             |       |
-|          | 11-12 | Guest Speaker                                                                                              |             |       |
+|          | 11-12 | Dr. Gianna Hammer                                                                                          |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 9-Oct    | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                            | Challenge 6 | 10/23 |
 |          | 11-12 | [Lecture: Amplicon Bioinformatics Analysis \#3](lectures/dada2_pipeline.pdf)                               |             |       |
