@@ -1,0 +1,20 @@
+---
+title: "Unix Shell Setup"
+output:
+  md_document:
+     variant: markdown_github
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Run the following in a *bash* chunk or the RStudio terminal to download the files we need for the Unix Shell lessons
+```{bash}
+cd ~
+wget --no-clobber http://swcarpentry.github.io/shell-novice/data/data-shell.zip
+unzip -o data-shell.zip
+```
+
