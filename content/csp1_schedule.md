@@ -10,6 +10,7 @@
 | 4-Sep    | 10-11 | [R: dplyr](http://swcarpentry.github.io/r-novice-gapminder/13-dplyr/index.html)                            |             |       |
 |          | 11-12 | [R: tidyr](http://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html)                            |             |       |
 |          |       | [R: Writing Data](http://swcarpentry.github.io/r-novice-gapminder/11-writing-data/)                        |             |       |
+|          |       | [R: Print Cat](lessons/print_cat.md)                                                                       |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 11-Sep   | 10-11 | [R: Writing Good Code](http://swcarpentry.github.io/r-novice-gapminder/16-wrap-up/index.html)              | Challenge 4 | 9/25  |
 |          |       | [Bash: Intro](http://swcarpentry.github.io/shell-novice/01-intro/index.html)                               |             |       |
@@ -27,7 +28,7 @@
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 2-Oct    | 10-11 | [Lecture: Amplicon Bioinformatics Analysis \#2](lectures/dada2_pipeline.pdf)                               |             |       |
 |          |       | [Hands-on: Demultiplexing \#1](lessons/demultiplex_tutorial.md)                                            |             |       |
-|          | 11-12 | Guest Speaker                                                                                              |             |       |
+|          | 11-12 | Dr. Gianna Hammer                                                                                          |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 9-Oct    | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                            | Challenge 6 | 10/23 |
 |          | 11-12 | [Lecture: Amplicon Bioinformatics Analysis \#3](lectures/dada2_pipeline.pdf)                               |             |       |
@@ -40,7 +41,7 @@
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 30-Oct   | 10-11 | [Lecture: Abundance and Diversity](lectures/statistical_analysis_1.pdf)                                    | Challenge 8 | 11/13 |
 |          |       | [Hands-on: Absolute Abundance \#1](lessons/absolute_abundance_plots.md)                                    |             |       |
-|          | 11-12 | Guest Speaker                                                                                              |             |       |
+|          | 11-12 | Dr. Frances Tong                                                                                           |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 6-Nov    | 11-12 | [Hands-on: Absolute Abundance \#2](lessons/absolute_abundance_plots.md)                                    |             |       |
 |          |       | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                    |             |       |
@@ -49,5 +50,5 @@
 |          | 12-1  | Office Hours                                                                                               |             |       |
 | 13-Nov   | 10-11 | [Hands-on: Relative Abundance \#2](lessons/relative_abundance.md)                                          |             |       |
 |          |       | [Lecture: Beta Diversity: Basics \#1](lectures/statistical_analysis_2.pdf)                                 |             |       |
-|          | 11-12 | Guest Speaker                                                                                              |             |       |
+|          | 11-12 | Dr. Matthew Kelly                                                                                          |             |       |
 |          | 12-1  | Office Hours                                                                                               |             |       |
