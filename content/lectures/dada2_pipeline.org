@@ -1,13 +1,13 @@
 #+TITLE:     Amplicon Bioinformatic Analysis: DADA2
 #+AUTHOR:    Josh Granek
-#+DATE:      September 13, 2019
+#+DATE:
 
 
 * Bioinformatic Goals
 ** Bioinformatic Analysis
 *** Input: Raw FASTQ File(s)
    #+LATEX: \tiny
-#+begin_src text
+#+BEGIN_EXAMPLE
  M00698:36:000000000-AFBEL:1:1101:14738:1412 1:N:0:0
 TTACGCTAACAGGCGGTAGCCTGGCAGGGTCAGGAAATCAATTAACTCATCGGAAGTGGTGATCTGTTCCATCAAGCGTGCGGCATCGTCA
 +
@@ -16,18 +16,18 @@ ABBBABBBAFFFGGGGGGGGGGHGGHGGGCG2GF3FFGHHHHHHGGFGHEHHGGGEHHHHAGGHHGHHHFFDHFHHHGEG
 CTGCCAGTTGAACGACGGCGAGCAGTTATAAGCCAGCAGTTTGCCCGGATATTTCGCGTGGATAGCTTGTGCAAAGCGACGCGCCAGTTCC
 +
 AAABBFFFFFFFGGGGGGGGGGGGHHHHHHHHGHGHGHHHHHGHHHGGGGGHHHHGGGGGGGHHHGHHFFHHHHHGHGGGGGGGGGGHHHH
-#+end_src
+#+END_EXAMPLE
 *** Output: Count Table
 |            | Sample 1 | Sample 2 | …  | Sample N |
-| /          | <>       | <>       | <> | <>       |
+| /          |       <> |       <> | <> |       <> |
 |------------+----------+----------+----+----------|
-| Bacteria 1 |          |          |    |          |
+| Bacteria 1 |        0 |        0 |    |       64 |
 |------------+----------+----------+----+----------|
-| Bacteria 2 |          |          |    |          |
+| Bacteria 2 |       72 |        5 |    |        0 |
 |------------+----------+----------+----+----------|
 | …          |          |          |    |          |
 |------------+----------+----------+----+----------|
-| Bacteria N |          |          |    |          |
+| Bacteria N |        0 |       43 |    |        0 |
 |------------+----------+----------+----+----------|
 
 ** Naive Approach: Assumptions
@@ -159,13 +159,14 @@ makeseq(15)
 
 ** Validate Data: Output
 # #+LATEX: \tiny
-#+begin_src text
+#+BEGIN_EXAMPLE
 $ md5sum -c md5sum.txt
 mydata_map.txt: OK
 Undetermined_S0_L001_I1_001.fastq.gz: OK
 Undetermined_S0_L001_R1_001.fastq.gz: OK
 Undetermined_S0_L001_R2_001.fastq.gz: OK
-#+end_src
+#+END_EXAMPLE
+
 ** Validate Data: Tools
    - md5sum
 * Assemble Metadata Table (pre-DADA2)
@@ -182,11 +183,11 @@ Undetermined_S0_L001_R2_001.fastq.gz: OK
    - Existing Map
    - Publication
    - Notes
-** Assemble Metadata Table: Output
+** Assemble Metadata Table: Output				   :noexport:
    Metadata Table (Mapping File)
    #+LATEX: \tiny
 
-#+begin_src text
+#+BEGIN_EXAMPLE
 #SampleID	BarcodeSequence	LinkerPrimerSequence	Treatment	DOB	Description
 PC.354	AGCACGAGCCTA	YATGCTGCCTCCCGTAGGAGT	Control	20061218	Control_mouse__I.D._354
 PC.355	AACTCGTCGATG	YATGCTGCCTCCCGTAGGAGT	Control	20061218	Control_mouse__I.D._355
@@ -197,22 +198,23 @@ PC.607	AACTGTGCGTAC	YATGCTGCCTCCCGTAGGAGT	Fast	20071112	Fasting_mouse__I.D._607
 PC.634	ACAGAGTCGGCT	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._634
 PC.635	ACCGCAGAGTCA	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._635
 PC.636	ACGGTGAGTGTC	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._636
-#+end_src
+#+END_EXAMPLE
 
-** Assemble Metadata Table: Output				   :noexport:
+** Assemble Metadata Table: Output
    Metadata Table (Mapping File)
    #+LATEX: \tiny
 
-| #SampleID | BarcodeSequence | LinkerPrimerSequence  | Treatment |      DOB | Description             |
-| PC.354    | AGCACGAGCCTA    | YATGCTGCCTCCCGTAGGAGT | Control   | 20061218 | Control_mouse__I.D._354 |
-| PC.355    | AACTCGTCGATG    | YATGCTGCCTCCCGTAGGAGT | Control   | 20061218 | Control_mouse__I.D._355 |
-| PC.356    | ACAGACCACTCA    | YATGCTGCCTCCCGTAGGAGT | Control   | 20061126 | Control_mouse__I.D._356 |
-| PC.481    | ACCAGCGACTAG    | YATGCTGCCTCCCGTAGGAGT | Control   | 20070314 | Control_mouse__I.D._481 |
-| PC.593    | AGCAGCACTTGT    | YATGCTGCCTCCCGTAGGAGT | Control   | 20071210 | Control_mouse__I.D._593 |
-| PC.607    | AACTGTGCGTAC    | YATGCTGCCTCCCGTAGGAGT | Fast      | 20071112 | Fasting_mouse__I.D._607 |
-| PC.634    | ACAGAGTCGGCT    | YATGCTGCCTCCCGTAGGAGT | Fast      | 20080116 | Fasting_mouse__I.D._634 |
-| PC.635    | ACCGCAGAGTCA    | YATGCTGCCTCCCGTAGGAGT | Fast      | 20080116 | Fasting_mouse__I.D._635 |
-| PC.636    | ACGGTGAGTGTC    | YATGCTGCCTCCCGTAGGAGT | Fast      | 20080116 | Fasting_mouse__I.D._636 |
+| SampleID  | BarcodeSequence | Treatment |      DOB | Description             |
+|-----------+-----------------+-----------+----------+-------------------------|
+| PC.354    | AGCACGAGCCTA    | Control   | 20061218 | Control_mouse__I.D._354 |
+| PC.355    | AACTCGTCGATG    | Control   | 20061218 | Control_mouse__I.D._355 |
+| PC.356    | ACAGACCACTCA    | Control   | 20061126 | Control_mouse__I.D._356 |
+| PC.481    | ACCAGCGACTAG    | Control   | 20070314 | Control_mouse__I.D._481 |
+| PC.593    | AGCAGCACTTGT    | Control   | 20071210 | Control_mouse__I.D._593 |
+| PC.607    | AACTGTGCGTAC    | Fast      | 20071112 | Fasting_mouse__I.D._607 |
+| PC.634    | ACAGAGTCGGCT    | Fast      | 20080116 | Fasting_mouse__I.D._634 |
+| PC.635    | ACCGCAGAGTCA    | Fast      | 20080116 | Fasting_mouse__I.D._635 |
+| PC.636    | ACGGTGAGTGTC    | Fast      | 20080116 | Fasting_mouse__I.D._636 |
 
 
 ** Assemble Metadata Table: Tools
@@ -248,7 +250,7 @@ PC.636	ACGGTGAGTGTC	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._636
 ** Adapter Trimming: Why?
    Remove adapter contamination
    - Necessary for amplicons with large variation in length (e.g. ITS)
-   - 
+   - Generally unnecessary for 16S rRNA
 *** TODO figure?						   :noexport:
 ** Adapter Trimming: Input
 *** Adapter Sequence
@@ -286,6 +288,7 @@ PC.636	ACGGTGAGTGTC	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._636
 ** Filter and Trim: Why?
    - Remove low quality parts of reads
    - Remove reads that are low quality overall
+   - /Remove adapter contamination/
 ** R1 Read Quality
     #+ATTR_LaTeX: :height 0.7\textheight :float t :placement [H]
     file:figures/see-quality-F-1.png [fn::[[https://benjjneb.github.io/dada2/tutorial_1_6.html][DADA2 Tutorial]]]
@@ -328,25 +331,25 @@ PC.636	ACGGTGAGTGTC	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._636
    | Phred | A:A | A:T | A:C | A:G | C:A | ... | G:G |
    |     / | <>  | <>  | <>  | <>  | <>  | <>  | <>  |
    |-------+-----+-----+-----+-----+-----+-----+-----|
-   |     1 |     |     |     |     |     |     |     |
-   |     2 |     |     |     |     |     |     |     |
-   |     3 |     |     |     |     |     |     |     |
-   |   ... |     |     |     |     |     |     |     |
-   |    40 |     |     |     |     |     |     |     |
+   |     1 | ?   | ?   | ?   | ?   | ?   | ... | ?   |
+   |     2 | ?   | ?   | ?   | ?   | ?   | ... | ?   |
+   |     3 | ?   | ?   | ?   | ?   | ?   | ... | ?   |
+   |   ... | ... | ... | ... | ... | ... | ... | ... |
+   |    40 | ?   | ?   | ?   | ?   | ?   | ... | ?   |
 
 ** Learn Error Rates: Input 
    Filtered and Trimmed FASTQs
 ** Learn Error Rates: Output
    error model
 
-   | Phred | A:A | A:T | A:C | A:G | C:A | ... | G:G |
-   |     / | <>  | <>  | <>  | <>  | <>  | <>  | <>  |
-   |-------+-----+-----+-----+-----+-----+-----+-----|
-   |     1 |     |     |     |     |     |     |     |
-   |     2 |     |     |     |     |     |     |     |
-   |     3 |     |     |     |     |     |     |     |
-   |   ... |     |     |     |     |     |     |     |
-   |    40 |     |     |     |     |     |     |     |
+   | Phred |     A:A |     A:T |     A:C |     A:G | ... |     G:G |
+   |     / |      <> |      <> |      <> |      <> | <>  |      <> |
+   |-------+---------+---------+---------+---------+-----+---------|
+   |     1 | 0.27042 | 0.23546 | 0.24245 | 0.25167 | ... | 0.24492 |
+   |     2 | 0.27927 | 0.23248 | 0.24764 | 0.24062 | ... | 0.25699 |
+   |     3 | 0.26260 | 0.25353 | 0.24638 | 0.23749 | ... | 0.23728 |
+   |   ... |     ... |     ... |     ... |     ... | ... |     ... |
+   |    40 | 0.99894 | 0.00022 | 0.00022 | 0.00062 | ... | 0.99724 |
 ** Learn Error Rates: Tools
    dada2::learnErrors()
 ** Learn Error Rates: Notes
@@ -451,12 +454,12 @@ PC.636	ACGGTGAGTGTC	YATGCTGCCTCCCGTAGGAGT	Fast	20080116	Fasting_mouse__I.D._636
 ** Merge Paired Reads: Why?
    Collapse read pairs into a single sequence for each inferred amplicon
 
-#+begin_src text
+#+BEGIN_EXAMPLE
 R1:       ATACCCTAGTGC
 R2:          CCCTAGTGCCGT
 
 Merged:   ATACCCTAGTGCCGT
-#+end_src 
+#+END_EXAMPLE 
 
 
 ** Merge Paired Reads: Input 
@@ -477,16 +480,17 @@ Inferred amplicon sequences
 Generate count table
 
 |            | Sample 1 | Sample 2 | …  | Sample N |
-| /          | <>       | <>       | <> | <>       |
+| /          |       <> |       <> | <> |       <> |
 |------------+----------+----------+----+----------|
-| Bacteria 1 |          |          |    |          |
+| Bacteria 1 |        0 |        0 |    |       64 |
 |------------+----------+----------+----+----------|
-| Bacteria 2 |          |          |    |          |
+| Bacteria 2 |       72 |        5 |    |        0 |
 |------------+----------+----------+----+----------|
 | …          |          |          |    |          |
 |------------+----------+----------+----+----------|
-| Bacteria N |          |          |    |          |
+| Bacteria N |        0 |       43 |    |        0 |
 |------------+----------+----------+----+----------|
+
 
 ** Construct Sequence Table: Input 
    Merged sequences
@@ -498,10 +502,14 @@ Generate count table
 * Remove Chimeras
 ** Remove Chimeras: Why?
    Library preparation is imperfect, so it generates chimeric amplicons
+    #+ATTR_LaTeX: :height 0.6\textheight :float t :placement [H]
+    file:figures/chimera_fig.png [fn::[[https://doi.org/10.1186/s12864-019-5847-2][Omelina, E.S., et al. BMC Genomics 20, 536 (2019)]]]
+
+
 ** Remove Chimeras: Input 
    Count Table
 ** Remove Chimeras: Output
-   Count table *without* chimeras
+   Count Table *without* chimeras
 ** Remove Chimeras: Tools
    dada2::removeBimeraDenovo()
 
@@ -513,6 +521,27 @@ Generate count table
    Chimera-free merged sequences
 ** Assign Taxonomy: Output
    Mapping from sequences to specific bacteria
+
+|             | Kingdom  | Phylum           | Class               | Order                 | Family             | Genus             |
+| /           | <        |                  |                     |                       |                    |                   |
+|-------------+----------+------------------+---------------------+-----------------------+--------------------+-------------------|
+| Bacteria 1  | Bacteria | Actinobacteria   | Rubrobacteria       | Rubrobacterales       | Rubrobacteriaceae  | Rubrobacter       |
+| Bacteria 2  | Bacteria | Gemmatimonadetes | Gemmatimonadetes    | Gemmatimonadales      | Gemmatimonadaceae  | NA                |
+| Bacteria 3  | Bacteria | Actinobacteria   | Actinobacteria      | Pseudonocardiales     | Pseudonocardiaceae | Crossiella        |
+| Bacteria 4  | Bacteria | Proteobacteria   | Alphaproteobacteria | Sphingomonadales      | Sphingomonadaceae  | Sphingomonas      |
+| Bacteria 5  | Bacteria | Firmicutes       | Bacilli             | Bacillales            | Paenibacillaceae   | Ammoniphilus      |
+| Bacteria 6  | Bacteria | Actinobacteria   | Thermoleophilia     | Gaiellales            | Gaiellaceae        | Gaiella           |
+| Bacteria 7  | Bacteria | Actinobacteria   | Actinobacteria      | Micrococcales         | Micrococcaceae     | Pseudarthrobacter |
+| Bacteria 8  | Bacteria | Proteobacteria   | Gammaproteobacteria | Betaproteobacteriales | Burkholderiaceae   | Ralstonia         |
+| Bacteria 9  | Bacteria | Actinobacteria   | Actinobacteria      | Corynebacteriales     | Mycobacteriaceae   | Mycobacterium     |
+| Bacteria 10 | Bacteria | Proteobacteria   | Alphaproteobacteria | Rhizobiales           | Xanthobacteraceae  | Bradyrhizobium    |
+| Bacteria 11 | Bacteria | Actinobacteria   | Nitriliruptoria     | Nitriliruptorales     | Nitriliruptoraceae | NA                |
+| ...         |          |                  |                     |                       |                    |                   |
+| Bacteria N  | Bacteria | Proteobacteria   | Gammaproteobacteria | Nitrosococcales       | Nitrosococcaceae   | wb1-P19           |
+
+
+
+
 ** Assign Taxonomy: Tools
    dada2::assignTaxonomy()
 
@@ -939,7 +968,7 @@ This was just a bare bones demonstration of how the data from DADA2 can be easil
 # #+LaTeX_HEADER: \def\thefootnote{\xdef\@thefnmark{}\@footnotetext}
 
 # Set footnote mark to "white" so it is not visible (i.e. blends in with background)
-# #+BEAMER_HEADER: \setbeamercolor{footnote mark}{fg=white}
+#+BEAMER_HEADER: \setbeamercolor{footnote mark}{fg=white}
 
 # Get rid of navigation symbols in bottom right of slide
 #+BEAMER_HEADER: \beamertemplatenavigationsymbolsempty
