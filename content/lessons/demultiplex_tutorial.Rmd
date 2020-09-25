@@ -43,6 +43,9 @@ if(exists("params") &&
 } else {
   data.dir = "/data/tutorial_data"
 }
+```
+
+```{r}
 
 # Directories
 
