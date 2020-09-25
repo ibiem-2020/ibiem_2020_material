@@ -21,14 +21,13 @@
 |                         |            | [Bash: Shell Variables](https://carpentries-incubator.github.io/shell-extras/08-environment-variables/index.html) |             |       |
 |                         |            | [Bash and R: Shell Variables in RMarkdown](lessons/shell_variables_in_rmarkdown.md)                               |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 18-Sep                  |      10-11 | [Lecture: HTS Sequencing](lectures/hts_background.pdf)                                                            | Challenge 5 | 10/2  |
+| 18-Sep                  |      10-11 | [Lecture: HTS Sequencing #1](lectures/hts_background.pdf)                                                         | Challenge 5 | 10/2  |
 |                         |      11-12 | Claudia Gunsch (Duke)                                                                                             |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 25-Sep                  |      10-11 | [Lecture: HTS Sequencing (continued)](lectures/hts_background.pdf)                                                |             |       |
+| 25-Sep                  |      10-11 | [Lecture: HTS Sequencing #2](lectures/hts_background.pdf)                                                         |             |       |
 |                         |            | [Lecture: Bioinformatics Background](lectures/bioinformatics_background.pdf)                                      |             |       |
-|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #1](lectures/dada2_pipeline.pdf)                                       |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 2-Oct                   |      10-11 | [Lecture: Amplicon Bioinformatics Analysis #2](lectures/dada2_pipeline.pdf)                                       |             |       |
+| 2-Oct                   |      10-11 | [Lecture: Amplicon Bioinformatics Analysis](lectures/dada2_pipeline.pdf)                                          |             |       |
 |                         |            | [Hands-on: Demultiplexing #1](lessons/demultiplex_tutorial.md)                                                    |             |       |
 |                         |      11-12 | Dr. Gianna Hammer                                                                                                 |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
