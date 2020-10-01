@@ -21,18 +21,16 @@
 |                         |            | [Bash: Shell Variables](https://carpentries-incubator.github.io/shell-extras/08-environment-variables/index.html) |             |       |
 |                         |            | [Bash and R: Shell Variables in RMarkdown](lessons/shell_variables_in_rmarkdown.md)                               |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 18-Sep                  |      10-11 | [Lecture: HTS Sequencing](lectures/hts_background.pdf)                                                            | Challenge 5 | 10/2  |
+| 18-Sep                  |      10-11 | [Lecture: HTS Sequencing #1](lectures/hts_background.pdf)                                                         | Challenge 5 | 10/2  |
 |                         |      11-12 | Claudia Gunsch (Duke)                                                                                             |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 25-Sep                  |      10-11 | [Lecture: HTS Sequencing (continued)](lectures/hts_background.pdf)                                                |             |       |
+| 25-Sep                  |      10-11 | [Lecture: HTS Sequencing #2](lectures/hts_background.pdf)                                                         |             |       |
 |                         |            | [Lecture: Bioinformatics Background](lectures/bioinformatics_background.pdf)                                      |             |       |
-|                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #1](lectures/dada2_pipeline.pdf)                                       |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 2-Oct                   |      10-11 | [Lecture: Amplicon Bioinformatics Analysis #2](lectures/dada2_pipeline.pdf)                                       |             |       |
-|                         |            | [Hands-on: Demultiplexing #1](lessons/demultiplex_tutorial.md)                                                    |             |       |
-|                         |      11-12 | Dr. Gianna Hammer                                                                                                 |             |       |
+| 2-Oct                   |      10-11 | [Lecture: Amplicon Bioinformatics Analysis](lectures/dada2_pipeline.pdf)                                          | Challenge 6 | 10/16 |
+|                         |      11-12 | [Hands-on: Demultiplexing #1](lessons/demultiplex_tutorial.md)                                                    |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
-| 9-Oct                   |      10-11 | [Hands-on: Demultiplexing #2](lessons/demultiplex_tutorial.md)                                                    | Challenge 6 | 10/23 |
+| 9-Oct                   |      10-11 | [Hands-on: Demultiplexing #2](lessons/demultiplex_tutorial.md)                                                    |             |       |
 |                         |      11-12 | [Lecture: Amplicon Bioinformatics Analysis #3](lectures/dada2_pipeline.pdf)                                       |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
 | 16-Oct                  |      10-11 | [Hands-on: DADA2 #1](lessons/dada2_tutorial_1_6.md)                                                               |             |       |
@@ -48,7 +46,7 @@
 | 6-Nov                   |      11-12 | [Hands-on: Absolute Abundance #2](lessons/absolute_abundance_plots.md)                                            |             |       |
 |                         |            | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                           |             |       |
 |                         |            | [Hands-on: Relative Abundance #1](lessons/relative_abundance.md)                                                  |             |       |
-|                         |      11-12 | Guest Speaker                                                                                                     |             |       |
+|                         |      11-12 | Lawrence David                                                                                                                  |             |       |
 |                         |       12-1 | Office Hours                                                                                                      |             |       |
 | 13-Nov                  |      10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md)                                                  |             |       |
 |                         |            | [Lecture: Beta Diversity: Basics #1](lectures/statistical_analysis_2.pdf)                                         |             |       |
