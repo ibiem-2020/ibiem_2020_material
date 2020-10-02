@@ -296,7 +296,6 @@ ls $DEMUX_DIR/
 
 ```{bash}
 ls $DEMUX_DIR/forward $DEMUX_DIR/reverse
-
 ```
 
 So the demuxed forward reads are in the `forward` directory and the demuxed reverse reads are in the `reverse` directory.  We are ready for DADA2!
@@ -322,6 +321,10 @@ for (curread in c("forward","reverse")) {
     # gzip(fastq_path, new_path)
   }
 }
+```
+
+```{bash}
+ls $DEMUX_DIR
 ```
 
 # Session Info
