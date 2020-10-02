@@ -27,10 +27,10 @@
 | 25-Sep   | 10-11 | [Lecture: HTS Sequencing \#2](lectures/hts_background.pdf)                                                        |             |       |
 |          |       | [Lecture: Bioinformatics Background](lectures/bioinformatics_background.pdf)                                      |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
-| 2-Oct    | 10-11 | [Lecture: Amplicon Bioinformatics Analysis](lectures/dada2_pipeline.pdf)                                          | Challenge 6 | 10/16 |
+| 2-Oct    | 10-11 | [Lecture: Amplicon Bioinformatics Analysis](lectures/dada2_pipeline.pdf)                                          |             |       |
 |          | 11-12 | [Hands-on: Demultiplexing \#1](lessons/demultiplex_tutorial.md)                                                   |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
-| 9-Oct    | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                                   |             |       |
+| 9-Oct    | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                                   | Challenge 6 | 10/23 |
 |          | 11-12 | [Lecture: Amplicon Bioinformatics Analysis \#3](lectures/dada2_pipeline.pdf)                                      |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
 | 16-Oct   | 10-11 | [Hands-on: DADA2 \#1](lessons/dada2_tutorial_1_6.md)                                                              |             |       |
