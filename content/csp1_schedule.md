@@ -30,14 +30,12 @@
 | 2-Oct    | 10-11 | [Lecture: Amplicon Bioinformatics Analysis](lectures/dada2_pipeline.pdf)                                          |             |       |
 |          | 11-12 | [Hands-on: Demultiplexing \#1](lessons/demultiplex_tutorial.md)                                                   |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
-| 9-Oct    | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                                   | Challenge 6 | 10/23 |
+| 9-Oct    |       | Class Cancelled: Mental Health Day                                                                                |             |       |
+| 16-Oct   | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md)                                                   | Challenge 6 | 10/30 |
 |          | 11-12 | [Lecture: Amplicon Bioinformatics Analysis \#3](lectures/dada2_pipeline.pdf)                                      |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
-| 16-Oct   | 10-11 | [Hands-on: DADA2 \#1](lessons/dada2_tutorial_1_6.md)                                                              |             |       |
-|          | 11-12 | Guest Speaker                                                                                                     |             |       |
-|          | 12-1  | Office Hours                                                                                                      |             |       |
-| 23-Oct   | 10-11 | [Hands-on: DADA2 \#2](lessons/dada2_tutorial_1_6.md)                                                              | Challenge 7 | 11/6  |
-|          | 11-12 | David Singleton: Giving a Research Presentation                                                                   |             |       |
+| 23-Oct   | 10-11 | [Hands-on: DADA2 \#1](lessons/dada2_tutorial_1_6.md)                                                              | Challenge 7 | 11/6  |
+|          | 11-12 | [Hands-on: DADA2 \#2](lessons/dada2_tutorial_1_6.md)                                                              |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
 | 30-Oct   | 10-11 | [Lecture: Abundance and Diversity](lectures/statistical_analysis_1.pdf)                                           | Challenge 8 | 11/13 |
 |          |       | [Hands-on: Absolute Abundance \#1](lessons/absolute_abundance_plots.md)                                           |             |       |
