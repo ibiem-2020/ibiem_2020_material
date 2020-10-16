@@ -10,15 +10,17 @@ library(tools)
 library(tibble)
 library(dplyr)
 library(readr)
+library(fs)
 ```
 
 
 ```{r files_and_directories}
 # Directories
-data.dir = "/data/tutorial_data/ibiem_2016_lemur_data/"
+data.dir = "/data/tutorial_data/ibiem_2016_lemur_data"
 subset.dir = file.path("/data/tutorial_data/ibiem2016_subset")
 
 # make directory for output
+file_chmod(path_dir(subset.dir), "u+w")
 dir.create(subset.dir, recursive = TRUE)
 
 # Set variables for bash
@@ -63,6 +65,10 @@ md5sum(files = list.files(subset.dir,full.names = TRUE)) %>%
   mutate(path=basename(path)) %>%
   select(".",path) %>%
   write_delim(file.path(subset.dir,"md5sum.txt"), col_names = FALSE)
+```
+
+```{r}
+file_chmod(subset.dir, "a-w")
 ```
 
 # Session Info
