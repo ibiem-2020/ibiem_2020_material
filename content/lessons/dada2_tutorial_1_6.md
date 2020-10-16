@@ -54,79 +54,6 @@ subsampled)](https://docs.qiime2.org/2018.11/tutorials/atacama-soils/#subsample-
 This Notebook assumes that you have followed the [Demultiplexing
 Tutorial](demultiplex_tutorial.md) to generate demultiplexed FASTQs.
 
-``` r
-output.dir = path.expand("~/scratch/atacama_1pct")
-demux.dir = file.path(output.dir, "demux")
-list.files(demux.dir)
-```
-
-    ##   [1] "BAQ1370.1.3.forward.fastq.gz" "BAQ1370.1.3.reverse.fastq.gz"
-    ##   [3] "BAQ1552.1.1.forward.fastq.gz" "BAQ1552.1.1.reverse.fastq.gz"
-    ##   [5] "BAQ2420.1.1.forward.fastq.gz" "BAQ2420.1.1.reverse.fastq.gz"
-    ##   [7] "BAQ2420.1.2.forward.fastq.gz" "BAQ2420.1.2.reverse.fastq.gz"
-    ##   [9] "BAQ2420.1.3.forward.fastq.gz" "BAQ2420.1.3.reverse.fastq.gz"
-    ##  [11] "BAQ2420.2.forward.fastq.gz"   "BAQ2420.2.reverse.fastq.gz"  
-    ##  [13] "BAQ2420.3.forward.fastq.gz"   "BAQ2420.3.reverse.fastq.gz"  
-    ##  [15] "BAQ2462.1.forward.fastq.gz"   "BAQ2462.1.reverse.fastq.gz"  
-    ##  [17] "BAQ2462.2.forward.fastq.gz"   "BAQ2462.2.reverse.fastq.gz"  
-    ##  [19] "BAQ2462.3.forward.fastq.gz"   "BAQ2462.3.reverse.fastq.gz"  
-    ##  [21] "BAQ2687.1.forward.fastq.gz"   "BAQ2687.1.reverse.fastq.gz"  
-    ##  [23] "BAQ2687.2.forward.fastq.gz"   "BAQ2687.2.reverse.fastq.gz"  
-    ##  [25] "BAQ2687.3.forward.fastq.gz"   "BAQ2687.3.reverse.fastq.gz"  
-    ##  [27] "BAQ2838.1.forward.fastq.gz"   "BAQ2838.1.reverse.fastq.gz"  
-    ##  [29] "BAQ2838.2.forward.fastq.gz"   "BAQ2838.2.reverse.fastq.gz"  
-    ##  [31] "BAQ2838.3.forward.fastq.gz"   "BAQ2838.3.reverse.fastq.gz"  
-    ##  [33] "BAQ3473.1.forward.fastq.gz"   "BAQ3473.1.reverse.fastq.gz"  
-    ##  [35] "BAQ3473.2.forward.fastq.gz"   "BAQ3473.2.reverse.fastq.gz"  
-    ##  [37] "BAQ3473.3.forward.fastq.gz"   "BAQ3473.3.reverse.fastq.gz"  
-    ##  [39] "BAQ4166.1.1.forward.fastq.gz" "BAQ4166.1.1.reverse.fastq.gz"
-    ##  [41] "BAQ4166.1.2.forward.fastq.gz" "BAQ4166.1.2.reverse.fastq.gz"
-    ##  [43] "BAQ4166.1.3.forward.fastq.gz" "BAQ4166.1.3.reverse.fastq.gz"
-    ##  [45] "BAQ4166.2.forward.fastq.gz"   "BAQ4166.2.reverse.fastq.gz"  
-    ##  [47] "BAQ4166.3.forward.fastq.gz"   "BAQ4166.3.reverse.fastq.gz"  
-    ##  [49] "BAQ4697.1.forward.fastq.gz"   "BAQ4697.1.reverse.fastq.gz"  
-    ##  [51] "BAQ4697.2.forward.fastq.gz"   "BAQ4697.2.reverse.fastq.gz"  
-    ##  [53] "BAQ4697.3.forward.fastq.gz"   "BAQ4697.3.reverse.fastq.gz"  
-    ##  [55] "forward"                      "reverse"                     
-    ##  [57] "split_4"                      "tagged_1"                    
-    ##  [59] "tagged_2"                     "tagged_3"                    
-    ##  [61] "tagged_4"                     "YUN1005.1.1.forward.fastq.gz"
-    ##  [63] "YUN1005.1.1.reverse.fastq.gz" "YUN1005.3.forward.fastq.gz"  
-    ##  [65] "YUN1005.3.reverse.fastq.gz"   "YUN1242.1.forward.fastq.gz"  
-    ##  [67] "YUN1242.1.reverse.fastq.gz"   "YUN1242.2.forward.fastq.gz"  
-    ##  [69] "YUN1242.2.reverse.fastq.gz"   "YUN1242.3.forward.fastq.gz"  
-    ##  [71] "YUN1242.3.reverse.fastq.gz"   "YUN1609.1.forward.fastq.gz"  
-    ##  [73] "YUN1609.1.reverse.fastq.gz"   "YUN2029.1.forward.fastq.gz"  
-    ##  [75] "YUN2029.1.reverse.fastq.gz"   "YUN2029.2.forward.fastq.gz"  
-    ##  [77] "YUN2029.2.reverse.fastq.gz"   "YUN2029.3.forward.fastq.gz"  
-    ##  [79] "YUN2029.3.reverse.fastq.gz"   "YUN3008.1.3.forward.fastq.gz"
-    ##  [81] "YUN3008.1.3.reverse.fastq.gz" "YUN3008.3.forward.fastq.gz"  
-    ##  [83] "YUN3008.3.reverse.fastq.gz"   "YUN3153.2.forward.fastq.gz"  
-    ##  [85] "YUN3153.2.reverse.fastq.gz"   "YUN3153.3.forward.fastq.gz"  
-    ##  [87] "YUN3153.3.reverse.fastq.gz"   "YUN3184.2.forward.fastq.gz"  
-    ##  [89] "YUN3184.2.reverse.fastq.gz"   "YUN3259.1.1.forward.fastq.gz"
-    ##  [91] "YUN3259.1.1.reverse.fastq.gz" "YUN3259.1.2.forward.fastq.gz"
-    ##  [93] "YUN3259.1.2.reverse.fastq.gz" "YUN3259.1.3.forward.fastq.gz"
-    ##  [95] "YUN3259.1.3.reverse.fastq.gz" "YUN3259.2.forward.fastq.gz"  
-    ##  [97] "YUN3259.2.reverse.fastq.gz"   "YUN3259.3.forward.fastq.gz"  
-    ##  [99] "YUN3259.3.reverse.fastq.gz"   "YUN3346.1.forward.fastq.gz"  
-    ## [101] "YUN3346.1.reverse.fastq.gz"   "YUN3346.2.forward.fastq.gz"  
-    ## [103] "YUN3346.2.reverse.fastq.gz"   "YUN3346.3.forward.fastq.gz"  
-    ## [105] "YUN3346.3.reverse.fastq.gz"   "YUN3428.1.forward.fastq.gz"  
-    ## [107] "YUN3428.1.reverse.fastq.gz"   "YUN3428.2.forward.fastq.gz"  
-    ## [109] "YUN3428.2.reverse.fastq.gz"   "YUN3428.3.forward.fastq.gz"  
-    ## [111] "YUN3428.3.reverse.fastq.gz"   "YUN3533.1.1.forward.fastq.gz"
-    ## [113] "YUN3533.1.1.reverse.fastq.gz" "YUN3533.1.2.forward.fastq.gz"
-    ## [115] "YUN3533.1.2.reverse.fastq.gz" "YUN3533.1.3.forward.fastq.gz"
-    ## [117] "YUN3533.1.3.reverse.fastq.gz" "YUN3533.2.forward.fastq.gz"  
-    ## [119] "YUN3533.2.reverse.fastq.gz"   "YUN3533.3.forward.fastq.gz"  
-    ## [121] "YUN3533.3.reverse.fastq.gz"   "YUN3856.1.1.forward.fastq.gz"
-    ## [123] "YUN3856.1.1.reverse.fastq.gz" "YUN3856.1.2.forward.fastq.gz"
-    ## [125] "YUN3856.1.2.reverse.fastq.gz" "YUN3856.1.3.forward.fastq.gz"
-    ## [127] "YUN3856.1.3.reverse.fastq.gz" "YUN3856.2.forward.fastq.gz"  
-    ## [129] "YUN3856.2.reverse.fastq.gz"   "YUN3856.3.forward.fastq.gz"  
-    ## [131] "YUN3856.3.reverse.fastq.gz"
-
 If the package successfully loaded and your listed files match those
 here, you are ready to go through the DADA2 pipeline.
 
@@ -139,7 +66,7 @@ generate while running dada2, but don’t need to save long term.
 ``` r
 scratch.dir = file.path(output.dir, "dada2")
 
-data.dir = "/data/tutorial_data/atacama_1pct"
+ps.rds = file.path(scratch.dir, paste0("atacama_", atacama.data.percent, "pct.rds"))
 map.file = file.path(data.dir,"sample_metadata.tsv")
 
 # make directory for output
@@ -149,7 +76,6 @@ if (dir_exists(scratch.dir)) {
 }
 dir_create(scratch.dir)
 
-ps.rds = file.path(scratch.dir, "atacama_1pct.rds")
 
 silva.ref = "/data/references/dada/silva_nr_v132_train_set.fa.gz"
 silva.species.ref = "/data/references/dada/silva_species_assignment_v132.fa.gz"
@@ -1164,20 +1090,20 @@ rownames(taxa.print) <- NULL
 head(taxa.print)
 ```
 
-    ##      Kingdom    Phylum             Class                
-    ## [1,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria"
-    ## [2,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria"
-    ## [3,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria"
-    ## [4,] "Bacteria" "Actinobacteria"   "Rubrobacteria"      
-    ## [5,] "Bacteria" "Gemmatimonadetes" "Gemmatimonadetes"   
-    ## [6,] "Bacteria" "Actinobacteria"   "Nitriliruptoria"    
-    ##      Order               Family               Genus         Species
-    ## [1,] "Nitrosococcales"   "Nitrosococcaceae"   "wb1-P19"     NA     
-    ## [2,] "Nitrosococcales"   "Nitrosococcaceae"   "wb1-P19"     NA     
-    ## [3,] "Nitrosococcales"   "Nitrosococcaceae"   "wb1-P19"     NA     
-    ## [4,] "Rubrobacterales"   "Rubrobacteriaceae"  "Rubrobacter" NA     
-    ## [5,] "Gemmatimonadales"  "Gemmatimonadaceae"  NA            NA     
-    ## [6,] "Nitriliruptorales" "Nitriliruptoraceae" NA            NA
+    ##      Kingdom    Phylum             Class                 Order              
+    ## [1,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria" "Nitrosococcales"  
+    ## [2,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria" "Nitrosococcales"  
+    ## [3,] "Bacteria" "Proteobacteria"   "Gammaproteobacteria" "Nitrosococcales"  
+    ## [4,] "Bacteria" "Actinobacteria"   "Rubrobacteria"       "Rubrobacterales"  
+    ## [5,] "Bacteria" "Gemmatimonadetes" "Gemmatimonadetes"    "Gemmatimonadales" 
+    ## [6,] "Bacteria" "Actinobacteria"   "Nitriliruptoria"     "Nitriliruptorales"
+    ##      Family               Genus         Species
+    ## [1,] "Nitrosococcaceae"   "wb1-P19"     NA     
+    ## [2,] "Nitrosococcaceae"   "wb1-P19"     NA     
+    ## [3,] "Nitrosococcaceae"   "wb1-P19"     NA     
+    ## [4,] "Rubrobacteriaceae"  "Rubrobacter" NA     
+    ## [5,] "Gemmatimonadaceae"  NA            NA     
+    ## [6,] "Nitriliruptoraceae" NA            NA
 
 **<span style="color:red">If using this workflow on your own
 data:</span>** If your reads do not seem to be appropriately assigned,
@@ -1211,7 +1137,7 @@ a file.
 
 ``` r
 meta.df = read_tsv(map.file, comment= "#q2") %>%
-  rename(Sample = "#SampleID") %>%
+  dplyr::rename(Sample = "#SampleID") %>%
   column_to_rownames("Sample") %>%
   as.data.frame
 ```
@@ -1311,158 +1237,158 @@ meta.df
     ## YUN3856.2      TTGGAACGGCTT CCGGACTACHVGGGTWTCTAAT      3856         4.178
     ## YUN3856.3      TCCTAGGTCCGA CCGGACTACHVGGGTWTCTAAT      3856         6.695
     ## YUN3856.1.3    GACCGTCAATAC CCGGACTACHVGGGTWTCTAAT      3856         3.134
-    ##             AmpliconConcentration ExtractGroupNo TransectName SiteName
-    ## BAQ1370.1.2                  0.95              B    Baquedano  BAQ1370
-    ## BAQ1370.3                   17.46              E    Baquedano  BAQ1370
-    ## BAQ1370.1.3                  0.96              J    Baquedano  BAQ1370
-    ## BAQ1552.1.1                 18.83              J    Baquedano  BAQ1552
-    ## BAQ1552.2                    2.00              B    Baquedano  BAQ1552
-    ## BAQ2420.1.1                  7.40              H    Baquedano  BAQ2420
-    ## BAQ2420.1.2                 11.42              H    Baquedano  BAQ2420
-    ## BAQ2420.2                   10.06              A    Baquedano  BAQ2420
-    ## BAQ2420.3                   15.92              C    Baquedano  BAQ2420
-    ## BAQ2420.1.3                 10.00              H    Baquedano  BAQ2420
-    ## BAQ2462.1                   15.29              H    Baquedano  BAQ2462
-    ## BAQ2462.2                   10.39              H    Baquedano  BAQ2462
-    ## BAQ2462.3                    8.46              A    Baquedano  BAQ2462
-    ## BAQ2687.1                    1.24              A    Baquedano  BAQ2687
-    ## BAQ2687.2                   17.53              C    Baquedano  BAQ2687
-    ## BAQ2687.3                   12.10              E    Baquedano  BAQ2687
-    ## BAQ2838.1                   10.91              G    Baquedano  BAQ2838
-    ## BAQ2838.2                   14.38              H    Baquedano  BAQ2838
-    ## BAQ2838.3                   14.06              A    Baquedano  BAQ2838
-    ## BAQ3473.1                    1.29              C    Baquedano  BAQ3473
-    ## BAQ3473.2                   11.05              B    Baquedano  BAQ3473
-    ## BAQ3473.3                    4.41              C    Baquedano  BAQ3473
-    ## BAQ4166.1.1                  3.16              C    Baquedano  BAQ4166
-    ## BAQ4166.1.2                 18.25              B    Baquedano  BAQ4166
-    ## BAQ4166.2                    0.12              C    Baquedano  BAQ4166
-    ## BAQ4166.3                    0.26              C    Baquedano  BAQ4166
-    ## BAQ4166.1.3                  0.55              C    Baquedano  BAQ4166
-    ## BAQ4697.1                    1.88              C    Baquedano  BAQ4697
-    ## BAQ4697.2                    1.22              B    Baquedano  BAQ4697
-    ## BAQ4697.3                    1.39              C    Baquedano  BAQ4697
-    ## BAQ895.2                     1.01              B    Baquedano   BAQ895
-    ## BAQ895.3                     2.36              E    Baquedano   BAQ895
-    ## YUN1005.1.1                 13.17              I       Yungay  YUN1005
-    ## YUN1005.2                    0.94              I       Yungay  YUN1005
-    ## YUN1005.3                    4.32              I       Yungay  YUN1005
-    ## YUN1005.1.3                  1.12              I       Yungay  YUN1005
-    ## YUN1242.1                   19.20              K       Yungay  YUN1242
-    ## YUN1242.2                    0.54              B       Yungay  YUN1242
-    ## YUN1242.3                   15.61              K       Yungay  YUN1242
-    ## YUN1609.1                    6.42              B       Yungay  YUN1609
-    ## YUN1609.3                   12.84              E       Yungay  YUN1609
-    ## YUN2029.1                    9.59              K       Yungay  YUN2029
-    ## YUN2029.2                   16.71              B       Yungay  YUN2029
-    ## YUN2029.3                   16.14              K       Yungay  YUN2029
-    ## YUN3008.1.1                  1.29              G       Yungay  YUN3008
-    ## YUN3008.1.2                  1.23              B       Yungay  YUN3008
-    ## YUN3008.2                    1.10              K       Yungay  YUN3008
-    ## YUN3008.3                    1.00              G       Yungay  YUN3008
-    ## YUN3008.1.3                  0.99              G       Yungay  YUN3008
-    ## YUN3153.1                    1.05              E       Yungay  YUN3153
-    ## YUN3153.2                   16.89              G       Yungay  YUN3153
-    ## YUN3153.3                   18.41              B       Yungay  YUN3153
-    ## YUN3184.1                    1.18              B       Yungay  YUN3184
-    ## YUN3184.2                    1.29              E       Yungay  YUN3184
-    ## YUN3259.1.1                  7.07              D       Yungay  YUN3259
-    ## YUN3259.1.2                 16.92              B       Yungay  YUN3259
-    ## YUN3259.2                   12.11              D       Yungay  YUN3259
-    ## YUN3259.3                   16.74              D       Yungay  YUN3259
-    ## YUN3259.1.3                 19.17              D       Yungay  YUN3259
-    ## YUN3346.1                   16.88              D       Yungay  YUN3346
-    ## YUN3346.2                   16.26              D       Yungay  YUN3346
-    ## YUN3346.3                   17.14              D       Yungay  YUN3346
-    ## YUN3428.1                   15.32              D       Yungay  YUN3428
-    ## YUN3428.2                    6.61              D       Yungay  YUN3428
-    ## YUN3428.3                   15.46              D       Yungay  YUN3428
-    ## YUN3533.1.1                 14.29              D       Yungay  YUN3533
-    ## YUN3533.1.2                 14.32              D       Yungay  YUN3533
-    ## YUN3533.2                   14.33              D       Yungay  YUN3533
-    ## YUN3533.3                   17.43              D       Yungay  YUN3533
-    ## YUN3533.1.3                  7.55              D       Yungay  YUN3533
-    ## YUN3856.1.1                 12.93              G       Yungay  YUN3856
-    ## YUN3856.1.2                 16.35              G       Yungay  YUN3856
-    ## YUN3856.2                   17.12              H       Yungay  YUN3856
-    ## YUN3856.3                   15.86              H       Yungay  YUN3856
-    ## YUN3856.1.3                 18.17              G       Yungay  YUN3856
-    ##             Depth   pH   TOC    EC AverageSoilRelativeHumidity
-    ## BAQ1370.1.2     2 7.98   525 6.080                       16.17
-    ## BAQ1370.3       2   NA   771 6.080                       16.17
-    ## BAQ1370.1.3     3 8.13    NA    NA                       16.17
-    ## BAQ1552.1.1     1 7.87    NA    NA                       15.75
-    ## BAQ1552.2       2   NA   223 1.839                       15.75
-    ## BAQ2420.1.1     1 9.33    NA    NA                       82.54
-    ## BAQ2420.1.2     2 9.36   166 0.075                       82.54
-    ## BAQ2420.2       2 9.36   337 0.075                       82.54
-    ## BAQ2420.3       2 9.36   574 0.075                       82.54
-    ## BAQ2420.1.3     3 8.90    NA    NA                       82.54
-    ## BAQ2462.1       2 8.35   173 0.506                       69.08
-    ## BAQ2462.2       2 8.35   331 0.506                       69.08
-    ## BAQ2462.3       2 8.35   634 0.506                       69.08
-    ## BAQ2687.1       2 8.35   554 0.131                       73.21
-    ## BAQ2687.2       2 8.35   350 0.131                       73.21
-    ## BAQ2687.3       2 8.35   400 0.131                       73.21
-    ## BAQ2838.1       2 8.36   353 0.212                       44.74
-    ## BAQ2838.2       2 8.36   260 0.212                       44.74
-    ## BAQ2838.3       2 8.36   369 0.212                       44.74
-    ## BAQ3473.1       2 7.93  3675 0.420                       82.05
-    ## BAQ3473.2       2 7.93   838 0.420                       82.05
-    ## BAQ3473.3       2 7.93 16449 0.420                       82.05
-    ## BAQ4166.1.1     1 5.64    NA    NA                      100.00
-    ## BAQ4166.1.2     2 7.22  2085 0.084                      100.00
-    ## BAQ4166.2       2 7.22  3692 0.084                      100.00
-    ## BAQ4166.3       2 7.22  2271 0.084                      100.00
-    ## BAQ4166.1.3     3 7.41    NA    NA                      100.00
-    ## BAQ4697.1       2 7.44   424 0.055                          NA
-    ## BAQ4697.2       2 7.44   531 0.055                          NA
-    ## BAQ4697.3       2 7.44   631 0.055                          NA
-    ## BAQ895.2        2   NA    61 2.945                       32.22
-    ## BAQ895.3        2   NA   474 2.945                       32.22
-    ## YUN1005.1.1     1 7.54    NA    NA                       20.70
-    ## YUN1005.2       2   NA   160 2.270                       20.70
-    ## YUN1005.3       2 7.60   223 2.270                       20.70
-    ## YUN1005.1.3     3 7.60    NA    NA                       20.70
-    ## YUN1242.1       2 9.00   226 1.845                       20.90
-    ## YUN1242.2       2 9.00   194 1.845                       20.90
-    ## YUN1242.3       2 9.00   452 1.845                       20.90
-    ## YUN1609.1       2 8.00   361 0.427                       17.18
-    ## YUN1609.3       2 8.00   424 0.427                       17.18
-    ## YUN2029.1       2 7.89   184 0.067                       28.79
-    ## YUN2029.2       2 7.89   241 0.067                       28.79
-    ## YUN2029.3       2 7.89   817 0.067                       28.79
-    ## YUN3008.1.1     1 7.70    NA    NA                       70.89
-    ## YUN3008.1.2     2 7.71   250 2.205                       70.89
-    ## YUN3008.2       2   NA   367 2.205                       70.89
-    ## YUN3008.3       2   NA   417 2.205                       70.89
-    ## YUN3008.1.3     3 7.50    NA    NA                       70.89
-    ## YUN3153.1       2 7.60   580 2.260                       59.69
-    ## YUN3153.2       2 7.60   185 2.260                       59.69
-    ## YUN3153.3       2 7.60   391 2.260                       59.69
-    ## YUN3184.1       2 7.70   254 2.235                       26.97
-    ## YUN3184.2       2   NA   411 2.235                       26.97
-    ## YUN3259.1.1     1 8.48    NA    NA                       93.57
-    ## YUN3259.1.2     2 8.10   419 0.133                       93.57
-    ## YUN3259.2       2 8.10   342 0.133                       93.57
-    ## YUN3259.3       2 8.10   539 0.133                       93.57
-    ## YUN3259.1.3     3 8.40    NA    NA                       93.57
-    ## YUN3346.1       2 7.10   429 0.044                       87.32
-    ## YUN3346.2       2 7.10   666 0.044                       87.32
-    ## YUN3346.3       2 7.10   387 0.044                       87.32
-    ## YUN3428.1       2 7.20   623 0.023                       99.99
-    ## YUN3428.2       2 7.20   621 0.023                       99.99
-    ## YUN3428.3       2 7.20   658 0.023                       99.99
-    ## YUN3533.1.1     1 7.10    NA    NA                      100.00
-    ## YUN3533.1.2     2 8.00   521 0.024                      100.00
-    ## YUN3533.2       2 8.00   773 0.024                      100.00
-    ## YUN3533.3       2 8.00   664 0.024                      100.00
-    ## YUN3533.1.3     3 7.80    NA    NA                      100.00
-    ## YUN3856.1.1     1 6.98    NA    NA                       99.44
-    ## YUN3856.1.2     2 7.43   713 0.029                       99.44
-    ## YUN3856.2       2 7.43   404 0.029                       99.44
-    ## YUN3856.3       2 7.43   988 0.029                       99.44
-    ## YUN3856.1.3     3 7.54    NA    NA                       99.44
+    ##             AmpliconConcentration ExtractGroupNo TransectName SiteName Depth
+    ## BAQ1370.1.2                  0.95              B    Baquedano  BAQ1370     2
+    ## BAQ1370.3                   17.46              E    Baquedano  BAQ1370     2
+    ## BAQ1370.1.3                  0.96              J    Baquedano  BAQ1370     3
+    ## BAQ1552.1.1                 18.83              J    Baquedano  BAQ1552     1
+    ## BAQ1552.2                    2.00              B    Baquedano  BAQ1552     2
+    ## BAQ2420.1.1                  7.40              H    Baquedano  BAQ2420     1
+    ## BAQ2420.1.2                 11.42              H    Baquedano  BAQ2420     2
+    ## BAQ2420.2                   10.06              A    Baquedano  BAQ2420     2
+    ## BAQ2420.3                   15.92              C    Baquedano  BAQ2420     2
+    ## BAQ2420.1.3                 10.00              H    Baquedano  BAQ2420     3
+    ## BAQ2462.1                   15.29              H    Baquedano  BAQ2462     2
+    ## BAQ2462.2                   10.39              H    Baquedano  BAQ2462     2
+    ## BAQ2462.3                    8.46              A    Baquedano  BAQ2462     2
+    ## BAQ2687.1                    1.24              A    Baquedano  BAQ2687     2
+    ## BAQ2687.2                   17.53              C    Baquedano  BAQ2687     2
+    ## BAQ2687.3                   12.10              E    Baquedano  BAQ2687     2
+    ## BAQ2838.1                   10.91              G    Baquedano  BAQ2838     2
+    ## BAQ2838.2                   14.38              H    Baquedano  BAQ2838     2
+    ## BAQ2838.3                   14.06              A    Baquedano  BAQ2838     2
+    ## BAQ3473.1                    1.29              C    Baquedano  BAQ3473     2
+    ## BAQ3473.2                   11.05              B    Baquedano  BAQ3473     2
+    ## BAQ3473.3                    4.41              C    Baquedano  BAQ3473     2
+    ## BAQ4166.1.1                  3.16              C    Baquedano  BAQ4166     1
+    ## BAQ4166.1.2                 18.25              B    Baquedano  BAQ4166     2
+    ## BAQ4166.2                    0.12              C    Baquedano  BAQ4166     2
+    ## BAQ4166.3                    0.26              C    Baquedano  BAQ4166     2
+    ## BAQ4166.1.3                  0.55              C    Baquedano  BAQ4166     3
+    ## BAQ4697.1                    1.88              C    Baquedano  BAQ4697     2
+    ## BAQ4697.2                    1.22              B    Baquedano  BAQ4697     2
+    ## BAQ4697.3                    1.39              C    Baquedano  BAQ4697     2
+    ## BAQ895.2                     1.01              B    Baquedano   BAQ895     2
+    ## BAQ895.3                     2.36              E    Baquedano   BAQ895     2
+    ## YUN1005.1.1                 13.17              I       Yungay  YUN1005     1
+    ## YUN1005.2                    0.94              I       Yungay  YUN1005     2
+    ## YUN1005.3                    4.32              I       Yungay  YUN1005     2
+    ## YUN1005.1.3                  1.12              I       Yungay  YUN1005     3
+    ## YUN1242.1                   19.20              K       Yungay  YUN1242     2
+    ## YUN1242.2                    0.54              B       Yungay  YUN1242     2
+    ## YUN1242.3                   15.61              K       Yungay  YUN1242     2
+    ## YUN1609.1                    6.42              B       Yungay  YUN1609     2
+    ## YUN1609.3                   12.84              E       Yungay  YUN1609     2
+    ## YUN2029.1                    9.59              K       Yungay  YUN2029     2
+    ## YUN2029.2                   16.71              B       Yungay  YUN2029     2
+    ## YUN2029.3                   16.14              K       Yungay  YUN2029     2
+    ## YUN3008.1.1                  1.29              G       Yungay  YUN3008     1
+    ## YUN3008.1.2                  1.23              B       Yungay  YUN3008     2
+    ## YUN3008.2                    1.10              K       Yungay  YUN3008     2
+    ## YUN3008.3                    1.00              G       Yungay  YUN3008     2
+    ## YUN3008.1.3                  0.99              G       Yungay  YUN3008     3
+    ## YUN3153.1                    1.05              E       Yungay  YUN3153     2
+    ## YUN3153.2                   16.89              G       Yungay  YUN3153     2
+    ## YUN3153.3                   18.41              B       Yungay  YUN3153     2
+    ## YUN3184.1                    1.18              B       Yungay  YUN3184     2
+    ## YUN3184.2                    1.29              E       Yungay  YUN3184     2
+    ## YUN3259.1.1                  7.07              D       Yungay  YUN3259     1
+    ## YUN3259.1.2                 16.92              B       Yungay  YUN3259     2
+    ## YUN3259.2                   12.11              D       Yungay  YUN3259     2
+    ## YUN3259.3                   16.74              D       Yungay  YUN3259     2
+    ## YUN3259.1.3                 19.17              D       Yungay  YUN3259     3
+    ## YUN3346.1                   16.88              D       Yungay  YUN3346     2
+    ## YUN3346.2                   16.26              D       Yungay  YUN3346     2
+    ## YUN3346.3                   17.14              D       Yungay  YUN3346     2
+    ## YUN3428.1                   15.32              D       Yungay  YUN3428     2
+    ## YUN3428.2                    6.61              D       Yungay  YUN3428     2
+    ## YUN3428.3                   15.46              D       Yungay  YUN3428     2
+    ## YUN3533.1.1                 14.29              D       Yungay  YUN3533     1
+    ## YUN3533.1.2                 14.32              D       Yungay  YUN3533     2
+    ## YUN3533.2                   14.33              D       Yungay  YUN3533     2
+    ## YUN3533.3                   17.43              D       Yungay  YUN3533     2
+    ## YUN3533.1.3                  7.55              D       Yungay  YUN3533     3
+    ## YUN3856.1.1                 12.93              G       Yungay  YUN3856     1
+    ## YUN3856.1.2                 16.35              G       Yungay  YUN3856     2
+    ## YUN3856.2                   17.12              H       Yungay  YUN3856     2
+    ## YUN3856.3                   15.86              H       Yungay  YUN3856     2
+    ## YUN3856.1.3                 18.17              G       Yungay  YUN3856     3
+    ##               pH   TOC    EC AverageSoilRelativeHumidity
+    ## BAQ1370.1.2 7.98   525 6.080                       16.17
+    ## BAQ1370.3     NA   771 6.080                       16.17
+    ## BAQ1370.1.3 8.13    NA    NA                       16.17
+    ## BAQ1552.1.1 7.87    NA    NA                       15.75
+    ## BAQ1552.2     NA   223 1.839                       15.75
+    ## BAQ2420.1.1 9.33    NA    NA                       82.54
+    ## BAQ2420.1.2 9.36   166 0.075                       82.54
+    ## BAQ2420.2   9.36   337 0.075                       82.54
+    ## BAQ2420.3   9.36   574 0.075                       82.54
+    ## BAQ2420.1.3 8.90    NA    NA                       82.54
+    ## BAQ2462.1   8.35   173 0.506                       69.08
+    ## BAQ2462.2   8.35   331 0.506                       69.08
+    ## BAQ2462.3   8.35   634 0.506                       69.08
+    ## BAQ2687.1   8.35   554 0.131                       73.21
+    ## BAQ2687.2   8.35   350 0.131                       73.21
+    ## BAQ2687.3   8.35   400 0.131                       73.21
+    ## BAQ2838.1   8.36   353 0.212                       44.74
+    ## BAQ2838.2   8.36   260 0.212                       44.74
+    ## BAQ2838.3   8.36   369 0.212                       44.74
+    ## BAQ3473.1   7.93  3675 0.420                       82.05
+    ## BAQ3473.2   7.93   838 0.420                       82.05
+    ## BAQ3473.3   7.93 16449 0.420                       82.05
+    ## BAQ4166.1.1 5.64    NA    NA                      100.00
+    ## BAQ4166.1.2 7.22  2085 0.084                      100.00
+    ## BAQ4166.2   7.22  3692 0.084                      100.00
+    ## BAQ4166.3   7.22  2271 0.084                      100.00
+    ## BAQ4166.1.3 7.41    NA    NA                      100.00
+    ## BAQ4697.1   7.44   424 0.055                          NA
+    ## BAQ4697.2   7.44   531 0.055                          NA
+    ## BAQ4697.3   7.44   631 0.055                          NA
+    ## BAQ895.2      NA    61 2.945                       32.22
+    ## BAQ895.3      NA   474 2.945                       32.22
+    ## YUN1005.1.1 7.54    NA    NA                       20.70
+    ## YUN1005.2     NA   160 2.270                       20.70
+    ## YUN1005.3   7.60   223 2.270                       20.70
+    ## YUN1005.1.3 7.60    NA    NA                       20.70
+    ## YUN1242.1   9.00   226 1.845                       20.90
+    ## YUN1242.2   9.00   194 1.845                       20.90
+    ## YUN1242.3   9.00   452 1.845                       20.90
+    ## YUN1609.1   8.00   361 0.427                       17.18
+    ## YUN1609.3   8.00   424 0.427                       17.18
+    ## YUN2029.1   7.89   184 0.067                       28.79
+    ## YUN2029.2   7.89   241 0.067                       28.79
+    ## YUN2029.3   7.89   817 0.067                       28.79
+    ## YUN3008.1.1 7.70    NA    NA                       70.89
+    ## YUN3008.1.2 7.71   250 2.205                       70.89
+    ## YUN3008.2     NA   367 2.205                       70.89
+    ## YUN3008.3     NA   417 2.205                       70.89
+    ## YUN3008.1.3 7.50    NA    NA                       70.89
+    ## YUN3153.1   7.60   580 2.260                       59.69
+    ## YUN3153.2   7.60   185 2.260                       59.69
+    ## YUN3153.3   7.60   391 2.260                       59.69
+    ## YUN3184.1   7.70   254 2.235                       26.97
+    ## YUN3184.2     NA   411 2.235                       26.97
+    ## YUN3259.1.1 8.48    NA    NA                       93.57
+    ## YUN3259.1.2 8.10   419 0.133                       93.57
+    ## YUN3259.2   8.10   342 0.133                       93.57
+    ## YUN3259.3   8.10   539 0.133                       93.57
+    ## YUN3259.1.3 8.40    NA    NA                       93.57
+    ## YUN3346.1   7.10   429 0.044                       87.32
+    ## YUN3346.2   7.10   666 0.044                       87.32
+    ## YUN3346.3   7.10   387 0.044                       87.32
+    ## YUN3428.1   7.20   623 0.023                       99.99
+    ## YUN3428.2   7.20   621 0.023                       99.99
+    ## YUN3428.3   7.20   658 0.023                       99.99
+    ## YUN3533.1.1 7.10    NA    NA                      100.00
+    ## YUN3533.1.2 8.00   521 0.024                      100.00
+    ## YUN3533.2   8.00   773 0.024                      100.00
+    ## YUN3533.3   8.00   664 0.024                      100.00
+    ## YUN3533.1.3 7.80    NA    NA                      100.00
+    ## YUN3856.1.1 6.98    NA    NA                       99.44
+    ## YUN3856.1.2 7.43   713 0.029                       99.44
+    ## YUN3856.2   7.43   404 0.029                       99.44
+    ## YUN3856.3   7.43   988 0.029                       99.44
+    ## YUN3856.1.3 7.54    NA    NA                       99.44
     ##             RelativeHumiditySoilHigh RelativeHumiditySoilLow
     ## BAQ1370.1.2                   23.970                  11.420
     ## BAQ1370.3                     23.970                  11.420
@@ -1858,7 +1784,7 @@ Always print `sessionInfo` for reproducibility!
 sessionInfo()
 ```
 
-    ## R version 3.6.1 (2019-07-05)
+    ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-pc-linux-gnu (64-bit)
     ## Running under: Ubuntu 18.04.3 LTS
     ## 
@@ -1878,53 +1804,55 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] fs_1.3.1        ggplot2_3.2.1   phyloseq_1.28.0 magrittr_1.5   
+    ##  [1] fs_1.3.1        ggplot2_3.2.1   phyloseq_1.30.0 magrittr_1.5   
     ##  [5] tibble_2.1.3    dplyr_0.8.3     stringr_1.4.0   readr_1.3.1    
-    ##  [9] dada2_1.12.1    Rcpp_1.0.2     
+    ##  [9] dada2_1.14.0    Rcpp_1.0.3     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Biobase_2.44.0              splines_3.6.1              
-    ##  [3] jsonlite_1.6                foreach_1.4.7              
-    ##  [5] RcppParallel_4.4.3          assertthat_0.2.1           
-    ##  [7] stats4_3.6.1                latticeExtra_0.6-28        
-    ##  [9] GenomeInfoDbData_1.2.1      Rsamtools_2.0.0            
-    ## [11] yaml_2.2.0                  pillar_1.4.2               
-    ## [13] backports_1.1.4             lattice_0.20-38            
-    ## [15] glue_1.3.1                  digest_0.6.20              
-    ## [17] GenomicRanges_1.36.1        RColorBrewer_1.1-2         
-    ## [19] XVector_0.24.0              colorspace_1.4-1           
-    ## [21] htmltools_0.3.6             Matrix_1.2-17              
-    ## [23] plyr_1.8.4                  pkgconfig_2.0.2            
-    ## [25] ShortRead_1.42.0            zlibbioc_1.30.0            
-    ## [27] purrr_0.3.2                 scales_1.0.0               
-    ## [29] BiocParallel_1.18.1         mgcv_1.8-28                
-    ## [31] IRanges_2.18.2              withr_2.1.2                
-    ## [33] SummarizedExperiment_1.14.1 BiocGenerics_0.30.0        
-    ## [35] lazyeval_0.2.2              cli_1.1.0                  
-    ## [37] survival_2.44-1.1           crayon_1.3.4               
-    ## [39] evaluate_0.14               fansi_0.4.0                
-    ## [41] nlme_3.1-141                MASS_7.3-51.4              
-    ## [43] hwriter_1.3.2               vegan_2.5-6                
-    ## [45] data.table_1.12.2           tools_3.6.1                
-    ## [47] hms_0.5.1                   matrixStats_0.55.0         
-    ## [49] Rhdf5lib_1.6.0              S4Vectors_0.22.0           
-    ## [51] munsell_0.5.0               cluster_2.1.0              
-    ## [53] DelayedArray_0.10.0         Biostrings_2.52.0          
-    ## [55] ade4_1.7-13                 compiler_3.6.1             
-    ## [57] GenomeInfoDb_1.20.0         rlang_0.4.0                
-    ## [59] rhdf5_2.28.0                grid_3.6.1                 
-    ## [61] RCurl_1.95-4.12             iterators_1.0.12           
-    ## [63] biomformat_1.12.0           igraph_1.2.4.1             
-    ## [65] labeling_0.3                bitops_1.0-6               
-    ## [67] rmarkdown_1.15              multtest_2.40.0            
-    ## [69] gtable_0.3.0                codetools_0.2-16           
-    ## [71] reshape2_1.4.3              R6_2.4.0                   
-    ## [73] GenomicAlignments_1.20.1    knitr_1.24                 
-    ## [75] utf8_1.1.4                  zeallot_0.1.0              
-    ## [77] permute_0.9-5               ape_5.3                    
-    ## [79] stringi_1.4.3               parallel_3.6.1             
-    ## [81] vctrs_0.2.0                 tidyselect_0.2.5           
-    ## [83] xfun_0.9
+    ##  [1] nlme_3.1-143                bitops_1.0-6               
+    ##  [3] matrixStats_0.55.0          RColorBrewer_1.1-2         
+    ##  [5] GenomeInfoDb_1.22.0         tools_3.6.2                
+    ##  [7] backports_1.1.5             utf8_1.1.4                 
+    ##  [9] R6_2.4.1                    vegan_2.5-6                
+    ## [11] lazyeval_0.2.2              BiocGenerics_0.32.0        
+    ## [13] mgcv_1.8-31                 colorspace_1.4-1           
+    ## [15] permute_0.9-5               ade4_1.7-13                
+    ## [17] withr_2.1.2                 tidyselect_0.2.5           
+    ## [19] compiler_3.6.2              cli_2.0.1                  
+    ## [21] Biobase_2.46.0              DelayedArray_0.12.2        
+    ## [23] labeling_0.3                scales_1.1.0               
+    ## [25] digest_0.6.23               Rsamtools_2.2.1            
+    ## [27] rmarkdown_2.1               XVector_0.26.0             
+    ## [29] jpeg_0.1-8.1                pkgconfig_2.0.3            
+    ## [31] htmltools_0.4.0             rlang_0.4.2                
+    ## [33] farver_2.0.3                hwriter_1.3.2              
+    ## [35] jsonlite_1.6                BiocParallel_1.20.1        
+    ## [37] RCurl_1.98-1.1              GenomeInfoDbData_1.2.2     
+    ## [39] biomformat_1.14.0           Matrix_1.2-18              
+    ## [41] fansi_0.4.1                 munsell_0.5.0              
+    ## [43] S4Vectors_0.24.3            Rhdf5lib_1.8.0             
+    ## [45] ape_5.3                     lifecycle_0.1.0            
+    ## [47] stringi_1.4.5               yaml_2.2.0                 
+    ## [49] MASS_7.3-51.5               SummarizedExperiment_1.16.1
+    ## [51] zlibbioc_1.32.0             rhdf5_2.30.1               
+    ## [53] plyr_1.8.5                  grid_3.6.2                 
+    ## [55] parallel_3.6.2              crayon_1.3.4               
+    ## [57] lattice_0.20-38             Biostrings_2.54.0          
+    ## [59] splines_3.6.2               multtest_2.42.0            
+    ## [61] hms_0.5.3                   zeallot_0.1.0              
+    ## [63] knitr_1.27                  pillar_1.4.3               
+    ## [65] igraph_1.2.4.2              GenomicRanges_1.38.0       
+    ## [67] reshape2_1.4.3              codetools_0.2-16           
+    ## [69] stats4_3.6.2                glue_1.3.1                 
+    ## [71] evaluate_0.14               ShortRead_1.44.1           
+    ## [73] latticeExtra_0.6-29         data.table_1.12.8          
+    ## [75] RcppParallel_4.4.4          png_0.1-7                  
+    ## [77] vctrs_0.2.1                 foreach_1.4.7              
+    ## [79] gtable_0.3.0                purrr_0.3.3                
+    ## [81] assertthat_0.2.1            xfun_0.12                  
+    ## [83] survival_3.1-8              iterators_1.0.12           
+    ## [85] GenomicAlignments_1.22.1    IRanges_2.20.2             
+    ## [87] cluster_2.1.0
 
 ------------------------------------------------------------------------
 
