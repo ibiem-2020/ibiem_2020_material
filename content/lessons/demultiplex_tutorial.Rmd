@@ -104,6 +104,7 @@ Once you have run `validate_mapping_file.py` you can view the report through RSt
 Remember from the map file that our dataset consists of reads from multiple samples.  In order to tally the number of different bacteria corresponding to each sample, we need to separate reads according to the sample of origin.
 
 We will be using `split_libraries_fastq.py` and  `split_sequence_file_on_sample_ids.py` to demultiplex the data.  The documentation for these programs is available here:
+
   - [split_libraries_fastq.py](http://qiime.org/scripts/split_libraries_fastq.html)
   - [split_sequence_file_on_sample_ids.py](http://qiime.org/scripts/split_sequence_file_on_sample_ids.html)
 

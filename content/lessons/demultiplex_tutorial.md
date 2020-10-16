@@ -134,10 +134,10 @@ sample of origin.
 
 We will be using `split_libraries_fastq.py` and
 `split_sequence_file_on_sample_ids.py` to demultiplex the data. The
-documentation for these programs is available here: -
-[split\_libraries\_fastq.py](http://qiime.org/scripts/split_libraries_fastq.html)
--
-[split\_sequence\_file\_on\_sample\_ids.py](http://qiime.org/scripts/split_sequence_file_on_sample_ids.html)
+documentation for these programs is available here:
+
+-   [split\_libraries\_fastq.py](http://qiime.org/scripts/split_libraries_fastq.html)
+-   [split\_sequence\_file\_on\_sample\_ids.py](http://qiime.org/scripts/split_sequence_file_on_sample_ids.html)
 
 Alternatively we can get some instructions if we run the programs with
 the `--help` command line option.
@@ -1452,6 +1452,142 @@ for (curread in c("forward","reverse")) {
     ## [1] "/home/guest/scratch/atacama_1pct/demux/reverse/YUN3856.3"
     ## [1] "YUN3856.3"
     ## [1] "NEW: /home/guest/scratch/atacama_1pct/demux/YUN3856.3.reverse.fastq"
+
+``` bash
+ls $DEMUX_DIR
+```
+
+    ## BAQ1370.1.3.forward.fastq.gz
+    ## BAQ1370.1.3.reverse.fastq.gz
+    ## BAQ1552.1.1.forward.fastq.gz
+    ## BAQ1552.1.1.reverse.fastq.gz
+    ## BAQ2420.1.1.forward.fastq.gz
+    ## BAQ2420.1.1.reverse.fastq.gz
+    ## BAQ2420.1.2.forward.fastq.gz
+    ## BAQ2420.1.2.reverse.fastq.gz
+    ## BAQ2420.1.3.forward.fastq.gz
+    ## BAQ2420.1.3.reverse.fastq.gz
+    ## BAQ2420.2.forward.fastq.gz
+    ## BAQ2420.2.reverse.fastq.gz
+    ## BAQ2420.3.forward.fastq.gz
+    ## BAQ2420.3.reverse.fastq.gz
+    ## BAQ2462.1.forward.fastq.gz
+    ## BAQ2462.1.reverse.fastq.gz
+    ## BAQ2462.2.forward.fastq.gz
+    ## BAQ2462.2.reverse.fastq.gz
+    ## BAQ2462.3.forward.fastq.gz
+    ## BAQ2462.3.reverse.fastq.gz
+    ## BAQ2687.1.forward.fastq.gz
+    ## BAQ2687.1.reverse.fastq.gz
+    ## BAQ2687.2.forward.fastq.gz
+    ## BAQ2687.2.reverse.fastq.gz
+    ## BAQ2687.3.forward.fastq.gz
+    ## BAQ2687.3.reverse.fastq.gz
+    ## BAQ2838.1.forward.fastq.gz
+    ## BAQ2838.1.reverse.fastq.gz
+    ## BAQ2838.2.forward.fastq.gz
+    ## BAQ2838.2.reverse.fastq.gz
+    ## BAQ2838.3.forward.fastq.gz
+    ## BAQ2838.3.reverse.fastq.gz
+    ## BAQ3473.1.forward.fastq.gz
+    ## BAQ3473.1.reverse.fastq.gz
+    ## BAQ3473.2.forward.fastq.gz
+    ## BAQ3473.2.reverse.fastq.gz
+    ## BAQ3473.3.forward.fastq.gz
+    ## BAQ3473.3.reverse.fastq.gz
+    ## BAQ4166.1.1.forward.fastq.gz
+    ## BAQ4166.1.1.reverse.fastq.gz
+    ## BAQ4166.1.2.forward.fastq.gz
+    ## BAQ4166.1.2.reverse.fastq.gz
+    ## BAQ4166.1.3.forward.fastq.gz
+    ## BAQ4166.1.3.reverse.fastq.gz
+    ## BAQ4166.2.forward.fastq.gz
+    ## BAQ4166.2.reverse.fastq.gz
+    ## BAQ4166.3.forward.fastq.gz
+    ## BAQ4166.3.reverse.fastq.gz
+    ## BAQ4697.1.forward.fastq.gz
+    ## BAQ4697.1.reverse.fastq.gz
+    ## BAQ4697.2.forward.fastq.gz
+    ## BAQ4697.2.reverse.fastq.gz
+    ## BAQ4697.3.forward.fastq.gz
+    ## BAQ4697.3.reverse.fastq.gz
+    ## forward
+    ## reverse
+    ## split_4
+    ## tagged_1
+    ## tagged_2
+    ## tagged_3
+    ## tagged_4
+    ## YUN1005.1.1.forward.fastq.gz
+    ## YUN1005.1.1.reverse.fastq.gz
+    ## YUN1005.3.forward.fastq.gz
+    ## YUN1005.3.reverse.fastq.gz
+    ## YUN1242.1.forward.fastq.gz
+    ## YUN1242.1.reverse.fastq.gz
+    ## YUN1242.2.forward.fastq.gz
+    ## YUN1242.2.reverse.fastq.gz
+    ## YUN1242.3.forward.fastq.gz
+    ## YUN1242.3.reverse.fastq.gz
+    ## YUN1609.1.forward.fastq.gz
+    ## YUN1609.1.reverse.fastq.gz
+    ## YUN2029.1.forward.fastq.gz
+    ## YUN2029.1.reverse.fastq.gz
+    ## YUN2029.2.forward.fastq.gz
+    ## YUN2029.2.reverse.fastq.gz
+    ## YUN2029.3.forward.fastq.gz
+    ## YUN2029.3.reverse.fastq.gz
+    ## YUN3008.1.3.forward.fastq.gz
+    ## YUN3008.1.3.reverse.fastq.gz
+    ## YUN3008.3.forward.fastq.gz
+    ## YUN3008.3.reverse.fastq.gz
+    ## YUN3153.2.forward.fastq.gz
+    ## YUN3153.2.reverse.fastq.gz
+    ## YUN3153.3.forward.fastq.gz
+    ## YUN3153.3.reverse.fastq.gz
+    ## YUN3184.2.forward.fastq.gz
+    ## YUN3184.2.reverse.fastq.gz
+    ## YUN3259.1.1.forward.fastq.gz
+    ## YUN3259.1.1.reverse.fastq.gz
+    ## YUN3259.1.2.forward.fastq.gz
+    ## YUN3259.1.2.reverse.fastq.gz
+    ## YUN3259.1.3.forward.fastq.gz
+    ## YUN3259.1.3.reverse.fastq.gz
+    ## YUN3259.2.forward.fastq.gz
+    ## YUN3259.2.reverse.fastq.gz
+    ## YUN3259.3.forward.fastq.gz
+    ## YUN3259.3.reverse.fastq.gz
+    ## YUN3346.1.forward.fastq.gz
+    ## YUN3346.1.reverse.fastq.gz
+    ## YUN3346.2.forward.fastq.gz
+    ## YUN3346.2.reverse.fastq.gz
+    ## YUN3346.3.forward.fastq.gz
+    ## YUN3346.3.reverse.fastq.gz
+    ## YUN3428.1.forward.fastq.gz
+    ## YUN3428.1.reverse.fastq.gz
+    ## YUN3428.2.forward.fastq.gz
+    ## YUN3428.2.reverse.fastq.gz
+    ## YUN3428.3.forward.fastq.gz
+    ## YUN3428.3.reverse.fastq.gz
+    ## YUN3533.1.1.forward.fastq.gz
+    ## YUN3533.1.1.reverse.fastq.gz
+    ## YUN3533.1.2.forward.fastq.gz
+    ## YUN3533.1.2.reverse.fastq.gz
+    ## YUN3533.1.3.forward.fastq.gz
+    ## YUN3533.1.3.reverse.fastq.gz
+    ## YUN3533.2.forward.fastq.gz
+    ## YUN3533.2.reverse.fastq.gz
+    ## YUN3533.3.forward.fastq.gz
+    ## YUN3533.3.reverse.fastq.gz
+    ## YUN3856.1.1.forward.fastq.gz
+    ## YUN3856.1.1.reverse.fastq.gz
+    ## YUN3856.1.2.forward.fastq.gz
+    ## YUN3856.1.2.reverse.fastq.gz
+    ## YUN3856.1.3.forward.fastq.gz
+    ## YUN3856.1.3.reverse.fastq.gz
+    ## YUN3856.2.forward.fastq.gz
+    ## YUN3856.2.reverse.fastq.gz
+    ## YUN3856.3.forward.fastq.gz
+    ## YUN3856.3.reverse.fastq.gz
 
 Session Info
 ============
