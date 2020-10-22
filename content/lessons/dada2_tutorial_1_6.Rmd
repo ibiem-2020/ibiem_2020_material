@@ -39,6 +39,7 @@ library(magrittr)
 library(phyloseq)
 library(ggplot2)
 library(fs)
+library(tidyr)
 ```
 
 We will work with are the [Atacama data (1% subsampled)](https://docs.qiime2.org/2018.11/tutorials/atacama-soils/#subsample-data).  This Notebook assumes that you have followed the [Demultiplexing Tutorial](demultiplex_tutorial.md) to generate demultiplexed FASTQs. 
@@ -357,6 +358,7 @@ The fraction of chimeras varies based on factors including experimental procedur
 
 # Track reads through the pipeline
 
+## Assemble Table
 As a final check of our progress, we'll look at the number of reads that made it through each step in the pipeline:
 ```{r track}
 getN <- function(x) sum(getUniques(x))
@@ -393,8 +395,18 @@ track
 
 &nbsp;
 
-# Assign taxonomy
+## Plot Counts through pipeline
+```{r}
+track %>%
+  gather(key="stage", value="counts", -c("sample")) %>%
+  replace_na(list(counts = 0)) %>%
+  mutate(stage=factor(stage, levels = c('input','filtered','denoised','merged','tabled','nonchim'))) %>%
+  ggplot(mapping=aes(x=stage, y=counts, by=sample, group = sample)) +
+  geom_line(alpha=0.5) +
+  theme_classic()
+```
 
+# Assign taxonomy
 It is common at this point, especially in 16S/18S/ITS amplicon sequencing, to classify sequence variants taxonomically. The DADA2 package provides a native implementation of [the RDP's naive Bayesian classifier](http://www.ncbi.nlm.nih.gov/pubmed/17586664) for this purpose. The `assignTaxonomy` function takes a set of sequences and a training set of taxonomically classified sequences, and outputs the taxonomic assignments with at least `minBoot` bootstrap confidence. 
 
 The DADA2 developers maintain [formatted training fastas for the RDP training set, GreenGenes clustered at 97\% identity, and the Silva reference database](training.html). For fungal taxonomy, the General Fasta release files from the [UNITE ITS database](https://unite.ut.ee/repository.php) can be used as is. 
@@ -428,10 +440,10 @@ head(taxa.print)
 
 # Bonus: Handoff to phyloseq
 
-The [phyloseq R package is a powerful framework for further analysis of microbiome data](https://joey711.github.io/phyloseq/). We now demosntrate how to straightforwardly import the tables produced by the DADA2 pipeline into phyloseq. We'll also add the small amount of metadata we have -- the samples are named by the gender (G), mouse subject number (X) and the day post-weaning (Y) it was sampled (eg. GXDY).
+The [phyloseq R package is a powerful framework for further analysis of microbiome data](https://joey711.github.io/phyloseq/). We now demonstrate how to straightforwardly import the tables produced by the DADA2 pipeline into phyloseq. We'll also add the metadata we have.
 
 ## Make Phyloseq Object
-We can construct a simple sample data.frame based on the filenames. Usually this step would instead involve reading the sample data in from a file.
+### Load Metadata
 ```{r load_map}
 meta.df = read_tsv(map.file, comment= "#q2") %>%
   dplyr::rename(Sample = "#SampleID") %>%

@@ -47,6 +47,7 @@ library(magrittr)
 library(phyloseq)
 library(ggplot2)
 library(fs)
+library(tidyr)
 ```
 
 We will work with are the [Atacama data (1%
@@ -982,6 +983,9 @@ removed prior to beginning the DADA2 pipeline.
 Track reads through the pipeline
 ================================
 
+Assemble Table
+--------------
+
 As a final check of our progress, we’ll look at the number of reads that
 made it through each step in the pipeline:
 
@@ -1042,6 +1046,21 @@ you may need to revisit the removal of primers, as the ambiguous
 nucleotides in unremoved primers interfere with chimera identification.
 
  
+
+Plot Counts through pipeline
+----------------------------
+
+``` r
+track %>%
+  gather(key="stage", value="counts", -c("sample")) %>%
+  replace_na(list(counts = 0)) %>%
+  mutate(stage=factor(stage, levels = c('input','filtered','denoised','merged','tabled','nonchim'))) %>%
+  ggplot(mapping=aes(x=stage, y=counts, by=sample, group = sample)) +
+  geom_line(alpha=0.5) +
+  theme_classic()
+```
+
+![](dada2_tutorial_1_6_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 Assign taxonomy
 ===============
@@ -1122,18 +1141,13 @@ Bonus: Handoff to phyloseq
 
 The [phyloseq R package is a powerful framework for further analysis of
 microbiome data](https://joey711.github.io/phyloseq/). We now
-demosntrate how to straightforwardly import the tables produced by the
-DADA2 pipeline into phyloseq. We’ll also add the small amount of
-metadata we have – the samples are named by the gender (G), mouse
-subject number (X) and the day post-weaning (Y) it was sampled (eg.
-GXDY).
+demonstrate how to straightforwardly import the tables produced by the
+DADA2 pipeline into phyloseq. We’ll also add the metadata we have.
 
 Make Phyloseq Object
 --------------------
 
-We can construct a simple sample data.frame based on the filenames.
-Usually this step would instead involve reading the sample data in from
-a file.
+### Load Metadata
 
 ``` r
 meta.df = read_tsv(map.file, comment= "#q2") %>%
@@ -1804,9 +1818,9 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] fs_1.3.1        ggplot2_3.2.1   phyloseq_1.30.0 magrittr_1.5   
-    ##  [5] tibble_2.1.3    dplyr_0.8.3     stringr_1.4.0   readr_1.3.1    
-    ##  [9] dada2_1.14.0    Rcpp_1.0.3     
+    ##  [1] tidyr_1.0.0     fs_1.3.1        ggplot2_3.2.1   phyloseq_1.30.0
+    ##  [5] magrittr_1.5    tibble_2.1.3    dplyr_0.8.3     stringr_1.4.0  
+    ##  [9] readr_1.3.1     dada2_1.14.0    Rcpp_1.0.3     
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] nlme_3.1-143                bitops_1.0-6               
@@ -1852,7 +1866,7 @@ sessionInfo()
     ## [81] assertthat_0.2.1            xfun_0.12                  
     ## [83] survival_3.1-8              iterators_1.0.12           
     ## [85] GenomicAlignments_1.22.1    IRanges_2.20.2             
-    ## [87] cluster_2.1.0
+    ## [87] cluster_2.1.0               ellipsis_0.3.0
 
 ------------------------------------------------------------------------
 
