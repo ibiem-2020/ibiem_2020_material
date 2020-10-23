@@ -47,7 +47,7 @@ We will work with are the [Atacama data (1% subsampled)](https://docs.qiime2.org
 
 
 
-```{r files_and_directories, include=FALSE}
+```{r files_and_directories}
 # Params
 
 if(exists("params") && 
@@ -111,10 +111,14 @@ fnRs <- sort(list.files(demux.dir, pattern="reverse.fastq", full.names = TRUE))
 
 forward_fastq_suffix = ".forward.fastq.gz"
 
-sample.names = fnFs %>% 
+fnFs %>% 
   basename %>%
-  str_replace(forward_fastq_suffix,"") 
+  str_replace(forward_fastq_suffix,"") ->
+  sample.names
+
+sample.names
 ```
+
 <div style="border: 1px solid red;padding: 5px;background-color: #fff6f6;">**<span style="color:red">If using this workflow on your own data:</span>** The string manipulations may have to be modified if using a different filename format.</div>
 
 ## Sanity Check on Lists
@@ -170,9 +174,11 @@ plotQualityProfile(file.path(data.dir, "reverse.fastq.gz"))
 
 The reverse reads are of significantly worse quality, and it drops off a little at the end, which is common in Illumina sequencing. This isn't too worrisome, as DADA2 incorporates quality information into its error model which makes the algorithm [robust to lower quality sequence](https://twitter.com/bejcal/status/771010634074820608), but trimming as the average qualities drop off will improve the algorithm's sensitivity to rare sequence variants. Based on these profiles, we will truncate the reverse reads at position 140 where the quality distribution dips down.  As with the forward reads, the first ~10bp are somewhat lower quality so we will trim 10bp from the left also.
 
-<div style="border: 1px solid red;padding: 5px;background-color: #fff6f6;">**<span style="color:red">If using this workflow on your own data:</span>** **Your reads must still overlap after truncation in order to merge them later!** The tutorial is using 150bp PE V4 sequence data, so the forward and reverse reads overlap by about 50bp.  When using data with limited overlap `truncLen` must be large enough to maintain `20 + biological.length.variation` nucleotides of overlap between them.  When using data that overlap more (e.g. 250 PE V4) trimming can be completely guided by the quality scores. 
+<div style="border: 1px solid red;padding: 5px;background-color: #fff6f6;">**<span style="color:red">If using this workflow on your own data:</span>** **Your reads must still overlap after truncation in order to merge them later!** This tutorial is using 150bp PE V4 sequence data, so the forward and reverse reads overlap by about 50bp.  When using data with limited overlap `truncLen` must be large enough to maintain `20 + biological.length.variation` nucleotides of overlap between them.  When using data that overlap more (e.g. 250 PE V4) trimming can be completely guided by the quality scores.
 
 Non-overlapping primer sets are supported as well with `mergePairs(..., justConcatenate=TRUE)` when performing merging.</div>
+
+>Note: Because the read length is 150bp and the amplicon size is about 250bp +/-5bp, we do not expect any adapter contamination at the 3' end.  Because of this our only concern for 3' trimming is quality.
 
 &nbsp;
 
@@ -191,7 +197,7 @@ We'll use standard filtering parameters: `maxN=0` (DADA2 requires no Ns), `trunc
 Filtering (e.g. removing a read because it has overall bad quality) must be done in such a way that forward and reverse reads are kept in sync: if a reverse read is filtered out because of low quality, its partner forward read must *also* be removed, even if it passes.  `filterAndTrim` does this if you pass it the forward and reverse FASTQs.
 
 The first ~10bp of R1 and R2 are somewhat lower quality, which is very common for Illumina data.  Let's trim this with `trimLeft=10` (note: this will result in shorter amplicons, where trimming on right end of a read should not change amplicon length after it is filtered).
-```{r filter, message=FALSE, warning=FALSE}
+```{r filter}
 filt.out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, trimLeft=10, truncLen=c(145,140),
               maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
               compress=TRUE, multithread=FALSE) # On Windows set multithread=FALSE
@@ -259,17 +265,17 @@ names(derepFs) <- sample.names
 names(derepRs) <- sample.names
 ```
 
-Oops, we generated our "sample.names" from the original list of FASTQs, but we dropped one out.  We need to do it again based on the list of filtered FASTQs
+Oops, we generated our "sample.names" from the original list of FASTQs, but we dropped one out.  We need to do it again based on derepF data structure itself.
 
 ```{r}
-filtFs %>% 
-  basename %>%
+derepFs %>%
+  names %>%
   str_replace("_F_filt.fastq.gz","") ->
   sample.names
 ```
 
 Now let's try the dereplication again
-```{r dereplicate_tryagain, message=FALSE}
+```{r dereplicate_tryagain}
 derepFs <- derepFastq(filtFs, verbose=TRUE)
 derepRs <- derepFastq(filtRs, verbose=TRUE)
 # Name the derep-class objects by the sample names
@@ -293,7 +299,7 @@ dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
 
 Inspecting the dada-class object returned by dada:
 ```{r see-dada}
-dadaFs[[1]]
+dadaFs[[2]]
 ```
 
 The DADA2 algorithm inferred `r length(dadaFs[[1]]$sequence)` real sequence variants from the `r length(dadaFs[[1]]$map)` unique sequences in the first sample. There is much more to the `dada-class` return object than this (see `help("dada-class")` for some info), including multiple diagnostics about the quality of each inferred sequence variant, but that is beyond the scope of an introductory tutorial.
@@ -311,7 +317,7 @@ The DADA2 algorithm inferred `r length(dadaFs[[1]]$sequence)` real sequence vari
 Spurious sequence variants are further reduced by merging overlapping reads. The core function here is `mergePairs`, which depends on the forward and reverse reads being in matching order at the time they were dereplicated.
 
 **Merge the denoised forward and reverse reads**:
-```{r merge, message=FALSE}
+```{r merge}
 mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
 # Inspect the merger data.frame from the first sample
 head(mergers[[2]])
@@ -344,7 +350,7 @@ The sequence table is a `matrix` with rows corresponding to (and named by) the s
 The core `dada` method removes substitution and indel errors, but chimeras remain. Fortunately, the accuracy of the sequences after denoising makes identifying chimeras simpler than it is when dealing with fuzzy OTUs: all sequences which can be exactly reconstructed as a bimera (two-parent chimera) from more abundant sequences.
 
 **Remove chimeric sequences**:
-```{r chimeras, message=FALSE}
+```{r chimeras}
 seqtab.nochim <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
 dim(seqtab.nochim)
 sum(seqtab.nochim)/sum(seqtab)
