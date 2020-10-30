@@ -113,3 +113,60 @@ tibble(richness = specnumber(jar_data),
       ) %>%
   t
 ```
+
+
+# Can Chao1 generate non-integer values?
+
+```{r}
+ace_part = function(a1, a2){
+  (a1*(a1-1))/(2*a2+1)
+}
+
+ace_part(10,1:10)
+
+```
+
+Seems like it!
+
+## Try the vegan Chao1 implementation
+```{r}
+estimateR(matrix(sample.int(15, size = 9*100, replace = TRUE), nrow = 9, ncol = 100))
+
+```
+Yes!
+
+
+```{r}
+matrix(sample.int(15, size = 9*100, replace = TRUE), nrow = 9, ncol = 100)
+
+```
+
+## Try zero-inflated data
+
+```{r}
+set.seed(1)
+
+isZero = rbinom(n = 10000, size = 1, prob = 0.97)
+
+ifelse(isZero==1, 0, sample.int(15, size = 9*100, replace = TRUE)) %>%
+  matrix(nrow = 10) %>%
+  estimateR # ["S.chao1",]
+
+```
+Less frequent, but yes!
+
+
+
+```{r}
+set.seed(3)
+isZero = rbinom(n = 10000, size = 1, prob = 0.97)
+
+ifelse(isZero==1, 0, rlnorm(sum(isZero==0), meanlog = 0, sdlog = 3)) %>%
+  round %>%
+  matrix(nrow = 10) %>%
+  estimateR
+
+```
+
+Less frequent, but yes!
+
