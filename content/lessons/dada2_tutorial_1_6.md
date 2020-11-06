@@ -55,6 +55,98 @@ subsampled)](https://docs.qiime2.org/2018.11/tutorials/atacama-soils/#subsample-
 This Notebook assumes that you have followed the [Demultiplexing
 Tutorial](demultiplex_tutorial.md) to generate demultiplexed FASTQs.
 
+``` r
+# Params
+
+if(exists("params") && 
+   !is.null(params[["atacama_data_percent"]])){
+  atacama.data.percent=params[["atacama_data_percent"]]
+} else {
+  atacama.data.percent = "1"
+}
+if(exists("params") && 
+   !is.null(params[["data_dir"]])){
+  data.dir=params[["data_dir"]]
+} else {
+  data.dir = "/data/tutorial_data"
+}
+
+# Directories
+
+data.dir = file.path(data.dir, paste0("atacama_", atacama.data.percent, "pct"))
+output.dir = path.expand(file.path("~/scratch", paste0("atacama_", atacama.data.percent, "pct")))
+demux.dir = file.path(output.dir, "demux")
+
+list.files(demux.dir)
+```
+
+    ##   [1] "BAQ1370.1.3.forward.fastq.gz" "BAQ1370.1.3.reverse.fastq.gz"
+    ##   [3] "BAQ1552.1.1.forward.fastq.gz" "BAQ1552.1.1.reverse.fastq.gz"
+    ##   [5] "BAQ2420.1.1.forward.fastq.gz" "BAQ2420.1.1.reverse.fastq.gz"
+    ##   [7] "BAQ2420.1.2.forward.fastq.gz" "BAQ2420.1.2.reverse.fastq.gz"
+    ##   [9] "BAQ2420.1.3.forward.fastq.gz" "BAQ2420.1.3.reverse.fastq.gz"
+    ##  [11] "BAQ2420.2.forward.fastq.gz"   "BAQ2420.2.reverse.fastq.gz"  
+    ##  [13] "BAQ2420.3.forward.fastq.gz"   "BAQ2420.3.reverse.fastq.gz"  
+    ##  [15] "BAQ2462.1.forward.fastq.gz"   "BAQ2462.1.reverse.fastq.gz"  
+    ##  [17] "BAQ2462.2.forward.fastq.gz"   "BAQ2462.2.reverse.fastq.gz"  
+    ##  [19] "BAQ2462.3.forward.fastq.gz"   "BAQ2462.3.reverse.fastq.gz"  
+    ##  [21] "BAQ2687.1.forward.fastq.gz"   "BAQ2687.1.reverse.fastq.gz"  
+    ##  [23] "BAQ2687.2.forward.fastq.gz"   "BAQ2687.2.reverse.fastq.gz"  
+    ##  [25] "BAQ2687.3.forward.fastq.gz"   "BAQ2687.3.reverse.fastq.gz"  
+    ##  [27] "BAQ2838.1.forward.fastq.gz"   "BAQ2838.1.reverse.fastq.gz"  
+    ##  [29] "BAQ2838.2.forward.fastq.gz"   "BAQ2838.2.reverse.fastq.gz"  
+    ##  [31] "BAQ2838.3.forward.fastq.gz"   "BAQ2838.3.reverse.fastq.gz"  
+    ##  [33] "BAQ3473.1.forward.fastq.gz"   "BAQ3473.1.reverse.fastq.gz"  
+    ##  [35] "BAQ3473.2.forward.fastq.gz"   "BAQ3473.2.reverse.fastq.gz"  
+    ##  [37] "BAQ3473.3.forward.fastq.gz"   "BAQ3473.3.reverse.fastq.gz"  
+    ##  [39] "BAQ4166.1.1.forward.fastq.gz" "BAQ4166.1.1.reverse.fastq.gz"
+    ##  [41] "BAQ4166.1.2.forward.fastq.gz" "BAQ4166.1.2.reverse.fastq.gz"
+    ##  [43] "BAQ4166.1.3.forward.fastq.gz" "BAQ4166.1.3.reverse.fastq.gz"
+    ##  [45] "BAQ4166.2.forward.fastq.gz"   "BAQ4166.2.reverse.fastq.gz"  
+    ##  [47] "BAQ4166.3.forward.fastq.gz"   "BAQ4166.3.reverse.fastq.gz"  
+    ##  [49] "BAQ4697.1.forward.fastq.gz"   "BAQ4697.1.reverse.fastq.gz"  
+    ##  [51] "BAQ4697.2.forward.fastq.gz"   "BAQ4697.2.reverse.fastq.gz"  
+    ##  [53] "BAQ4697.3.forward.fastq.gz"   "BAQ4697.3.reverse.fastq.gz"  
+    ##  [55] "forward"                      "reverse"                     
+    ##  [57] "split_4"                      "tagged_1"                    
+    ##  [59] "tagged_2"                     "tagged_3"                    
+    ##  [61] "tagged_4"                     "YUN1005.1.1.forward.fastq.gz"
+    ##  [63] "YUN1005.1.1.reverse.fastq.gz" "YUN1005.3.forward.fastq.gz"  
+    ##  [65] "YUN1005.3.reverse.fastq.gz"   "YUN1242.1.forward.fastq.gz"  
+    ##  [67] "YUN1242.1.reverse.fastq.gz"   "YUN1242.2.forward.fastq.gz"  
+    ##  [69] "YUN1242.2.reverse.fastq.gz"   "YUN1242.3.forward.fastq.gz"  
+    ##  [71] "YUN1242.3.reverse.fastq.gz"   "YUN1609.1.forward.fastq.gz"  
+    ##  [73] "YUN1609.1.reverse.fastq.gz"   "YUN2029.1.forward.fastq.gz"  
+    ##  [75] "YUN2029.1.reverse.fastq.gz"   "YUN2029.2.forward.fastq.gz"  
+    ##  [77] "YUN2029.2.reverse.fastq.gz"   "YUN2029.3.forward.fastq.gz"  
+    ##  [79] "YUN2029.3.reverse.fastq.gz"   "YUN3008.1.3.forward.fastq.gz"
+    ##  [81] "YUN3008.1.3.reverse.fastq.gz" "YUN3008.3.forward.fastq.gz"  
+    ##  [83] "YUN3008.3.reverse.fastq.gz"   "YUN3153.2.forward.fastq.gz"  
+    ##  [85] "YUN3153.2.reverse.fastq.gz"   "YUN3153.3.forward.fastq.gz"  
+    ##  [87] "YUN3153.3.reverse.fastq.gz"   "YUN3184.2.forward.fastq.gz"  
+    ##  [89] "YUN3184.2.reverse.fastq.gz"   "YUN3259.1.1.forward.fastq.gz"
+    ##  [91] "YUN3259.1.1.reverse.fastq.gz" "YUN3259.1.2.forward.fastq.gz"
+    ##  [93] "YUN3259.1.2.reverse.fastq.gz" "YUN3259.1.3.forward.fastq.gz"
+    ##  [95] "YUN3259.1.3.reverse.fastq.gz" "YUN3259.2.forward.fastq.gz"  
+    ##  [97] "YUN3259.2.reverse.fastq.gz"   "YUN3259.3.forward.fastq.gz"  
+    ##  [99] "YUN3259.3.reverse.fastq.gz"   "YUN3346.1.forward.fastq.gz"  
+    ## [101] "YUN3346.1.reverse.fastq.gz"   "YUN3346.2.forward.fastq.gz"  
+    ## [103] "YUN3346.2.reverse.fastq.gz"   "YUN3346.3.forward.fastq.gz"  
+    ## [105] "YUN3346.3.reverse.fastq.gz"   "YUN3428.1.forward.fastq.gz"  
+    ## [107] "YUN3428.1.reverse.fastq.gz"   "YUN3428.2.forward.fastq.gz"  
+    ## [109] "YUN3428.2.reverse.fastq.gz"   "YUN3428.3.forward.fastq.gz"  
+    ## [111] "YUN3428.3.reverse.fastq.gz"   "YUN3533.1.1.forward.fastq.gz"
+    ## [113] "YUN3533.1.1.reverse.fastq.gz" "YUN3533.1.2.forward.fastq.gz"
+    ## [115] "YUN3533.1.2.reverse.fastq.gz" "YUN3533.1.3.forward.fastq.gz"
+    ## [117] "YUN3533.1.3.reverse.fastq.gz" "YUN3533.2.forward.fastq.gz"  
+    ## [119] "YUN3533.2.reverse.fastq.gz"   "YUN3533.3.forward.fastq.gz"  
+    ## [121] "YUN3533.3.reverse.fastq.gz"   "YUN3856.1.1.forward.fastq.gz"
+    ## [123] "YUN3856.1.1.reverse.fastq.gz" "YUN3856.1.2.forward.fastq.gz"
+    ## [125] "YUN3856.1.2.reverse.fastq.gz" "YUN3856.1.3.forward.fastq.gz"
+    ## [127] "YUN3856.1.3.reverse.fastq.gz" "YUN3856.2.forward.fastq.gz"  
+    ## [129] "YUN3856.2.reverse.fastq.gz"   "YUN3856.3.forward.fastq.gz"  
+    ## [131] "YUN3856.3.reverse.fastq.gz"
+
 If the package successfully loaded and your listed files match those
 here, you are ready to go through the DADA2 pipeline.
 
@@ -103,10 +195,27 @@ fnRs <- sort(list.files(demux.dir, pattern="reverse.fastq", full.names = TRUE))
 
 forward_fastq_suffix = ".forward.fastq.gz"
 
-sample.names = fnFs %>% 
+fnFs %>% 
   basename %>%
-  str_replace(forward_fastq_suffix,"") 
+  str_replace(forward_fastq_suffix,"") ->
+  sample.names
+
+sample.names
 ```
+
+    ##  [1] "BAQ1370.1.3" "BAQ1552.1.1" "BAQ2420.1.1" "BAQ2420.1.2" "BAQ2420.1.3"
+    ##  [6] "BAQ2420.2"   "BAQ2420.3"   "BAQ2462.1"   "BAQ2462.2"   "BAQ2462.3"  
+    ## [11] "BAQ2687.1"   "BAQ2687.2"   "BAQ2687.3"   "BAQ2838.1"   "BAQ2838.2"  
+    ## [16] "BAQ2838.3"   "BAQ3473.1"   "BAQ3473.2"   "BAQ3473.3"   "BAQ4166.1.1"
+    ## [21] "BAQ4166.1.2" "BAQ4166.1.3" "BAQ4166.2"   "BAQ4166.3"   "BAQ4697.1"  
+    ## [26] "BAQ4697.2"   "BAQ4697.3"   "YUN1005.1.1" "YUN1005.3"   "YUN1242.1"  
+    ## [31] "YUN1242.2"   "YUN1242.3"   "YUN1609.1"   "YUN2029.1"   "YUN2029.2"  
+    ## [36] "YUN2029.3"   "YUN3008.1.3" "YUN3008.3"   "YUN3153.2"   "YUN3153.3"  
+    ## [41] "YUN3184.2"   "YUN3259.1.1" "YUN3259.1.2" "YUN3259.1.3" "YUN3259.2"  
+    ## [46] "YUN3259.3"   "YUN3346.1"   "YUN3346.2"   "YUN3346.3"   "YUN3428.1"  
+    ## [51] "YUN3428.2"   "YUN3428.3"   "YUN3533.1.1" "YUN3533.1.2" "YUN3533.1.3"
+    ## [56] "YUN3533.2"   "YUN3533.3"   "YUN3856.1.1" "YUN3856.1.2" "YUN3856.1.3"
+    ## [61] "YUN3856.2"   "YUN3856.3"
 
 **<span style="color:red">If using this workflow on your own
 data:</span>** The string manipulations may have to be modified if using
@@ -338,7 +447,7 @@ somewhat lower quality so we will trim 10bp from the left also.
 
 **<span style="color:red">If using this workflow on your own
 data:</span>** **Your reads must still overlap after truncation in order
-to merge them later!** The tutorial is using 150bp PE V4 sequence data,
+to merge them later!** This tutorial is using 150bp PE V4 sequence data,
 so the forward and reverse reads overlap by about 50bp. When using data
 with limited overlap `truncLen` must be large enough to maintain
 `20 + biological.length.variation` nucleotides of overlap between them.
@@ -347,6 +456,10 @@ completely guided by the quality scores.
 
 Non-overlapping primer sets are supported as well with
 `mergePairs(..., justConcatenate=TRUE)` when performing merging.
+
+> Note: Because the read length is 150bp and the amplicon size is about
+> 250bp +/-5bp, we do not expect any adapter contamination at the 3’
+> end. Because of this our only concern for 3’ trimming is quality.
 
  
 
@@ -384,6 +497,15 @@ should not change amplicon length after it is filtered).
 filt.out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, trimLeft=10, truncLen=c(145,140),
               maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
               compress=TRUE, multithread=FALSE) # On Windows set multithread=FALSE
+```
+
+    ## Creating output directory: /home/guest/scratch/atacama_1pct/dada2/filtered
+
+    ## The filter removed all reads: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ1370.1.3_F_filt.fastq.gz and /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ1370.1.3_R_filt.fastq.gz not written.
+
+    ## Some input samples had no reads pass the filter.
+
+``` r
 head(filt.out)
 ```
 
@@ -653,12 +775,12 @@ names(derepRs) <- sample.names
     ## Error in names(derepRs) <- sample.names: 'names' attribute [62] must be the same length as the vector [61]
 
 Oops, we generated our “sample.names” from the original list of FASTQs,
-but we dropped one out. We need to do it again based on the list of
-filtered FASTQs
+but we dropped one out. We need to do it again based on derepF data
+structure itself.
 
 ``` r
-filtFs %>% 
-  basename %>%
+derepFs %>%
+  names %>%
   str_replace("_F_filt.fastq.gz","") ->
   sample.names
 ```
@@ -667,7 +789,501 @@ Now let’s try the dereplication again
 
 ``` r
 derepFs <- derepFastq(filtFs, verbose=TRUE)
+```
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ1552.1.1_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.1_F_filt.fastq.gz
+
+    ## Encountered 566 unique sequences from 672 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.2_F_filt.fastq.gz
+
+    ## Encountered 469 unique sequences from 601 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.3_F_filt.fastq.gz
+
+    ## Encountered 468 unique sequences from 633 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.2_F_filt.fastq.gz
+
+    ## Encountered 394 unique sequences from 567 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.3_F_filt.fastq.gz
+
+    ## Encountered 397 unique sequences from 607 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.1_F_filt.fastq.gz
+
+    ## Encountered 519 unique sequences from 805 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.2_F_filt.fastq.gz
+
+    ## Encountered 360 unique sequences from 547 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.3_F_filt.fastq.gz
+
+    ## Encountered 280 unique sequences from 434 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.1_F_filt.fastq.gz
+
+    ## Encountered 662 unique sequences from 820 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.2_F_filt.fastq.gz
+
+    ## Encountered 365 unique sequences from 607 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.3_F_filt.fastq.gz
+
+    ## Encountered 555 unique sequences from 785 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.1_F_filt.fastq.gz
+
+    ## Encountered 432 unique sequences from 542 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.2_F_filt.fastq.gz
+
+    ## Encountered 380 unique sequences from 449 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.3_F_filt.fastq.gz
+
+    ## Encountered 254 unique sequences from 331 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.1_F_filt.fastq.gz
+
+    ## Encountered 785 unique sequences from 1020 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.2_F_filt.fastq.gz
+
+    ## Encountered 655 unique sequences from 790 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.3_F_filt.fastq.gz
+
+    ## Encountered 740 unique sequences from 1121 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.1_F_filt.fastq.gz
+
+    ## Encountered 744 unique sequences from 965 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.2_F_filt.fastq.gz
+
+    ## Encountered 905 unique sequences from 1203 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.3_F_filt.fastq.gz
+
+    ## Encountered 718 unique sequences from 990 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.2_F_filt.fastq.gz
+
+    ## Encountered 877 unique sequences from 1195 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.3_F_filt.fastq.gz
+
+    ## Encountered 888 unique sequences from 1144 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.1_F_filt.fastq.gz
+
+    ## Encountered 413 unique sequences from 783 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.2_F_filt.fastq.gz
+
+    ## Encountered 428 unique sequences from 723 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.3_F_filt.fastq.gz
+
+    ## Encountered 552 unique sequences from 1018 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1005.1.1_F_filt.fastq.gz
+
+    ## Encountered 397 unique sequences from 819 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1005.3_F_filt.fastq.gz
+
+    ## Encountered 169 unique sequences from 387 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.1_F_filt.fastq.gz
+
+    ## Encountered 229 unique sequences from 503 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.2_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.3_F_filt.fastq.gz
+
+    ## Encountered 306 unique sequences from 688 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1609.1_F_filt.fastq.gz
+
+    ## Encountered 277 unique sequences from 656 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.1_F_filt.fastq.gz
+
+    ## Encountered 6 unique sequences from 6 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.2_F_filt.fastq.gz
+
+    ## Encountered 394 unique sequences from 792 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.3_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3008.1.3_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3008.3_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3153.2_F_filt.fastq.gz
+
+    ## Encountered 270 unique sequences from 415 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3153.3_F_filt.fastq.gz
+
+    ## Encountered 290 unique sequences from 533 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3184.2_F_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.1_F_filt.fastq.gz
+
+    ## Encountered 52 unique sequences from 53 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.2_F_filt.fastq.gz
+
+    ## Encountered 434 unique sequences from 645 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.3_F_filt.fastq.gz
+
+    ## Encountered 180 unique sequences from 251 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.2_F_filt.fastq.gz
+
+    ## Encountered 751 unique sequences from 901 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.3_F_filt.fastq.gz
+
+    ## Encountered 714 unique sequences from 986 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.1_F_filt.fastq.gz
+
+    ## Encountered 379 unique sequences from 606 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.2_F_filt.fastq.gz
+
+    ## Encountered 136 unique sequences from 166 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.3_F_filt.fastq.gz
+
+    ## Encountered 495 unique sequences from 720 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.1_F_filt.fastq.gz
+
+    ## Encountered 723 unique sequences from 970 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.2_F_filt.fastq.gz
+
+    ## Encountered 934 unique sequences from 1278 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.3_F_filt.fastq.gz
+
+    ## Encountered 739 unique sequences from 951 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.1_F_filt.fastq.gz
+
+    ## Encountered 645 unique sequences from 892 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.2_F_filt.fastq.gz
+
+    ## Encountered 681 unique sequences from 846 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.3_F_filt.fastq.gz
+
+    ## Encountered 548 unique sequences from 732 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.2_F_filt.fastq.gz
+
+    ## Encountered 674 unique sequences from 1093 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.3_F_filt.fastq.gz
+
+    ## Encountered 839 unique sequences from 1190 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.1_F_filt.fastq.gz
+
+    ## Encountered 665 unique sequences from 872 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.2_F_filt.fastq.gz
+
+    ## Encountered 598 unique sequences from 917 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.3_F_filt.fastq.gz
+
+    ## Encountered 404 unique sequences from 612 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.2_F_filt.fastq.gz
+
+    ## Encountered 657 unique sequences from 921 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.3_F_filt.fastq.gz
+
+    ## Encountered 829 unique sequences from 1166 total sequences read.
+
+``` r
 derepRs <- derepFastq(filtRs, verbose=TRUE)
+```
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ1552.1.1_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.1_R_filt.fastq.gz
+
+    ## Encountered 592 unique sequences from 672 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.2_R_filt.fastq.gz
+
+    ## Encountered 519 unique sequences from 601 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.1.3_R_filt.fastq.gz
+
+    ## Encountered 527 unique sequences from 633 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.2_R_filt.fastq.gz
+
+    ## Encountered 444 unique sequences from 567 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2420.3_R_filt.fastq.gz
+
+    ## Encountered 473 unique sequences from 607 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.1_R_filt.fastq.gz
+
+    ## Encountered 624 unique sequences from 805 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.2_R_filt.fastq.gz
+
+    ## Encountered 441 unique sequences from 547 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2462.3_R_filt.fastq.gz
+
+    ## Encountered 359 unique sequences from 434 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.1_R_filt.fastq.gz
+
+    ## Encountered 715 unique sequences from 820 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.2_R_filt.fastq.gz
+
+    ## Encountered 463 unique sequences from 607 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2687.3_R_filt.fastq.gz
+
+    ## Encountered 657 unique sequences from 785 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.1_R_filt.fastq.gz
+
+    ## Encountered 473 unique sequences from 542 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.2_R_filt.fastq.gz
+
+    ## Encountered 404 unique sequences from 449 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ2838.3_R_filt.fastq.gz
+
+    ## Encountered 284 unique sequences from 331 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.1_R_filt.fastq.gz
+
+    ## Encountered 893 unique sequences from 1020 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.2_R_filt.fastq.gz
+
+    ## Encountered 711 unique sequences from 790 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ3473.3_R_filt.fastq.gz
+
+    ## Encountered 905 unique sequences from 1121 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.1_R_filt.fastq.gz
+
+    ## Encountered 839 unique sequences from 965 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.2_R_filt.fastq.gz
+
+    ## Encountered 1066 unique sequences from 1203 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.1.3_R_filt.fastq.gz
+
+    ## Encountered 818 unique sequences from 990 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.2_R_filt.fastq.gz
+
+    ## Encountered 1021 unique sequences from 1195 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4166.3_R_filt.fastq.gz
+
+    ## Encountered 985 unique sequences from 1144 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.1_R_filt.fastq.gz
+
+    ## Encountered 526 unique sequences from 783 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.2_R_filt.fastq.gz
+
+    ## Encountered 528 unique sequences from 723 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/BAQ4697.3_R_filt.fastq.gz
+
+    ## Encountered 708 unique sequences from 1018 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1005.1.1_R_filt.fastq.gz
+
+    ## Encountered 552 unique sequences from 819 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1005.3_R_filt.fastq.gz
+
+    ## Encountered 244 unique sequences from 387 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.1_R_filt.fastq.gz
+
+    ## Encountered 319 unique sequences from 503 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.2_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1242.3_R_filt.fastq.gz
+
+    ## Encountered 436 unique sequences from 688 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN1609.1_R_filt.fastq.gz
+
+    ## Encountered 432 unique sequences from 656 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.1_R_filt.fastq.gz
+
+    ## Encountered 6 unique sequences from 6 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.2_R_filt.fastq.gz
+
+    ## Encountered 536 unique sequences from 792 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN2029.3_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3008.1.3_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3008.3_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3153.2_R_filt.fastq.gz
+
+    ## Encountered 322 unique sequences from 415 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3153.3_R_filt.fastq.gz
+
+    ## Encountered 377 unique sequences from 533 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3184.2_R_filt.fastq.gz
+
+    ## Encountered 1 unique sequences from 1 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.1_R_filt.fastq.gz
+
+    ## Encountered 52 unique sequences from 53 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.2_R_filt.fastq.gz
+
+    ## Encountered 505 unique sequences from 645 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.1.3_R_filt.fastq.gz
+
+    ## Encountered 214 unique sequences from 251 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.2_R_filt.fastq.gz
+
+    ## Encountered 816 unique sequences from 901 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3259.3_R_filt.fastq.gz
+
+    ## Encountered 801 unique sequences from 986 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.1_R_filt.fastq.gz
+
+    ## Encountered 446 unique sequences from 606 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.2_R_filt.fastq.gz
+
+    ## Encountered 154 unique sequences from 166 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3346.3_R_filt.fastq.gz
+
+    ## Encountered 572 unique sequences from 720 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.1_R_filt.fastq.gz
+
+    ## Encountered 811 unique sequences from 970 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.2_R_filt.fastq.gz
+
+    ## Encountered 1048 unique sequences from 1278 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3428.3_R_filt.fastq.gz
+
+    ## Encountered 809 unique sequences from 951 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.1_R_filt.fastq.gz
+
+    ## Encountered 737 unique sequences from 892 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.2_R_filt.fastq.gz
+
+    ## Encountered 751 unique sequences from 846 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.1.3_R_filt.fastq.gz
+
+    ## Encountered 609 unique sequences from 732 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.2_R_filt.fastq.gz
+
+    ## Encountered 762 unique sequences from 1093 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3533.3_R_filt.fastq.gz
+
+    ## Encountered 946 unique sequences from 1190 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.1_R_filt.fastq.gz
+
+    ## Encountered 755 unique sequences from 872 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.2_R_filt.fastq.gz
+
+    ## Encountered 683 unique sequences from 917 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.1.3_R_filt.fastq.gz
+
+    ## Encountered 512 unique sequences from 612 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.2_R_filt.fastq.gz
+
+    ## Encountered 781 unique sequences from 921 total sequences read.
+
+    ## Dereplicating sequence entries in Fastq file: /home/guest/scratch/atacama_1pct/dada2/filtered/YUN3856.3_R_filt.fastq.gz
+
+    ## Encountered 948 unique sequences from 1166 total sequences read.
+
+``` r
 # Name the derep-class objects by the sample names
 names(derepFs) <- sample.names
 names(derepRs) <- sample.names
@@ -824,11 +1440,11 @@ dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
 Inspecting the dada-class object returned by dada:
 
 ``` r
-dadaFs[[1]]
+dadaFs[[2]]
 ```
 
     ## dada-class: object describing DADA2 denoising results
-    ## 1 sequence variants were inferred from 1 input unique sequences.
+    ## 26 sequence variants were inferred from 566 input unique sequences.
     ## Key parameters: OMEGA_A = 1e-40, OMEGA_C = 1e-40, BAND_SIZE = 16
 
 The DADA2 algorithm inferred 1 real sequence variants from the 1 unique
@@ -873,6 +1489,131 @@ dereplicated.
 
 ``` r
 mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
+```
+
+    ## 1 paired-reads (in 1 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 178 paired-reads (in 9 unique pairings) successfully merged out of 359 (in 44 pairings) input.
+
+    ## 184 paired-reads (in 9 unique pairings) successfully merged out of 390 (in 47 pairings) input.
+
+    ## 223 paired-reads (in 14 unique pairings) successfully merged out of 454 (in 56 pairings) input.
+
+    ## 176 paired-reads (in 12 unique pairings) successfully merged out of 405 (in 53 pairings) input.
+
+    ## 258 paired-reads (in 14 unique pairings) successfully merged out of 475 (in 58 pairings) input.
+
+    ## 396 paired-reads (in 13 unique pairings) successfully merged out of 681 (in 72 pairings) input.
+
+    ## 323 paired-reads (in 14 unique pairings) successfully merged out of 450 (in 45 pairings) input.
+
+    ## 159 paired-reads (in 9 unique pairings) successfully merged out of 305 (in 37 pairings) input.
+
+    ## 272 paired-reads (in 10 unique pairings) successfully merged out of 535 (in 56 pairings) input.
+
+    ## 346 paired-reads (in 13 unique pairings) successfully merged out of 507 (in 49 pairings) input.
+
+    ## 295 paired-reads (in 13 unique pairings) successfully merged out of 593 (in 73 pairings) input.
+
+    ## 134 paired-reads (in 7 unique pairings) successfully merged out of 335 (in 40 pairings) input.
+
+    ## 87 paired-reads (in 7 unique pairings) successfully merged out of 302 (in 35 pairings) input.
+
+    ## 105 paired-reads (in 5 unique pairings) successfully merged out of 214 (in 25 pairings) input.
+
+    ## 351 paired-reads (in 13 unique pairings) successfully merged out of 702 (in 87 pairings) input.
+
+    ## 111 paired-reads (in 7 unique pairings) successfully merged out of 471 (in 68 pairings) input.
+
+    ## 408 paired-reads (in 17 unique pairings) successfully merged out of 849 (in 106 pairings) input.
+
+    ## 245 paired-reads (in 12 unique pairings) successfully merged out of 629 (in 91 pairings) input.
+
+    ## 463 paired-reads (in 14 unique pairings) successfully merged out of 910 (in 88 pairings) input.
+
+    ## 297 paired-reads (in 15 unique pairings) successfully merged out of 698 (in 78 pairings) input.
+
+    ## 385 paired-reads (in 18 unique pairings) successfully merged out of 861 (in 114 pairings) input.
+
+    ## 379 paired-reads (in 18 unique pairings) successfully merged out of 783 (in 92 pairings) input.
+
+    ## 486 paired-reads (in 20 unique pairings) successfully merged out of 676 (in 85 pairings) input.
+
+    ## 375 paired-reads (in 15 unique pairings) successfully merged out of 602 (in 74 pairings) input.
+
+    ## 676 paired-reads (in 23 unique pairings) successfully merged out of 890 (in 102 pairings) input.
+
+    ## 603 paired-reads (in 17 unique pairings) successfully merged out of 755 (in 52 pairings) input.
+
+    ## 284 paired-reads (in 10 unique pairings) successfully merged out of 337 (in 24 pairings) input.
+
+    ## 405 paired-reads (in 11 unique pairings) successfully merged out of 471 (in 22 pairings) input.
+
+    ## 1 paired-reads (in 1 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 523 paired-reads (in 18 unique pairings) successfully merged out of 644 (in 53 pairings) input.
+
+    ## 471 paired-reads (in 10 unique pairings) successfully merged out of 627 (in 31 pairings) input.
+
+    ## 0 paired-reads (in 0 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 565 paired-reads (in 18 unique pairings) successfully merged out of 716 (in 62 pairings) input.
+
+    ## 1 paired-reads (in 1 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 0 paired-reads (in 0 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 1 paired-reads (in 1 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 265 paired-reads (in 14 unique pairings) successfully merged out of 346 (in 34 pairings) input.
+
+    ## 336 paired-reads (in 11 unique pairings) successfully merged out of 462 (in 44 pairings) input.
+
+    ## 0 paired-reads (in 0 unique pairings) successfully merged out of 1 (in 1 pairings) input.
+
+    ## 0 paired-reads (in 0 unique pairings) successfully merged out of 14 (in 1 pairings) input.
+
+    ## 276 paired-reads (in 8 unique pairings) successfully merged out of 495 (in 47 pairings) input.
+
+    ## 79 paired-reads (in 4 unique pairings) successfully merged out of 167 (in 24 pairings) input.
+
+    ## 183 paired-reads (in 8 unique pairings) successfully merged out of 535 (in 72 pairings) input.
+
+    ## 393 paired-reads (in 11 unique pairings) successfully merged out of 763 (in 79 pairings) input.
+
+    ## 389 paired-reads (in 16 unique pairings) successfully merged out of 509 (in 46 pairings) input.
+
+    ## 24 paired-reads (in 1 unique pairings) successfully merged out of 86 (in 10 pairings) input.
+
+    ## 337 paired-reads (in 12 unique pairings) successfully merged out of 553 (in 53 pairings) input.
+
+    ## 332 paired-reads (in 16 unique pairings) successfully merged out of 691 (in 83 pairings) input.
+
+    ## 557 paired-reads (in 20 unique pairings) successfully merged out of 958 (in 110 pairings) input.
+
+    ## 215 paired-reads (in 13 unique pairings) successfully merged out of 642 (in 80 pairings) input.
+
+    ## 368 paired-reads (in 11 unique pairings) successfully merged out of 644 (in 60 pairings) input.
+
+    ## 249 paired-reads (in 14 unique pairings) successfully merged out of 576 (in 65 pairings) input.
+
+    ## 224 paired-reads (in 12 unique pairings) successfully merged out of 484 (in 59 pairings) input.
+
+    ## 618 paired-reads (in 14 unique pairings) successfully merged out of 833 (in 66 pairings) input.
+
+    ## 545 paired-reads (in 22 unique pairings) successfully merged out of 885 (in 100 pairings) input.
+
+    ## 293 paired-reads (in 9 unique pairings) successfully merged out of 597 (in 63 pairings) input.
+
+    ## 475 paired-reads (in 17 unique pairings) successfully merged out of 707 (in 70 pairings) input.
+
+    ## 228 paired-reads (in 16 unique pairings) successfully merged out of 438 (in 49 pairings) input.
+
+    ## 379 paired-reads (in 21 unique pairings) successfully merged out of 624 (in 75 pairings) input.
+
+    ## 465 paired-reads (in 24 unique pairings) successfully merged out of 874 (in 111 pairings) input.
+
+``` r
 # Inspect the merger data.frame from the first sample
 head(mergers[[2]])
 ```
@@ -954,6 +1695,11 @@ bimera (two-parent chimera) from more abundant sequences.
 
 ``` r
 seqtab.nochim <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
+```
+
+    ## Identified 11 bimeras out of 470 input sequences.
+
+``` r
 dim(seqtab.nochim)
 ```
 

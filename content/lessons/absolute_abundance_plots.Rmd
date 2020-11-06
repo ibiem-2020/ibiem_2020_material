@@ -147,6 +147,14 @@ plot_bar(atacama.ps, facet_grid=~TransectName, fill="Phylum") +
   facet_grid(~TransectName, scale="free_x", space = "free_x")
 ```
 
+Are there any Kingdom biases by transect?
+
+```{r}
+plot_bar(atacama.ps, facet_grid=~TransectName, fill="Kingdom") +
+  geom_bar(aes(color=Kingdom, fill=Kingdom), stat="identity", position="stack") +
+  facet_grid(~TransectName, scale="free_x", space = "free_x")
+```
+
 # Session Info
 Always print `sessionInfo` for reproducibility!
 ```{r}

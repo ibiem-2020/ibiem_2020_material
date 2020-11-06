@@ -189,6 +189,16 @@ plot_bar(atacama.ps, facet_grid=~TransectName, fill="Phylum") +
 
 ![](absolute_abundance_plots_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
+Are there any Kingdom biases by transect?
+
+``` r
+plot_bar(atacama.ps, facet_grid=~TransectName, fill="Kingdom") +
+  geom_bar(aes(color=Kingdom, fill=Kingdom), stat="identity", position="stack") +
+  facet_grid(~TransectName, scale="free_x", space = "free_x")
+```
+
+![](absolute_abundance_plots_files/figure-markdown_github/unnamed-chunk-13-1.png)
+
 Session Info
 ============
 
@@ -198,7 +208,7 @@ Always print `sessionInfo` for reproducibility!
 sessionInfo()
 ```
 
-    ## R version 3.6.1 (2019-07-05)
+    ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-pc-linux-gnu (64-bit)
     ## Running under: Ubuntu 18.04.3 LTS
     ## 
@@ -218,38 +228,38 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] dplyr_0.8.3     ggplot2_3.2.1   phyloseq_1.28.0 readr_1.3.1    
-    ## [5] knitr_1.24     
+    ## [1] dplyr_0.8.3     ggplot2_3.2.1   phyloseq_1.30.0 readr_1.3.1    
+    ## [5] knitr_1.27     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] tidyselect_0.2.5    xfun_0.9            purrr_0.3.2        
-    ##  [4] reshape2_1.4.3      splines_3.6.1       lattice_0.20-38    
-    ##  [7] rhdf5_2.28.0        colorspace_1.4-1    vctrs_0.2.0        
-    ## [10] htmltools_0.3.6     stats4_3.6.1        mgcv_1.8-28        
-    ## [13] yaml_2.2.0          survival_2.44-1.1   rlang_0.4.0        
-    ## [16] pillar_1.4.2        withr_2.1.2         glue_1.3.1         
-    ## [19] BiocGenerics_0.30.0 foreach_1.4.7       plyr_1.8.4         
-    ## [22] stringr_1.4.0       zlibbioc_1.30.0     Biostrings_2.52.0  
-    ## [25] munsell_0.5.0       gtable_0.3.0        codetools_0.2-16   
-    ## [28] evaluate_0.14       labeling_0.3        Biobase_2.44.0     
-    ## [31] permute_0.9-5       IRanges_2.18.2      biomformat_1.12.0  
-    ## [34] parallel_3.6.1      Rcpp_1.0.2          backports_1.1.4    
-    ## [37] scales_1.0.0        vegan_2.5-6         S4Vectors_0.22.0   
-    ## [40] jsonlite_1.6        XVector_0.24.0      hms_0.5.1          
-    ## [43] digest_0.6.20       stringi_1.4.3       ade4_1.7-13        
-    ## [46] grid_3.6.1          tools_3.6.1         magrittr_1.5       
-    ## [49] lazyeval_0.2.2      tibble_2.1.3        cluster_2.1.0      
-    ## [52] crayon_1.3.4        ape_5.3             pkgconfig_2.0.2    
-    ## [55] zeallot_0.1.0       MASS_7.3-51.4       Matrix_1.2-17      
-    ## [58] data.table_1.12.2   assertthat_0.2.1    rmarkdown_1.15     
-    ## [61] iterators_1.0.12    Rhdf5lib_1.6.0      R6_2.4.0           
-    ## [64] multtest_2.40.0     igraph_1.2.4.1      nlme_3.1-141       
-    ## [67] compiler_3.6.1
+    ##  [1] Rcpp_1.0.3          ape_5.3             lattice_0.20-38    
+    ##  [4] Biostrings_2.54.0   assertthat_0.2.1    zeallot_0.1.0      
+    ##  [7] digest_0.6.23       foreach_1.4.7       R6_2.4.1           
+    ## [10] plyr_1.8.5          backports_1.1.5     stats4_3.6.2       
+    ## [13] evaluate_0.14       pillar_1.4.3        zlibbioc_1.32.0    
+    ## [16] rlang_0.4.2         lazyeval_0.2.2      data.table_1.12.8  
+    ## [19] vegan_2.5-6         S4Vectors_0.24.3    Matrix_1.2-18      
+    ## [22] rmarkdown_2.1       labeling_0.3        splines_3.6.2      
+    ## [25] stringr_1.4.0       igraph_1.2.4.2      munsell_0.5.0      
+    ## [28] compiler_3.6.2      xfun_0.12           pkgconfig_2.0.3    
+    ## [31] BiocGenerics_0.32.0 multtest_2.42.0     mgcv_1.8-31        
+    ## [34] htmltools_0.4.0     biomformat_1.14.0   tidyselect_0.2.5   
+    ## [37] tibble_2.1.3        IRanges_2.20.2      codetools_0.2-16   
+    ## [40] permute_0.9-5       crayon_1.3.4        withr_2.1.2        
+    ## [43] MASS_7.3-51.5       grid_3.6.2          nlme_3.1-143       
+    ## [46] jsonlite_1.6        gtable_0.3.0        lifecycle_0.1.0    
+    ## [49] magrittr_1.5        scales_1.1.0        stringi_1.4.5      
+    ## [52] farver_2.0.3        XVector_0.26.0      reshape2_1.4.3     
+    ## [55] vctrs_0.2.1         Rhdf5lib_1.8.0      iterators_1.0.12   
+    ## [58] tools_3.6.2         ade4_1.7-13         Biobase_2.46.0     
+    ## [61] glue_1.3.1          purrr_0.3.3         hms_0.5.3          
+    ## [64] parallel_3.6.2      survival_3.1-8      yaml_2.2.0         
+    ## [67] colorspace_1.4-1    rhdf5_2.30.1        cluster_2.1.0
 
-Start Time: 2019-10-18 04:07:12
+Start Time: 2020-11-06 16:28:23
 
-End Time: 2019-10-18 04:08:25
+End Time: 2020-11-06 16:29:42
 
-Total Knit Time: 73.05 seconds
+Total Knit Time: 79.68 seconds
 
-Total Knit Time: 1.22 minutes
+Total Knit Time: 1.33 minutes
