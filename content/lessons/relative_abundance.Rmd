@@ -71,8 +71,9 @@ The first step in making relative abundance plots is to transform your OTU table
 
 ```{r echo=TRUE, include=TRUE}
 atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
-otu_table(atacama.ps.rel)[1:10,1:10] %>%
-  as.data.frame
+otu_table(atacama.ps.rel) %>%
+  as.data.frame %>%
+  setNames(seq(ncol(.))) # number columns so we can see more than one at a time
 ```
 
 > Why are there NaNs?
@@ -184,7 +185,7 @@ plot_bar(atacama.prune_s_t20.rel, fill="Phylum") +
 ```
 
 ### Where have all the taxa gone?
-We trimmed to the top 20 taxa, but in this plot we only see 4.  Why?
+We trimmed to the top 20 taxa, but in this plot we only see 5.  Why?
 Try looking at `tax_table` to figure out what is going on.  It may also help to do one of the "default" plots that includes the annoying sub-bar outlines.
 
 ```{r include=TRUE}
@@ -245,9 +246,16 @@ Now try running `mean_test` on the first row
 mean_test(vals[1,])
 ```
 Now let's use apply to run `mean_test` row-by-row
+
 ```{r echo=TRUE, include=TRUE}
 apply(vals, 1, mean_test)
 ```
+
+Just to check we can calculate the mean of each row
+```{r echo=TRUE, include=TRUE}
+apply(vals, 1, mean)
+```
+
 Now let's plot relative abundance for the taxa that pass `mean_cutoff`
 
 ```{r}
