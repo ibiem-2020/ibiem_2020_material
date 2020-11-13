@@ -3,6 +3,16 @@
  Challenge 9 
  Challenge 10 
 
+
+
+
+
+| 13-Nov | 10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md#other-ways-to-prune-taxa)  |   |   |
+|        |       | [Lecture: Beta Diversity: Basics](lectures/statistical_analysis_2.pdf)                     |   |   |
+|        |       | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf) |   |   |
+
+
+
 | 8-Nov                   |      10-11 | [Lecture: Beta Diversity: Basics #2](lectures/statistical_analysis_2.pdf)                                  |                 |       |          |
 |                         |            | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                 |                 |       |          |
 |                         |      11-12 | Guest Speaker                                                                                              |                 |       |          |

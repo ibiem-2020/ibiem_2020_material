@@ -45,8 +45,6 @@
 |          |       | [Hands-on: Alpha Diversity](lessons/alpha_diversity.md)                                                           |             |       |
 |          | 11-12 | Lawrence David                                                                                                    |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
-| 13-Nov   | 10-11 | [Hands-on: Relative Abundance](lessons/relative_abundance.md)                                                     |             |       |
-|          |       | [Lecture: Beta Diversity: Basics](lectures/statistical_analysis_2.pdf)                                            |             |       |
-|          |       | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                        |             |       |
+| 13-Nov   | 10-11 | [Hands-on: Relative Abundance \#1](lessons/relative_abundance.md)                                                 |             |       |
 |          | 11-12 | Dr. Matthew Kelly                                                                                                 |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
