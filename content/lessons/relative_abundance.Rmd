@@ -131,10 +131,42 @@ plot_bar(atacama.ps.rel) +
 
 How about coloring by taxa as we did for absolute abundance plots
 ```{r echo=FALSE, include=TRUE}
-plot_bar(atacama.ps.rel, fill="Phylum") +
+tax_level="Phylum"
+atacama.ps.rel %>%
+  plot_bar(fill = tax_level) +
   labs(y = "Relative Abundance") +
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+  geom_bar(aes_string(color = tax_level, fill = tax_level),
+           stat = "identity",
+           position = "stack")
 ```
+
+#### Make it a function
+We are going to be doing this a lot, so let's wrap this in a function
+```{r}
+noOutlineAbundancePlot = function(ps, tax_level) {
+  ps %>%
+    plot_bar(fill = tax_level) +
+    labs(y = "Relative Abundance") +
+    geom_bar(
+      aes_string(color = tax_level, fill = tax_level),
+      stat = "identity",
+      position = "stack"
+    )
+}
+
+atacama.ps.rel %>%
+  noOutlineAbundancePlot(tax_level = "Phylum")
+```
+
+
+
+How about by family
+```{r echo=FALSE, include=TRUE}
+atacama.ps.rel %>%
+  noOutlineAbundancePlot(tax_level = "Family")
+```
+
+
 
 ## Prune Taxa
 How many different taxa do we have?
@@ -179,9 +211,8 @@ print(atacama.prune_s_t20.rel)
 ```
 
 ```{r include=TRUE}
-plot_bar(atacama.prune_s_t20.rel, fill="Phylum") +
-  labs(y = "Relative Abundance") +
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+atacama.prune_s_t20.rel %>%
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
 ### Where have all the taxa gone?
@@ -189,19 +220,18 @@ We trimmed to the top 20 taxa, but in this plot we only see 5.  Why?
 Try looking at `tax_table` to figure out what is going on.  It may also help to do one of the "default" plots that includes the annoying sub-bar outlines.
 
 ```{r include=TRUE}
-plot_bar(atacama.prune_s_t20.rel, fill="Phylum") +
+atacama.prune_s_t20.rel %>%
+  plot_bar(fill="Phylum") +
   labs(y = "Relative Abundance")
 ```
 
 ### Why transform first?
-What happens if we prune taxa, then transform? 
+What happens if we prune taxa, then transform?
 ```{r}
 atacama.prune_s.ps %>%
   prune_taxa(top20, .) %>%
   transform_sample_counts(function(x) x / sum(x) ) %>%
-  plot_bar(fill="Phylum") +
-    labs(y = "Relative Abundance") +
-    geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
 ### Other Ways to Prune Taxa
@@ -258,11 +288,9 @@ apply(vals, 1, mean)
 
 Now let's plot relative abundance for the taxa that pass `mean_cutoff`
 
-```{r}
+```{r include=TRUE}
 atacama.prune_s_1pct.rel %>%
-  plot_bar(fill="Phylum") +
-    labs(y = "Relative Abundance") +
-    geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
 Compare this with the pruning top20 plot above.  Notice any important differences?
@@ -273,9 +301,11 @@ Instead of requiring a minimum average across all samples, we can require that e
 ```{r echo=TRUE, include=TRUE}
 min_fraction = 0.05
 min_samples = 3
-atacama.ps.rel.minfrac = filter_taxa(atacama.ps.rel, 
-                       function(x) sum(x >= min_fraction) >= min_samples,
-                       prune=TRUE)
+filter_taxa(atacama.ps.rel,
+            function(x)
+              sum(x >= min_fraction) >= min_samples,
+            prune = TRUE) ->
+  atacama.ps.rel.minfrac
 
 ntaxa(atacama.ps.rel.minfrac)
 ```
@@ -318,9 +348,10 @@ apply(vals, 1, function(x) sum(x >= min_fraction) >= min_samples)
 Now let's plot relative abundance for the taxa that pass the test
 
 ```{r min_fraction_relabund_plot, echo=TRUE, include=TRUE}
-plot_bar(atacama.ps.rel.minfrac, fill="Genus") + 
-  geom_bar(aes(color=Genus, fill=Genus), stat="identity", position="stack")
+atacama.ps.rel.minfrac %>%
+  noOutlineAbundancePlot(tax_level = "Genus")
 ```
+
 
 #### Agglomerating Taxa
 Another approach we can consider is agglomerating taxa.  So far we have individually considered taxa for pruning.  However we might want to recognize the fact that closely related taxa can be functionally redundant.  Here we use the `tax_glom` function to agglomerate taxa at the Genus level.
@@ -361,9 +392,8 @@ ntaxa(atacama.ps.rel.countprune)
 ```
 
 ```{r genus_fill_relabund, echo=FALSE, include=TRUE}
-plot_bar(atacama.ps.rel.countprune, fill="Family") + 
-  geom_bar(aes(color=Family, fill=Family), stat="identity", position="stack")  +
-  labs(y = "Relative Abundance", title="Family Level")
+atacama.ps.rel.countprune %>%
+  noOutlineAbundancePlot(tax_level = "Family")
 ```
 
 # Session Info
