@@ -82,7 +82,11 @@ otu_table(atacama.ps)[1:10,1:9] %>%
 The first step in making relative abundance plots is to transform your OTU table from raw counts to relative abundance (also known as proportional or fractional abundance).  Phyloseq provides the `transform_sample_counts` function for performing user defined transformations on the OTU table.  We want to divide the counts for each taxa in each sample by the total number of counts for that sample.  The phyloseq object returned has fractional "counts":
 
 ```{r}
-atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
+# for each sample -> per taxon count/(counts for sample)
+atacama.ps %>%
+  transform_sample_counts(function(x) x / sum(x) ) ->
+  atacama.ps.rel
+
 otu_table(atacama.ps.rel)[1:40,1:9] %>%
   as.data.frame %>%
   setNames(seq(ncol(.))) # number columns so we can see more than one at a time
@@ -95,14 +99,12 @@ otu_table(atacama.ps.rel)[1:40,1:9] %>%
 Maybe division by zero?  Let's check
 
 ```{r}
-sample_sums(atacama.ps) %>% sort
+atacama.ps %>%
+  sample_sums %>% 
+  sort
 ```
 
 Yes, there are several samples that have no counts, and a few more that have very low counts
-
-```{r}
-(sample_sums(atacama.ps) < 50) %>% sum
-```
 
 ```{r}
 plot_bar(atacama.ps)
@@ -142,6 +144,22 @@ plot_bar(atacama.ps.rel) +
 ```
 
 How about coloring by taxa as we did for absolute abundance plots
+
+```{r}
+atacama.ps.rel %>%
+  plot_bar(fill = "Phylum")
+```
+
+```{r}
+tax_level="Phylum"
+atacama.ps.rel %>%
+  plot_bar(fill = tax_level) +
+  labs(y = "Relative Abundance") +
+  geom_bar(aes(color = tax_level, fill = tax_level),
+           stat = "identity",
+           position = "stack")
+```
+
 ```{r}
 tax_level="Phylum"
 atacama.ps.rel %>%
@@ -188,26 +206,34 @@ ntaxa(atacama.ps.rel)
 
 How many different Families?
 ```{r}
-length(get_taxa_unique(atacama.ps.rel,"Family"))
+atacama.ps.rel %>%
+get_taxa_unique("Family") %>%
+  length
 ```
 
 How many different taxa at each level?
-
 ```{r}
 tibble(rank = rank_names(atacama.ps.rel)) %>%
   rowwise %>%
   mutate(num_taxa = length(get_taxa_unique(atacama.ps.rel,rank)))
 ```
 
-Let's play with pruning taxa to make plots more manangeable.  Let's start by pruning all but the 20 taxa with the most counts
 
+Let's play with pruning taxa to make plots more manangeable.  Let's start by pruning all but the 20 taxa with the most counts
 ```{r}
-top20 <- names(sort(taxa_sums(atacama.ps), decreasing=TRUE))[1:20]
+atacama.ps %>%
+  taxa_sums %>%
+  sort(decreasing=TRUE) %>%
+  names %>%
+  head(20) ->
+  top20
 
 atacama.prune_s.ps %>%
   transform_sample_counts(function(x) x / sum(x) ) %>%
   prune_taxa(top20, .) ->
   atacama.prune_s_t20.rel
+
+atacama.prune_s_t20.rel
 ```
 
 ```{r}
@@ -245,6 +271,8 @@ atacama.prune_s.ps %>%
   transform_sample_counts(function(x) x / sum(x) ) %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
+
+# Stopped Here 11/13/2020
 
 ### Other Ways to Prune Taxa
 We can use the `filter_taxa` function to prune taxa by average fractional abundance, for example, we can choose to only show taxa that, on average across all samples, have a relative abundance of at least 1%.  
