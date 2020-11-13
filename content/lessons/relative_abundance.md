@@ -182,7 +182,11 @@ taxa in each sample by the total number of counts for that sample. The
 phyloseq object returned has fractional “counts”:
 
 ``` r
-atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
+# for each sample -> per taxon count/(counts for sample)
+atacama.ps %>%
+  transform_sample_counts(function(x) x / sum(x) ) ->
+  atacama.ps.rel
+
 otu_table(atacama.ps.rel)[1:40,1:9] %>%
   as.data.frame %>%
   setNames(seq(ncol(.))) # number columns so we can see more than one at a time
@@ -278,7 +282,9 @@ otu_table(atacama.ps.rel)[1:40,1:9] %>%
 Maybe division by zero? Let’s check
 
 ``` r
-sample_sums(atacama.ps) %>% sort
+atacama.ps %>%
+  sample_sums %>% 
+  sort
 ```
 
     ##   YUN2029.1 YUN3008.1.3   YUN3184.2 YUN3259.1.1 BAQ1552.1.1   YUN1242.2 
@@ -308,16 +314,10 @@ Yes, there are several samples that have no counts, and a few more that
 have very low counts
 
 ``` r
-(sample_sums(atacama.ps) < 50) %>% sum
-```
-
-    ## [1] 9
-
-``` r
 plot_bar(atacama.ps)
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 Let’s “prune” samples that have less counts of less than 50
 
@@ -396,6 +396,25 @@ plot_bar(atacama.ps.rel) +
 How about coloring by taxa as we did for absolute abundance plots
 
 ``` r
+atacama.ps.rel %>%
+  plot_bar(fill = "Phylum")
+```
+
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-10-1.png)
+
+``` r
+tax_level="Phylum"
+atacama.ps.rel %>%
+  plot_bar(fill = tax_level) +
+  labs(y = "Relative Abundance") +
+  geom_bar(aes(color = tax_level, fill = tax_level),
+           stat = "identity",
+           position = "stack")
+```
+
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-11-1.png)
+
+``` r
 tax_level="Phylum"
 atacama.ps.rel %>%
   plot_bar(fill = tax_level) +
@@ -405,7 +424,7 @@ atacama.ps.rel %>%
            position = "stack")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
 #### Make it a function
 
@@ -427,7 +446,7 @@ atacama.ps.rel %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 How about by family
 
@@ -436,7 +455,7 @@ atacama.ps.rel %>%
   noOutlineAbundancePlot(tax_level = "Family")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 Prune Taxa
 ----------
@@ -452,7 +471,9 @@ ntaxa(atacama.ps.rel)
 How many different Families?
 
 ``` r
-length(get_taxa_unique(atacama.ps.rel,"Family"))
+atacama.ps.rel %>%
+get_taxa_unique("Family") %>%
+  length
 ```
 
     ## [1] 58
@@ -483,13 +504,25 @@ Let’s play with pruning taxa to make plots more manangeable. Let’s start
 by pruning all but the 20 taxa with the most counts
 
 ``` r
-top20 <- names(sort(taxa_sums(atacama.ps), decreasing=TRUE))[1:20]
+atacama.ps %>%
+  taxa_sums %>%
+  sort(decreasing=TRUE) %>%
+  names %>%
+  head(20) ->
+  top20
 
 atacama.prune_s.ps %>%
   transform_sample_counts(function(x) x / sum(x) ) %>%
   prune_taxa(top20, .) ->
   atacama.prune_s_t20.rel
+
+atacama.prune_s_t20.rel
 ```
+
+    ## phyloseq-class experiment-level object
+    ## otu_table()   OTU Table:         [ 20 taxa and 52 samples ]
+    ## sample_data() Sample Data:       [ 52 samples by 22 sample variables ]
+    ## tax_table()   Taxonomy Table:    [ 20 taxa by 7 taxonomic ranks ]
 
 ``` r
 print(atacama.ps)
@@ -523,7 +556,7 @@ atacama.prune_s_t20.rel %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-21-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-22-1.png)
 
 ### Where have all the taxa gone?
 
@@ -538,7 +571,7 @@ atacama.prune_s_t20.rel %>%
   labs(y = "Relative Abundance")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-22-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-23-1.png)
 
 ### Why transform first?
 
@@ -555,7 +588,10 @@ atacama.prune_s.ps %>%
 
     ## Warning: Removed 180 rows containing missing values (position_stack).
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-23-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-24-1.png)
+
+Stopped Here 11/13/2020
+=======================
 
 ### Other Ways to Prune Taxa
 
@@ -609,7 +645,7 @@ filter_taxa
     ##         return(ans)
     ##     }
     ## }
-    ## <bytecode: 0x55d6e3639870>
+    ## <bytecode: 0x56432c4435e0>
     ## <environment: namespace:phyloseq>
 
 Let’s break it down:
@@ -678,7 +714,7 @@ atacama.prune_s_1pct.rel %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-31-1.png)
 
 Compare this with the pruning top20 plot above. Notice any important
 differences?
@@ -922,4 +958,4 @@ sessionInfo()
     ## [67] survival_3.1-8      yaml_2.2.0          colorspace_1.4-1   
     ## [70] rhdf5_2.30.1        cluster_2.1.0
 
-Total Knit Time: 62 in seconds; 1.03 in minutes
+Total Knit Time: 79.19 in seconds; 1.32 in minutes
