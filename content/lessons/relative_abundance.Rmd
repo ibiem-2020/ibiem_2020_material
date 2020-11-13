@@ -68,14 +68,22 @@ print(atacama.ps)
 Our OTU tables are currently raw counts
 
 ```{r}
-otu_table(atacama.ps)[1:10,1:10] %>%
+otu_table(atacama.ps)[1:10,1:9] %>%
   as.data.frame
 ```
+
+Let's change the column names so we can see more than one column at a time
+```{r}
+otu_table(atacama.ps)[1:10,1:9] %>%
+  as.data.frame %>%
+  setNames(seq(ncol(.))) # number columns so we can see more than one at a time
+```
+
 The first step in making relative abundance plots is to transform your OTU table from raw counts to relative abundance (also known as proportional or fractional abundance).  Phyloseq provides the `transform_sample_counts` function for performing user defined transformations on the OTU table.  We want to divide the counts for each taxa in each sample by the total number of counts for that sample.  The phyloseq object returned has fractional "counts":
 
 ```{r}
 atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
-otu_table(atacama.ps.rel) %>%
+otu_table(atacama.ps.rel)[1:40,1:9] %>%
   as.data.frame %>%
   setNames(seq(ncol(.))) # number columns so we can see more than one at a time
 ```

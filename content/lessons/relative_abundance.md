@@ -17,6 +17,20 @@ library(ggplot2)
 ```
 
 ``` r
+# This chunk sets the RDS file to load the atacama phyloseq instance from. 
+# It is a bit complicated to allow the RDS to be specified when this Rmd is knit from the commandline 
+
+# Directories
+
+if(exists("params") && 
+   !is.null(params[["atacama_ps_rds"]])){
+  atacama.ps.rds=params[["atacama_ps_rds"]]
+} else {
+  atacama.ps.rds = "/data/tutorial_data/atacama_10pct.rds"
+  }
+```
+
+``` r
 atacama.ps = read_rds(atacama.ps.rds)
 print(atacama.ps)
 ```
@@ -34,7 +48,7 @@ Relative Abundance
 Our OTU tables are currently raw counts
 
 ``` r
-otu_table(atacama.ps)[1:10,1:10] %>%
+otu_table(atacama.ps)[1:10,1:9] %>%
   as.data.frame
 ```
 
@@ -137,17 +151,27 @@ otu_table(atacama.ps)[1:10,1:10] %>%
     ## BAQ2462.2                                                                                                                                                                                                                                           0
     ## BAQ2462.3                                                                                                                                                                                                                                           0
     ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGCGCGTAGGCGGTGAAGTCAGTCGGGTGTGAAAGCCCCGGGCTCAACCTGGGAACTGCATCCGATACTGCTTCGCTAGAGTATGGTAGAGGGAAGCGGAATTCCGGGTGTAGCGGTGAAATGCGTAGATATCCGGAGGAACACCAGTGGCGAAGGCGGCTTCCTGGACCAATACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
+
+Let’s change the column names so we can see more than one column at a
+time
+
+``` r
+otu_table(atacama.ps)[1:10,1:9] %>%
+  as.data.frame %>%
+  setNames(seq(ncol(.))) # number columns so we can see more than one at a time
+```
+
+    ##             1  2 3  4  5  6 7 8 9
+    ## BAQ1552.1.1 0  0 0  0  0  0 0 0 0
+    ## BAQ2420.1.1 0  0 0 55 15  0 0 0 0
+    ## BAQ2420.1.2 0  0 0  0  0  0 0 0 0
+    ## BAQ2420.1.3 0  0 0  0  0  0 0 0 0
+    ## BAQ2420.2   0  0 0  0  0  0 0 0 0
+    ## BAQ2420.3   0 33 0 20  0  0 0 0 0
+    ## BAQ2462.1   0 30 0  0  0 33 0 0 0
+    ## BAQ2462.2   0 17 0 40  0  9 0 0 0
+    ## BAQ2462.3   0 14 0  0  0 36 0 0 0
+    ## BAQ2687.1   0  0 0  0 28  0 0 0 0
 
 The first step in making relative abundance plots is to transform your
 OTU table from raw counts to relative abundance (also known as
@@ -159,120 +183,93 @@ phyloseq object returned has fractional “counts”:
 
 ``` r
 atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
-otu_table(atacama.ps.rel)[1:10,1:10] %>%
-  as.data.frame
+otu_table(atacama.ps.rel)[1:40,1:9] %>%
+  as.data.frame %>%
+  setNames(seq(ncol(.))) # number columns so we can see more than one at a time
 ```
 
-    ##             GCGAGCGTTAATCGGAATCACTGGGCGTAAAGGGCGCGTAGGCGGTTAGGTAAGTCGGATGTGAAAGCCCTGGGCTTAACCTGGGAATGGCATTCGAGACTGTCTATCTAGAGTCTGGTAGAGGGAAGTGGAATTTCCGGTGTAGCGGTGAAATGTGTAGATATCGGAAGGAACACCAGTGGCGAAGGCGACTTCCTGGACCAAGACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGCGCGTAGGCGGTTGGGTAAGTCGGGTGTGAAAGCCCTGGGCTTAACCTGGGAATGGCATTCGAGACTACCTAGCTAGAGTCTGGTAGAGGGAAGTGGAATTTCCGGTGTAGCGGTGAAATGTGTAGATATCGGAAGGAACACCAGTGGCGAAGGCGACTTCCTGGACCAAGACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.2                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.3                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.2                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2420.3                                                                                                                                                                                                                                  0.12790698
-    ## BAQ2462.1                                                                                                                                                                                                                                  0.07575758
-    ## BAQ2462.2                                                                                                                                                                                                                                  0.05263158
-    ## BAQ2462.3                                                                                                                                                                                                                                  0.08805031
-    ## BAQ2687.1                                                                                                                                                                                                                                  0.00000000
-    ##             GCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGCGCGTAGGCGGTGAAGTAAGTCGGGTGTGAAAGCCCCGGGCTCAACCTGGGAACTGCATCCGATACTGCTTCGCTAGAGTATGGTAGAGGGAAGCGGAATTCCGGGTGTAGCGGTGAAATGCGTAGATATCCGGAGGAACACCAGTGGCGAAGGCGGCTTCCTGGACCAATACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCGAGCGTTGTCCGGAATTATTGGGCGTAAAGAGCGTGTAGGCGGTTCGGTAAGTCTGCCGTGAAAACCTGGGGCTCAACCCCGGGCGTGCGGTGGATACTGCCGGGCTAGAGGATGGTAGAGGCGAGTGGAATTCCCGGTGTAGCGGTGAAATGCGCAGATATCGGGAGGAACACCAGTAGCGAAGGCGGCTCGCTGGGCCATTCCTGACGCTGAGACGCGAAAGCTAGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.1                                                                                                                                                                                                                                0.30898876
-    ## BAQ2420.1.2                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.3                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.2                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2420.3                                                                                                                                                                                                                                  0.07751938
-    ## BAQ2462.1                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2462.2                                                                                                                                                                                                                                  0.12383901
-    ## BAQ2462.3                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2687.1                                                                                                                                                                                                                                  0.00000000
-    ##             GCGAGCGTTGTCCGGAATCACTGGGCGTAAAGGGCGCGTAGGCGGCCTGATAAGTAGGGGGTGAAATCCTGCGGCTTAACCGCAGGGCTGCCTTCTAAACTGTCAGGCTCGAGCACAGTAGAGGCAGGTGGAATTCCCGGTGTAGCGGTGGAATGCGTAGAGATCGGGAAGAACATCAGTGGCGAAGGCGGCCTGCTGGGCTGTTGCTGACGCTGAGGCGCGACAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.1                                                                                                                                                                                                                                0.08426966
-    ## BAQ2420.1.2                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.3                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.2                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2420.3                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2462.1                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2462.2                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2462.3                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2687.1                                                                                                                                                                                                                                  0.11914894
-    ##             GCTAGCGTTGTCCGGATTTATTGGGCGTAAAGAGCTCGTAGGCGGCCTGGTGAGTCGGGTGTGAAAGCCCGAGGCTCAACCTCGGAATTGCATTCGATACTGCTGGGCTTGAGGCAGGTAGGGGAGGATGGAATTCCCGGTGTAGCGGTGGAATGCGCAGATATCGGGAGGAACACCTGCGGCGAAGGCGGTCCTCTGGGCCTGTCCTGACGCTGAGGAGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.1                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.2                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.1.3                                                                                                                                                                                                                                0.00000000
-    ## BAQ2420.2                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2420.3                                                                                                                                                                                                                                  0.00000000
-    ## BAQ2462.1                                                                                                                                                                                                                                  0.08333333
-    ## BAQ2462.2                                                                                                                                                                                                                                  0.02786378
-    ## BAQ2462.3                                                                                                                                                                                                                                  0.22641509
-    ## BAQ2687.1                                                                                                                                                                                                                                  0.00000000
-    ##             GCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGCGCGTAGGCGGTGAAGTAAGTCGGGTGTGAAAGCCCCGGGCTCAACCTGGGAACTGCATTCGATACTGCTTCGCTAGAGTATGGTAGAGGGAAGCGGAATTCCGGGTGTAGCGGTGAAATGCGTAGATATCCGGAGGAACACCAGTGGCGAAGGCGGCTTCCTGGACCAATACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCAAGCGTTGTCCGGAATTATTGGGCGTAAAGAGCTCGTAGGCGGTCTGTCGCGTCGGCTGTGAAAACTCGGGGCTCAACTCCGAGCTTGCAGTCGATACGGGCAGGCTAGAGTTCGGCAGGGGAGACTGGAATTCCTGGTGTAGCGGTGAAATGCGCAGATATCAGGAGGAACACCGGTGGCGAAGGCGGGTCTCTGGGCCGATACTGACGCTGAGGAGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCAAGCGTTGTCCGGAATCATTGGGCGTAAAGAGCGTGTAGGCGGTCCGGTAAGTCGGCTGTGAAAGTCCAGGGCTCAACCCTGGGATGCCGGTCGATACTGCCGGACTAGAGTTCGGAAGAGGCGAGTGGAATTCCCGGTGTAGCGGTGAAATGCGCAGATATCGGGAGGAACACCTATGGCGAAGGCAGCTCGCTGGGACGTTACTGACGCTGAGACGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
-    ##             GCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGCGCGTAGGCGGTGAAGTCAGTCGGGTGTGAAAGCCCCGGGCTCAACCTGGGAACTGCATCCGATACTGCTTCGCTAGAGTATGGTAGAGGGAAGCGGAATTCCGGGTGTAGCGGTGAAATGCGTAGATATCCGGAGGAACACCAGTGGCGAAGGCGGCTTCCTGGACCAATACTGACGCTGAGGCGCGAAAGCGTGGGG
-    ## BAQ1552.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.1                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.2                                                                                                                                                                                                                                         0
-    ## BAQ2420.1.3                                                                                                                                                                                                                                         0
-    ## BAQ2420.2                                                                                                                                                                                                                                           0
-    ## BAQ2420.3                                                                                                                                                                                                                                           0
-    ## BAQ2462.1                                                                                                                                                                                                                                           0
-    ## BAQ2462.2                                                                                                                                                                                                                                           0
-    ## BAQ2462.3                                                                                                                                                                                                                                           0
-    ## BAQ2687.1                                                                                                                                                                                                                                           0
+    ##                      1          2         3          4          5          6
+    ## BAQ1552.1.1 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2420.1.1 0.00000000 0.00000000 0.0000000 0.30898876 0.08426966 0.00000000
+    ## BAQ2420.1.2 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2420.1.3 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2420.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2420.3   0.00000000 0.12790698 0.0000000 0.07751938 0.00000000 0.00000000
+    ## BAQ2462.1   0.00000000 0.07575758 0.0000000 0.00000000 0.00000000 0.08333333
+    ## BAQ2462.2   0.00000000 0.05263158 0.0000000 0.12383901 0.00000000 0.02786378
+    ## BAQ2462.3   0.00000000 0.08805031 0.0000000 0.00000000 0.00000000 0.22641509
+    ## BAQ2687.1   0.00000000 0.00000000 0.0000000 0.00000000 0.11914894 0.00000000
+    ## BAQ2687.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2687.3   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2838.1   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2838.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ2838.3   0.00000000 0.00000000 0.0000000 0.39047619 0.00000000 0.00000000
+    ## BAQ3473.1   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ3473.2   0.21621622 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ3473.3   0.00000000 0.00000000 0.0000000 0.00000000 0.06617647 0.00000000
+    ## BAQ4166.1.1 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ4166.1.2 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ4166.1.3 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ4166.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## BAQ4166.3   0.02110818 0.00000000 0.0000000 0.00000000 0.16622691 0.00000000
+    ## BAQ4697.1   0.00000000 0.00000000 0.1966874 0.00000000 0.00000000 0.00000000
+    ## BAQ4697.2   0.00000000 0.00000000 0.1778976 0.00000000 0.00000000 0.00000000
+    ## BAQ4697.3   0.00000000 0.00000000 0.2131902 0.00000000 0.01226994 0.00000000
+    ## YUN1005.1.1 0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN1005.3   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN1242.1   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN1242.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN1242.3   0.00000000 0.00000000 0.0000000 0.08285164 0.00000000 0.00000000
+    ## YUN1609.1   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.53715499
+    ## YUN2029.1          NaN        NaN       NaN        NaN        NaN        NaN
+    ## YUN2029.2   0.00000000 0.00000000 0.0000000 0.14742451 0.00000000 0.00000000
+    ## YUN2029.3   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN3008.1.3        NaN        NaN       NaN        NaN        NaN        NaN
+    ## YUN3008.3   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN3153.2   0.00000000 0.00000000 0.0000000 0.00000000 0.00000000 0.00000000
+    ## YUN3153.3   0.00000000 0.00000000 0.0000000 0.14880952 0.00000000 0.00000000
+    ## YUN3184.2          NaN        NaN       NaN        NaN        NaN        NaN
+    ##                     7   8          9
+    ## BAQ1552.1.1 0.0000000   0 0.00000000
+    ## BAQ2420.1.1 0.0000000   0 0.00000000
+    ## BAQ2420.1.2 0.0000000   0 0.00000000
+    ## BAQ2420.1.3 0.0000000   0 0.00000000
+    ## BAQ2420.2   0.0000000   0 0.00000000
+    ## BAQ2420.3   0.0000000   0 0.00000000
+    ## BAQ2462.1   0.0000000   0 0.00000000
+    ## BAQ2462.2   0.0000000   0 0.00000000
+    ## BAQ2462.3   0.0000000   0 0.00000000
+    ## BAQ2687.1   0.0000000   0 0.00000000
+    ## BAQ2687.2   0.0000000   0 0.00000000
+    ## BAQ2687.3   0.0000000   0 0.00000000
+    ## BAQ2838.1   0.0000000   0 0.00000000
+    ## BAQ2838.2   0.0000000   0 0.00000000
+    ## BAQ2838.3   0.0000000   0 0.00000000
+    ## BAQ3473.1   0.0000000   0 0.23646724
+    ## BAQ3473.2   0.0000000   0 0.00000000
+    ## BAQ3473.3   0.0000000   0 0.16176471
+    ## BAQ4166.1.1 0.0000000   0 0.00000000
+    ## BAQ4166.1.2 0.0000000   0 0.13606911
+    ## BAQ4166.1.3 0.0000000   0 0.00000000
+    ## BAQ4166.2   0.0000000   0 0.00000000
+    ## BAQ4166.3   0.0000000   0 0.00000000
+    ## BAQ4697.1   0.1221532   0 0.05797101
+    ## BAQ4697.2   0.2237197   0 0.00000000
+    ## BAQ4697.3   0.1165644   0 0.04141104
+    ## YUN1005.1.1 0.0000000   0 0.00000000
+    ## YUN1005.3   0.0000000   0 0.00000000
+    ## YUN1242.1   0.0000000   0 0.00000000
+    ## YUN1242.2   0.0000000   0 0.00000000
+    ## YUN1242.3   0.0000000   0 0.00000000
+    ## YUN1609.1   0.0000000   0 0.00000000
+    ## YUN2029.1         NaN NaN        NaN
+    ## YUN2029.2   0.0000000   0 0.00000000
+    ## YUN2029.3   0.0000000   0 0.00000000
+    ## YUN3008.1.3       NaN NaN        NaN
+    ## YUN3008.3   0.0000000   0 0.00000000
+    ## YUN3153.2   0.0000000   0 0.00000000
+    ## YUN3153.3   0.0000000   0 0.00000000
+    ## YUN3184.2         NaN NaN        NaN
 
 > Why are there NaNs?
 
@@ -320,7 +317,7 @@ have very low counts
 plot_bar(atacama.ps)
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 Let’s “prune” samples that have less counts of less than 50
 
@@ -397,7 +394,49 @@ plot_bar(atacama.ps.rel) +
 ![](relative_abundance_files/figure-markdown_github/basic_relabund_plot-1.png)
 
 How about coloring by taxa as we did for absolute abundance plots
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-10-1.png)
+
+``` r
+tax_level="Phylum"
+atacama.ps.rel %>%
+  plot_bar(fill = tax_level) +
+  labs(y = "Relative Abundance") +
+  geom_bar(aes_string(color = tax_level, fill = tax_level),
+           stat = "identity",
+           position = "stack")
+```
+
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-11-1.png)
+
+#### Make it a function
+
+We are going to be doing this a lot, so let’s wrap this in a function
+
+``` r
+noOutlineAbundancePlot = function(ps, tax_level) {
+  ps %>%
+    plot_bar(fill = tax_level) +
+    labs(y = "Relative Abundance") +
+    geom_bar(
+      aes_string(color = tax_level, fill = tax_level),
+      stat = "identity",
+      position = "stack"
+    )
+}
+
+atacama.ps.rel %>%
+  noOutlineAbundancePlot(tax_level = "Phylum")
+```
+
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-12-1.png)
+
+How about by family
+
+``` r
+atacama.ps.rel %>%
+  noOutlineAbundancePlot(tax_level = "Family")
+```
+
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Prune Taxa
 ----------
@@ -437,7 +476,7 @@ tibble(rank = rank_names(atacama.ps.rel)) %>%
     ## 3 Class         37
     ## 4 Order         55
     ## 5 Family        58
-    ## 6 Genus         74
+    ## 6 Genus         75
     ## 7 Species       12
 
 Let’s play with pruning taxa to make plots more manangeable. Let’s start
@@ -480,26 +519,26 @@ print(atacama.prune_s_t20.rel)
     ## tax_table()   Taxonomy Table:    [ 20 taxa by 7 taxonomic ranks ]
 
 ``` r
-plot_bar(atacama.prune_s_t20.rel, fill="Phylum") +
-  labs(y = "Relative Abundance") +
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+atacama.prune_s_t20.rel %>%
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-21-1.png)
 
 ### Where have all the taxa gone?
 
-We trimmed to the top 20 taxa, but in this plot we only see 4. Why? Try
+We trimmed to the top 20 taxa, but in this plot we only see 5. Why? Try
 looking at `tax_table` to figure out what is going on. It may also help
 to do one of the “default” plots that includes the annoying sub-bar
 outlines.
 
 ``` r
-plot_bar(atacama.prune_s_t20.rel, fill="Phylum") +
+atacama.prune_s_t20.rel %>%
+  plot_bar(fill="Phylum") +
   labs(y = "Relative Abundance")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-19-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-22-1.png)
 
 ### Why transform first?
 
@@ -509,16 +548,14 @@ What happens if we prune taxa, then transform?
 atacama.prune_s.ps %>%
   prune_taxa(top20, .) %>%
   transform_sample_counts(function(x) x / sum(x) ) %>%
-  plot_bar(fill="Phylum") +
-    labs(y = "Relative Abundance") +
-    geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
     ## Warning: Removed 180 rows containing missing values (position_stack).
 
     ## Warning: Removed 180 rows containing missing values (position_stack).
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-20-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-23-1.png)
 
 ### Other Ways to Prune Taxa
 
@@ -572,7 +609,7 @@ filter_taxa
     ##         return(ans)
     ##     }
     ## }
-    ## <bytecode: 0x5598510f1810>
+    ## <bytecode: 0x55d6e3639870>
     ## <environment: namespace:phyloseq>
 
 Let’s break it down:
@@ -625,16 +662,23 @@ apply(vals, 1, mean_test)
 
     ##  [1] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE
 
+Just to check we can calculate the mean of each row
+
+``` r
+apply(vals, 1, mean)
+```
+
+    ##  [1] 0.009374590 0.005072154 0.012743667 0.009452444 0.008258293 0.011881353
+    ##  [7] 0.011171227 0.013567279 0.012525600 0.007863870
+
 Now let’s plot relative abundance for the taxa that pass `mean_cutoff`
 
 ``` r
 atacama.prune_s_1pct.rel %>%
-  plot_bar(fill="Phylum") +
-    labs(y = "Relative Abundance") +
-    geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")
+  noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
-![](relative_abundance_files/figure-markdown_github/unnamed-chunk-26-1.png)
+![](relative_abundance_files/figure-markdown_github/unnamed-chunk-30-1.png)
 
 Compare this with the pruning top20 plot above. Notice any important
 differences?
@@ -649,9 +693,11 @@ contstitutes at least `min_fraction` of the counts in at least
 ``` r
 min_fraction = 0.05
 min_samples = 3
-atacama.ps.rel.minfrac = filter_taxa(atacama.ps.rel, 
-                       function(x) sum(x >= min_fraction) >= min_samples,
-                       prune=TRUE)
+filter_taxa(atacama.ps.rel,
+            function(x)
+              sum(x >= min_fraction) >= min_samples,
+            prune = TRUE) ->
+  atacama.ps.rel.minfrac
 
 ntaxa(atacama.ps.rel.minfrac)
 ```
@@ -738,8 +784,8 @@ apply(vals, 1, function(x) sum(x >= min_fraction) >= min_samples)
 Now let’s plot relative abundance for the taxa that pass the test
 
 ``` r
-plot_bar(atacama.ps.rel.minfrac, fill="Genus") + 
-  geom_bar(aes(color=Genus, fill=Genus), stat="identity", position="stack")
+atacama.ps.rel.minfrac %>%
+  noOutlineAbundancePlot(tax_level = "Genus")
 ```
 
 ![](relative_abundance_files/figure-markdown_github/min_fraction_relabund_plot-1.png)
@@ -811,6 +857,11 @@ ntaxa(atacama.ps.rel.countprune)
 
     ## [1] 2
 
+``` r
+atacama.ps.rel.countprune %>%
+  noOutlineAbundancePlot(tax_level = "Family")
+```
+
 ![](relative_abundance_files/figure-markdown_github/genus_fill_relabund-1.png)
 
 Session Info
@@ -822,7 +873,7 @@ Always print `sessionInfo` for reproducibility!
 sessionInfo()
 ```
 
-    ## R version 3.6.1 (2019-07-05)
+    ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-pc-linux-gnu (64-bit)
     ## Running under: Ubuntu 18.04.3 LTS
     ## 
@@ -842,32 +893,33 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] ggplot2_3.2.1   dplyr_0.8.3     tibble_2.1.3    phyloseq_1.28.0
-    ## [5] readr_1.3.1     knitr_1.24     
+    ## [1] ggplot2_3.2.1   dplyr_0.8.3     tibble_2.1.3    phyloseq_1.30.0
+    ## [5] readr_1.3.1     knitr_1.27     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.2          ape_5.3             lattice_0.20-38    
-    ##  [4] Biostrings_2.52.0   utf8_1.1.4          assertthat_0.2.1   
-    ##  [7] zeallot_0.1.0       digest_0.6.20       foreach_1.4.7      
-    ## [10] R6_2.4.0            plyr_1.8.4          backports_1.1.4    
-    ## [13] stats4_3.6.1        evaluate_0.14       pillar_1.4.2       
-    ## [16] zlibbioc_1.30.0     rlang_0.4.0         lazyeval_0.2.2     
-    ## [19] data.table_1.12.2   vegan_2.5-6         S4Vectors_0.22.0   
-    ## [22] Matrix_1.2-17       rmarkdown_1.15      labeling_0.3       
-    ## [25] splines_3.6.1       stringr_1.4.0       igraph_1.2.4.1     
-    ## [28] munsell_0.5.0       compiler_3.6.1      xfun_0.9           
-    ## [31] pkgconfig_2.0.2     BiocGenerics_0.30.0 multtest_2.40.0    
-    ## [34] mgcv_1.8-28         htmltools_0.3.6     biomformat_1.12.0  
-    ## [37] tidyselect_0.2.5    IRanges_2.18.2      codetools_0.2-16   
-    ## [40] fansi_0.4.0         permute_0.9-5       crayon_1.3.4       
-    ## [43] withr_2.1.2         MASS_7.3-51.4       grid_3.6.1         
-    ## [46] nlme_3.1-141        jsonlite_1.6        gtable_0.3.0       
-    ## [49] magrittr_1.5        scales_1.0.0        cli_1.1.0          
-    ## [52] stringi_1.4.3       XVector_0.24.0      reshape2_1.4.3     
-    ## [55] vctrs_0.2.0         Rhdf5lib_1.6.0      iterators_1.0.12   
-    ## [58] tools_3.6.1         ade4_1.7-13         Biobase_2.44.0     
-    ## [61] glue_1.3.1          purrr_0.3.2         hms_0.5.1          
-    ## [64] parallel_3.6.1      survival_2.44-1.1   yaml_2.2.0         
-    ## [67] colorspace_1.4-1    rhdf5_2.28.0        cluster_2.1.0
+    ##  [1] Rcpp_1.0.3          ape_5.3             lattice_0.20-38    
+    ##  [4] Biostrings_2.54.0   utf8_1.1.4          assertthat_0.2.1   
+    ##  [7] zeallot_0.1.0       digest_0.6.23       foreach_1.4.7      
+    ## [10] R6_2.4.1            plyr_1.8.5          backports_1.1.5    
+    ## [13] stats4_3.6.2        evaluate_0.14       pillar_1.4.3       
+    ## [16] zlibbioc_1.32.0     rlang_0.4.2         lazyeval_0.2.2     
+    ## [19] data.table_1.12.8   vegan_2.5-6         S4Vectors_0.24.3   
+    ## [22] Matrix_1.2-18       rmarkdown_2.1       labeling_0.3       
+    ## [25] splines_3.6.2       stringr_1.4.0       igraph_1.2.4.2     
+    ## [28] munsell_0.5.0       compiler_3.6.2      xfun_0.12          
+    ## [31] pkgconfig_2.0.3     BiocGenerics_0.32.0 multtest_2.42.0    
+    ## [34] mgcv_1.8-31         htmltools_0.4.0     biomformat_1.14.0  
+    ## [37] tidyselect_0.2.5    IRanges_2.20.2      codetools_0.2-16   
+    ## [40] fansi_0.4.1         permute_0.9-5       crayon_1.3.4       
+    ## [43] withr_2.1.2         MASS_7.3-51.5       grid_3.6.2         
+    ## [46] nlme_3.1-143        jsonlite_1.6        gtable_0.3.0       
+    ## [49] lifecycle_0.1.0     magrittr_1.5        scales_1.1.0       
+    ## [52] cli_2.0.1           stringi_1.4.5       farver_2.0.3       
+    ## [55] XVector_0.26.0      reshape2_1.4.3      vctrs_0.2.1        
+    ## [58] Rhdf5lib_1.8.0      iterators_1.0.12    tools_3.6.2        
+    ## [61] ade4_1.7-13         Biobase_2.46.0      glue_1.3.1         
+    ## [64] purrr_0.3.3         hms_0.5.3           parallel_3.6.2     
+    ## [67] survival_3.1-8      yaml_2.2.0          colorspace_1.4-1   
+    ## [70] rhdf5_2.30.1        cluster_2.1.0
 
-Total Knit Time: 44.79 in seconds; 0.75 in minutes
+Total Knit Time: 62 in seconds; 1.03 in minutes
