@@ -12,6 +12,7 @@ output:
 ---
 
 ```{r global_options, include=FALSE}
+# This chunk times how long it takes to knit the whole Rmd.  You don't need to worry about it.
 start_time = Sys.time()
 library(knitr)
 local({
@@ -43,7 +44,10 @@ library(dplyr)
 library(ggplot2)
 ```
 
-```{r files_and_directories, include=FALSE}
+```{r files_and_directories}
+# This chunk sets the RDS file to load the atacama phyloseq instance from. 
+# It is a bit complicated to allow the RDS to be specified when this Rmd is knit from the commandline 
+
 # Directories
 
 if(exists("params") && 
@@ -63,13 +67,13 @@ print(atacama.ps)
 ### Transform OTU table
 Our OTU tables are currently raw counts
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 otu_table(atacama.ps)[1:10,1:10] %>%
   as.data.frame
 ```
 The first step in making relative abundance plots is to transform your OTU table from raw counts to relative abundance (also known as proportional or fractional abundance).  Phyloseq provides the `transform_sample_counts` function for performing user defined transformations on the OTU table.  We want to divide the counts for each taxa in each sample by the total number of counts for that sample.  The phyloseq object returned has fractional "counts":
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 atacama.ps.rel  = transform_sample_counts(atacama.ps, function(x) x / sum(x) )
 otu_table(atacama.ps.rel) %>%
   as.data.frame %>%
@@ -116,7 +120,7 @@ atacama.ps.rel  = transform_sample_counts(atacama.prune_s.ps, function(x) x / su
 
 As a result, the sum of all fractional abundance values for each sample is should be *1*:
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 sample_sums(atacama.ps.rel)
 ```
 
@@ -124,13 +128,13 @@ sample_sums(atacama.ps.rel)
 
 Now let's make a basic relative abundance plot.
 
-```{r basic_relabund_plot, include=TRUE}
+```{r basic_relabund_plot}
 plot_bar(atacama.ps.rel) +
   labs(y = "Relative Abundance")
 ```
 
 How about coloring by taxa as we did for absolute abundance plots
-```{r echo=FALSE, include=TRUE}
+```{r}
 tax_level="Phylum"
 atacama.ps.rel %>%
   plot_bar(fill = tax_level) +
@@ -161,7 +165,7 @@ atacama.ps.rel %>%
 
 
 How about by family
-```{r echo=FALSE, include=TRUE}
+```{r}
 atacama.ps.rel %>%
   noOutlineAbundancePlot(tax_level = "Family")
 ```
@@ -210,7 +214,7 @@ print(atacama.prune_s.ps)
 print(atacama.prune_s_t20.rel)
 ```
 
-```{r include=TRUE}
+```{r}
 atacama.prune_s_t20.rel %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
@@ -219,7 +223,7 @@ atacama.prune_s_t20.rel %>%
 We trimmed to the top 20 taxa, but in this plot we only see 5.  Why?
 Try looking at `tax_table` to figure out what is going on.  It may also help to do one of the "default" plots that includes the annoying sub-bar outlines.
 
-```{r include=TRUE}
+```{r}
 atacama.prune_s_t20.rel %>%
   plot_bar(fill="Phylum") +
   labs(y = "Relative Abundance")
@@ -255,7 +259,7 @@ print(atacama.prune_s_1pct.rel)
 
 That `filter_taxa` command can be a little hard to understand, so let's look at what its actually doing
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 filter_taxa
 ```
 
@@ -266,29 +270,29 @@ Let's break it down:
 3. Since we are calling it with `prune = TRUE`, it runs `prune_taxa` on `physeq` using the results from `mean_test`.  If `prune=FALSE`, it just returns the results from #2.
 
 Let's try this by hand.  First generate a random matrix
-```{r echo=TRUE, include=TRUE}
+```{r}
 set.seed(1)
 vals = matrix(runif(30, max = 0.02), nrow=10)
 print(vals)
 ```
 Now try running `mean_test` on the first row
-```{r echo=TRUE, include=TRUE}
+```{r}
 mean_test(vals[1,])
 ```
 Now let's use apply to run `mean_test` row-by-row
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 apply(vals, 1, mean_test)
 ```
 
 Just to check we can calculate the mean of each row
-```{r echo=TRUE, include=TRUE}
+```{r}
 apply(vals, 1, mean)
 ```
 
 Now let's plot relative abundance for the taxa that pass `mean_cutoff`
 
-```{r include=TRUE}
+```{r}
 atacama.prune_s_1pct.rel %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
@@ -298,7 +302,7 @@ Compare this with the pruning top20 plot above.  Notice any important difference
 #### Complex Pruning
 We can use more complex rules for pruning taxa.
 Instead of requiring a minimum average across all samples, we can require that each taxon contstitutes at least `min_fraction` of the counts in at least `min_samples` of the samples.
-```{r echo=TRUE, include=TRUE}
+```{r}
 min_fraction = 0.05
 min_samples = 3
 filter_taxa(atacama.ps.rel,
@@ -314,40 +318,40 @@ ntaxa(atacama.ps.rel.minfrac)
 Let's look again at the `filter_taxa` call.  Last time we made a function named `mean_test`, and called `filter_taxa` with `mean_test` as an argument.  Here we are using an anonymous function, in other words instead of defining a function, giving it a name, and passing that function name as an argument, we are defining the function on the fly, which can be more convenient if we are only ever using the function here, but also more confusing.
 
 Let's break down that function.  First we will make our matrix
-```{r echo=TRUE, include=TRUE}
+```{r}
 set.seed(1)
 vals = matrix(runif(30, max = 0.1), nrow=10)
 print(vals)
 ```
 
 Now lets just run the `x >= min_fraction` part on the first row
-```{r echo=TRUE, include=TRUE}
+```{r}
 vals[1,] >= min_fraction
 ```
 
 Here we are testing *each value in the row* to see if it is greater-than-or-equal-to min_fraction, so for the row, we get a logical vector back that is the same length.  Now let's build on that
-```{r echo=TRUE, include=TRUE}
+```{r}
 sum(vals[1,] >= min_fraction)
 ```
 
 `sum` calculates the sum of the vector.  How do you calculate the sum of a logical vector? Convert it to zeroes and ones (sum does this on the fly):
-```{r echo=TRUE, include=TRUE}
+```{r}
 as.numeric(vals[1,] >= min_fraction)
 ```
 So the result of `sum(x >= min_fraction)` is just a tally of how many samples in the row have values greater-than-or-equal-to `min_fraction`
 
 Now its pretty straightforward, just test whether the number of samples in the row that pass the test is at least `min_samples`
-```{r echo=TRUE, include=TRUE}
+```{r}
 sum(vals[1,] >= min_fraction) >= min_samples
 ```
 
 Now let's use apply to run `sum(x >= min_fraction) >= min_samples` row-by-row
-```{r echo=TRUE, include=TRUE}
+```{r}
 apply(vals, 1, function(x) sum(x >= min_fraction) >= min_samples)
 ```
 Now let's plot relative abundance for the taxa that pass the test
 
-```{r min_fraction_relabund_plot, echo=TRUE, include=TRUE}
+```{r min_fraction_relabund_plot}
 atacama.ps.rel.minfrac %>%
   noOutlineAbundancePlot(tax_level = "Genus")
 ```
@@ -382,7 +386,7 @@ It is slight more complicated to use counts to prune the relative abundance data
 
 Here we are identifying the taxa that have at least `min_count` reads in at least `min_sample_frac` of the samples, then using the logical vector that is returned to prune.
 
-```{r echo=TRUE, include=TRUE}
+```{r}
 min_count = 2
 min_sample_frac = 0.2
 filt_vec = filter_taxa(atacama.prune_s.ps, 
@@ -391,7 +395,7 @@ atacama.ps.rel.countprune = prune_taxa(filt_vec, atacama.ps.rel)
 ntaxa(atacama.ps.rel.countprune)
 ```
 
-```{r genus_fill_relabund, echo=FALSE, include=TRUE}
+```{r genus_fill_relabund}
 atacama.ps.rel.countprune %>%
   noOutlineAbundancePlot(tax_level = "Family")
 ```
