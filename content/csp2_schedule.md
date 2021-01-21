@@ -37,7 +37,7 @@
 |          | 11-12  | Short Research Presentations?                                                                                  |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 4/16     | 10-11  | *Poster/Figure Critique* (Eric Monson)                                                                         |              |      |
-|          | 11-12  | Short Research Presentations: Akbar, Nick, Joshua, Rohit                                                       |              |      |
+|          | 11-12  | Short Research Presentations?                                                                                  |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 4/23     | 10-11  | *Group Presentations*: Final Posters                                                                           |              |      |
 |          | 11-12  | *Group Presentations*: Final Posters                                                                           |              |      |
