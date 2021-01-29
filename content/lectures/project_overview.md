@@ -1,6 +1,3 @@
-Start Reproducibility Demo
-==========================
-
 Projects
 ========
 
@@ -125,10 +122,10 @@ Space: Usage (continued)
 du --max-depth 1 /home/guest | sort -nr
 ```
 
-    ## 5319740  /home/guest
-    ## 4719940  /home/guest/scratch
-    ## 575376   /home/guest/repos
-    ## 23924    /home/guest/.rstudio
+    ## 5319828  /home/guest
+    ## 4719944  /home/guest/scratch
+    ## 575456   /home/guest/repos
+    ## 23928    /home/guest/.rstudio
     ## 256  /home/guest/.texlive2017
     ## 140  /home/guest/.cache
     ## 28   /home/guest/.ssh
@@ -163,6 +160,3 @@ Git for Teams
 -   [Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 -   [Stashing](https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning)
 -   [Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
-
-Show Reproducibility Demo
-=========================
