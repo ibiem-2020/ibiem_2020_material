@@ -1,12 +1,12 @@
 ---
 title: "Project Work Overview"
 author: "Josh Granek"
-date: "January 17, 2020"
+date: "January 29, 2021"
 output:
+  ioslides_presentation: default
+  beamer_presentation: default
   md_document:
     variant: markdown_github
-  beamer_presentation: default
-  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +14,24 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Start Reproducibility Demo
+
+# Projects
+## Project Groups {.build}
+
+- **Project 1 - Microbiome adaptation to plastics**
+  - Brianna, Derrick, Amani, Katherine M.
+
+- **Project 2 - Personal microbiomes and chemical exposome**
+  - Katherine D., Elissa, Yingzhu, Pat
+
+- **Project 3 - The mycobiome of the pig lung**
+  - Naveen, Beverly, Zeni
+
+- **Project 4 – 16S amplicon vs shallow shotgun sequencing**
+  - Vidya, Eva, Mizpha, Justice
+
+- **Project 5 – Biofouling of solar panels**
+  - Sam, Sarah, Aaron, Jessica
 
 # Project Organization
 
@@ -23,25 +41,44 @@ knitr::opts_chunk$set(echo = TRUE)
   > - Individual: `/home/guest`
   
 ## Name that Location
-  > - Code?
-  > - Taxonomic Reference (e.g. Silva)?
-  > - Raw Data (e.g. FASTQs)?
-  > - Intermediate Files (e.g. Filtered FASTQs)?
-  > - Final Results (e.g. RDS of phyloseq object)
-  > - Metadata
+  - Code?
+  - Taxonomic Reference (e.g. Silva)?
+  - Raw Data (e.g. FASTQs)?
+  - Intermediate Files (e.g. Filtered FASTQs)?
+  - Final Results (e.g. RDS of phyloseq object)?
+  - Metadata?
 
-## Code
+## Code {.build}
   - Git Repo in Home directory
   - Remote repository on Github
     - All project members are collaborators
 
-## Raw Data
+## Taxonomic Reference (e.g. Silva)? {.build}
+  - Class: everyone needs these
+  - `/data/references`
+
+## Raw Data (e.g. FASTQs)? {.build}
   - Working Copy
     - Group Directory
     - Read Only
   - Archive
     - New Data: Duke Data Service
     - Published Data: SRA
+
+## Intermediate Files (e.g. Filtered FASTQs)? {.build}
+  - Individual
+  - `/home/guest/scratch/atacama_1pct`
+
+## Final Results (e.g. RDS of phyloseq object)? {.build}
+  - Individual: `/home/guest/scratch/atacama_1pct`
+  - Group: `/sharedspace/platypus_poop`
+
+## Metadata?  {.build}
+  - Data: `/data/projects/platypus_poop`
+  - Group: `/sharedspace/platypus_poop`
+
+# Managing Space
+
 
 ## Space: Availabile
 
@@ -63,12 +100,15 @@ du --max-depth 1 /home/guest | sort -nr
 
 # Project Timeline
 ## Milestones
-  - January 31: Group Presentations on Project Background
-  - February 21: Group Presentations on Project Progress
-  - April 3: Poster/Figure Critique
-  - April 17:	Final Presentations
+  - February 19: Group Presentations on Project Background
+  - March 12: Group Presentations on Project Progress
+  - April 9: Poster/Figure Critique
+  - April 23:	Final Presentations
 
 # Collaboration
+
+## Collaborating with Git
+  - https://github.com/ibiem-2020/ibiem_2020_material/blob/master/content/lessons/bootcamp/040_git_overview.md#collaborating
 
 ## Git for Teams
   - [Team Conflicts](https://github.com/ibiem-2019/ibiem_2019_material/blob/master/content/lessons/bootcamp/040_git_overview.md#team-conflicts)
