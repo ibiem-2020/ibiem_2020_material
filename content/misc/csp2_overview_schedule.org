@@ -2,9 +2,9 @@
 |-------------------------+------------+----------------------------------------------------------------------------------------------------------------+--------------+------|
 | 1/29                    |      10-11 | [Project Overview](lectures/project_overview.md)                                                               | Challenge 8  | 2/12 |
 |                         |      11-12 | [Git: Collaborating](lessons/bootcamp/040_git_overview.md#collaborating)                                       |              |      |
-|                         |            | [Git: Team Conflict](lessons/bootcamp/040_git_overview.md#team-conflicts)                                      |              |      |
 |                         |       12-1 | Office Hours                                                                                                   |              |      |
-| 2/5                     |      10-11 | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md#other-ways-to-prune-taxa)                      | Challenge 9  | 2/26 |
+| 2/5                     |      10-11 | [Git: Team Conflict](lessons/bootcamp/040_git_overview.md#team-conflicts)                                      | Challenge 9  | 2/26 |
+|                         |            | [Hands-on: Relative Abundance #2](lessons/relative_abundance.md#other-ways-to-prune-taxa)                      |              |      |
 |                         |      11-12 | [Lecture: Beta Diversity: Basics](lectures/statistical_analysis_2.pdf)                                         |              |      |
 |                         |            | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                     |              |      |
 | 2/12                    |      10-11 | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                                 | Challenge 10 | 3/5  |
