@@ -111,7 +111,7 @@ du --max-depth 1 /home/guest | sort -nr
   - [Collaborating with Git](https://github.com/ibiem-2020/ibiem_2020_material/blob/master/content/lessons/bootcamp/040_git_overview.md#collaborating)
 
 ## Git for Teams
-  - [Team Conflicts](https://github.com/ibiem-2019/ibiem_2019_material/blob/master/content/lessons/bootcamp/040_git_overview.md#team-conflicts)
+  - [Team Conflicts](https://github.com/ibiem-2020/ibiem_2020_material/blob/master/content/lessons/bootcamp/040_git_overview.md#team-conflicts)
   - [Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
   - [Stashing](https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning)
   - [Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
