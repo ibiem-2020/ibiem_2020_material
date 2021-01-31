@@ -8,7 +8,7 @@
 |          | 11-12  | [Lecture: Beta Diversity: Basics](lectures/statistical_analysis_2.pdf)                                         |              |      |
 |          |        | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                     |              |      |
 | 2/12     | 10-11  | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                                 | Challenge 10 | 3/5  |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+|          | 11-12  | Robert Dickson (University of Michigan Medical School)                                                         |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/19     | 10-11  | *Group Presentations*: Project Background                                                                      |              |      |
 |          | 11-12  | Guest Speaker                                                                                                  |              |      |
