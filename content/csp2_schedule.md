@@ -11,10 +11,10 @@
 |          | 11-12  | Robert Dickson (University of Michigan Medical School)                                                         |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/19     | 10-11  | *Group Presentations*: Project Background                                                                      |              |      |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+|          | 11-12  | Noah Fierer (University of Colorado)                                                                           |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/26     | 10-11  | TBD                                                                                                            |              |      |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+|          | 11-12  | Dana Hunt (Duke)                                                                                               |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 3/5      | 10-11  | [Git: Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)                     |              |      |
 |          |        | [Git: Stashing](https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning)                                |              |      |
@@ -22,7 +22,7 @@
 |          | 11-12  | Guest Speaker                                                                                                  |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 3/12     | 10-11  | Computing After IBIEM                                                                                          |              |      |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+|          | 11-12  | Michael Shaffer (Colorado State)                                                                               |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 3/19     | 10-11  | [Some Questions:](lectures/some_questions.pdf) [PERMANOVA](lessons/permanova.md) and [LEfSe](lessons/lefse.md) |              |      |
 |          | 11-12  | Guest Speaker                                                                                                  |              |      |
