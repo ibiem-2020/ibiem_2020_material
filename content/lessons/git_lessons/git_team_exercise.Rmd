@@ -3,38 +3,41 @@ title: "Git Team Exercise"
 output:
   md_document:
     variant: markdown_github
-    toc: true
+    toc: false
   html_document:
-    toc: true
-    toc_float: true
+    toc: false
+    toc_float: false
 ---
+# Team Conflicts
 
 1. Form teams of 4 people, and choose numbers for each team member, 1 through 4. Going forward only one member at a time touches their computer.
-3. Member 1:
-    1. Start a new project named "team_conflict".
-    2. Open a new text file in the project, add the text "Will our team crack under conflict", and save as `README.md`. 
-    3. Create a new repository on Github named "team_conflict", and set this up as the remote repository for the "team_conflict" repository that you created in RStudio.
-    4. Add your other team members as Collaborators.
-4. Member 2: 
+2. Member 1:
+    1. Create a new repository on Github named "team_conflict". Check the box for "Add a README file"
+    2. Add your other team members as Collaborators.
+    3. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
+    4. Add the text "Will our team crack under conflict" to the `README.md` file and save it.
+    5. Stage and commit your changes to `README.md`
+    6. Push your changes.
+3. Member 2: 
     1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Open a new R Notebook in the "team_conflict" repo, which should give you the standard R Notbook template.  
-    3. Save this Notebook as "team_stats"
-    4. Stage and commit this notebook to the repo
-    5. Push changes to the remote repo
-5. Member 3:
+    2. Open a new R Markdown file in the "team_conflict" repo, this will be populated with the standard R Markdown template text.  
+    3. Save this R Markdown as `team_stats.Rmd`
+    4. Stage and commit your changes to `team_stats.Rmd`
+    5. Push changes to the remote repo.
+4. Member 3:
     1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Add a new R code chuck to "team_stats.Rmd": `plot(rnorm(10),rnorm(10))`
-    4. Stage and commit this notebook to the repo
+    2. Add a new R code chuck to "team_stats.Rmd" with this code: `plot(rnorm(10),rnorm(10))`
+    4. Save your changes to `team_stats.Rmd`, then stage and commit these changes.
     5. Push changes to the remote repo
 5. Member 4:
     1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Add a new R code chuck to "team_stats.Rmd": `plot(1:10,10:1)`
-    4. Stage and commit this notebook to the repo
+    2. Add a new R code chuck to `team_stats.Rmd` with this code: `plot(1:10,10:1)`
+    4. Save your changes to `team_stats.Rmd`, then stage and commit these changes.
     5. Push changes to the remote repo
 6. Each team member should now pull the repo before continuing with the next steps
 7. Member 1:
-    1. Change the Title in "team_stats.Rmd" to something more interesting, for example come up with a team name.
-    2. Save, commit, and push (with an informative commit message!)
+    1. Change the Title in `team_stats.Rmd` to something more interesting, for example come up with a team name.
+    2. Save your changes to `team_stats.Rmd`, then stage and commit these changes.
 8. Member 2:
     1. Change the Title again
     2. Save, commit, push.
