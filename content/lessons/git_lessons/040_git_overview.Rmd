@@ -352,58 +352,6 @@ Conflicts can also be minimized with project management strategies:
 * Discuss what order tasks should be carried out in with your collaborators so that tasks expected to change the same lines won’t be worked on simultaneously
 * If the conflicts are stylistic churn (e.g. tabs vs. spaces), establish a project convention that is governing and use code style tools (e.g. htmltidy, perltidy, rubocop, etc.) to enforce, if necessary
 
-## Team Conflicts
-
-1. Form teams of 4 people, and choose numbers for each team member, 1 through 4. Going forward only one member at a time touches their computer.
-3. Member 1:
-    1. Start a new project named "team_conflict".
-    2. Open a new text file in the project, add the text "Will our team crack under conflict", and save as `README.md`. 
-    3. Create a new repository on Github named "team_conflict", and set this up as the remote repository for the "team_conflict" repository that you created in RStudio.
-    4. Add your other team members as Collaborators.
-4. Member 2: 
-    1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Open a new R Notebook in the "team_conflict" repo, which should give you the standard R Notbook template.  
-    3. Save this Notebook as "team_stats"
-    4. Stage and commit this notebook to the repo
-    5. Push changes to the remote repo
-5. Member 3:
-    1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Add a new R code chuck to "team_stats.Rmd": `plot(rnorm(10),rnorm(10))`
-    4. Stage and commit this notebook to the repo
-    5. Push changes to the remote repo
-5. Member 4:
-    1. Clone the "team_conflict" repo from GitHub using the "New Project" command in RStudio.
-    2. Add a new R code chuck to "team_stats.Rmd": `plot(1:10,10:1)`
-    4. Stage and commit this notebook to the repo
-    5. Push changes to the remote repo
-6. Each team member should now pull the repo before continuing with the next steps
-7. Member 1:
-    1. Change the Title in "team_stats.Rmd" to something more interesting, for example come up with a team name.
-    2. Save, commit, and push (with an informative commit message!)
-8. Member 2:
-    1. Change the Title again
-    2. Save, commit, push.
-    3. You should get an error. Read the error!
-    4. Pull.
-    5. Locate the merge conflict in the R Markdown file (it should be on top, but you can also search for the word HEAD)
-    6. Resolve the merge conflict by choosing the correct/preferred change. 
-    7. Commit with a message “Resolving merge conflict”, and push.
-9. Member 3:
-    1. Add a comment to the first code chunk.
-    2. Save, commit, push. 
-    3. You should get an error. 
-    4. Pull. 
-    5. No merge conflicts should occur. 
-    6. Now push.
-10. Member 4:
-    1. Change the comment in the first code chunk.
-    2. Save, commit, push.
-    3. You should get an error. Read the error! 
-    4. Pull. 
-    5. Locate the merge conflict in the R Markdown file. 
-    6. Resolve the merge conflict by choosing the correct/preferred label. 
-    7. Commit with a message “Resolving merge conflict”, and push.
-
 # References
 The bulk of this set of lessons is a translation from Unix command line to RStudio GUI of the The Software Carpentry module [Version Control with Git](http://swcarpentry.github.io/git-novice/), specifically:
 
