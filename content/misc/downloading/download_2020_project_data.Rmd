@@ -1,0 +1,121 @@
+---
+title: "Download IBIEM 2020 Project Data From DDS"
+output:
+  md_document:
+    variant: markdown_github
+  html_document:
+    toc: false
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,  eval=FALSE)
+```
+
+
+# Setup ddsclient
+1. Generate a DDS key following instruction from: <https://github.com/Duke-GCB/DukeDSClient/wiki/Agent-User-Keys-(setup)>
+2. Open a new text file, paste in DDS key, and save as `~/.ddsclient`
+3. Run the following chunk to set DDS key permissions
+
+```{r}
+project_data_dir="/data/project_data"
+dir.create(project_data_dir)
+Sys.setenv(PROJECT_DATA_DIR=project_data_dir)
+```
+
+
+
+```{bash}
+# change permissions to make ddsclient happy
+chmod 600 ~/.ddsclient
+```
+
+# Download Data
+```{bash}
+ddsclient -h
+```
+
+Figure out which project to download
+```{bash}
+ddsclient list
+```
+
+Check project contents
+```{bash eval=FALSE, include=FALSE}
+ddsclient list -p IBIEM_2020
+```
+
+Download data
+```{bash}
+ddsclient download -p IBIEM_2020 $PROJECT_DATA_DIR
+```
+
+
+```{bash}
+df -hl
+```
+
+
+```{bash eval=FALSE, include=FALSE}
+ddsclient list -p IBIEM_2019
+```
+
+Does -p IBIEM_2019 /argonne_data/ have data for both of these:
+Project 1 - Microbiome adaptation to plastics
+Project 2 - Using silicone bands to monitor personal microbiomes and chemical exposome
+
+
+```{bash}
+df -hl
+```
+
+```{bash}
+ddsclient download -p IBIEM_2019 --include argonne_data $PROJECT_DATA_DIR
+
+```
+
+```{bash}
+ddsclient download -h
+
+```
+
+```{bash}
+df -hl
+```
+
+
+```{bash}
+ddsclient download -p "GunschLab " \
+  --include McCumber/Pig_lungs/ \
+  $PROJECT_DATA_DIR
+```
+
+```{bash}
+df -hl
+```
+
+```{bash}
+ls $PROJECT_DATA_DIR/McCumber/Pig_lungs/Data/Reads_Fungal
+```
+
+```{bash}
+cd $PROJECT_DATA_DIR/McCumber/Pig_lungs/Data/Reads_Fungal
+md5sum -c md5_checksum_uncompressed_fastqs.txt
+
+gzip *.fastq
+md5sum *.fastq.gz > md5_checksum.txt
+```
+
+
+
+
+
+
+
+Set data directory read only
+```{bash eval=FALSE, include=FALSE}
+chmod -R a-w /data/tutorial_data/IBIEM_2016
+```
+

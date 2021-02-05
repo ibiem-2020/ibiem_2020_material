@@ -1,0 +1,79 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+file.path("apple","pear")
+```
+
+```{r}
+a = "apple"
+b = "pear"
+file.path(a,b)
+```
+
+
+```{r}
+file.path("/home////kldfalsdkjlvknasln","guest","scratch")
+```
+"/home/guest/scratch"
+
+
+
+```{r}
+scratchdir = "/home/guest/scratch/challenge7"
+file.path(scratchdir)
+```
+
+```{r}
+print(b)
+```
+
+
+```{r}
+file.path(a)
+```
+
+
+```{r}
+file.path(a,a,a,a)
+```
+"/apple/apple/apple/apple/"
+
+```{r}
+s = "/home/guest/scratch/challenge7"
+file.path(s,a)
+```
+
+"/home/guest/scratch/challenge7/apple"
+
+
+```{r}
+scratchdir = "/home/guest/scratch/challenge7"
+file.path(a,scratchdir,a)
+```
+"/home/guest/scratch/challenge7/apple"
+
+
+```{r}
+file.path("/data/tutorial_data/ibiem2016_subset")
+```
+"/data/tutorial_data/ibiem2016_subset"
+
+```{r}
+file.path("a","b","a","a","a","c")
+```
+
+
+```{r}
+scratchdir
+```
+
+
+```{r eval=FALSE, include=FALSE}
+file.path(scratchdir,"/data/tutorial_data/ibiem2016_subset")
+```
+"/data/tutorual_data/ibiem2016_subset"
+
+
