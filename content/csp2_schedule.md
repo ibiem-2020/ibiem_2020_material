@@ -4,8 +4,7 @@
 |          | 11-12  | [Git: Collaborating](lessons/git_lessons/040_git_overview.md#collaborating)                                    |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/5      | 10-11  | [Hands-on: Relative Abundance \#2](lessons/relative_abundance.md#other-ways-to-prune-taxa)                     | Challenge 8  | 2/26 |
-|          |        | [Lecture: Beta Diversity: Basics](lectures/statistical_analysis_2.pdf)                                         |              |      |
-|          |        | [Lecture: Beta Diversity: Ordination and Comparisons](lectures/statistical_analysis_3.pdf)                     |              |      |
+|          |        | [Lecture: Beta Diversity](lectures/statistical_analysis_2.pdf)                                                 |              |      |
 |          | 11-12  | [Git: Conflicts](lessons/git_lessons/git_conflicts.md)                                                         |              |      |
 |          |        | [Git: Team Conflict](lessons/git_lessons/git_team_exercise.md)                                                 |              |      |
 | 2/12     | 10-11  | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                                 | Challenge 9  | 3/5  |
