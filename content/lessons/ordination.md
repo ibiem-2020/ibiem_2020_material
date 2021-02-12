@@ -3,7 +3,7 @@ Data
 
 This tutorial uses the 10% Atacama subset data (note that for the demux
 and dada2 tutorial we used the 1% Atacama subset) There is a problem
-when running `ordinate` on the 1% dataset. Not sure what it is!
+when running `ordinate` on the 1% dataset.
 
 Getting ready
 =============
@@ -118,9 +118,6 @@ ntaxa(atacama.st_prune.even)
     ## [1] 1015
 
 ``` r
-# plot_bar(atacama.ps)
-# plot_bar(atacama.sample_prune)
-# plot_bar(atacama.st_prune)
 plot_bar(atacama.st_prune.even)
 ```
 
@@ -146,33 +143,34 @@ atacama.st_prune.even.nmds_bc <- ordinate(atacama.st_prune.even, "NMDS", "bray")
     ## Square root transformation
     ## Wisconsin double standardization
     ## Run 0 stress 0.1687009 
-    ## Run 1 stress 0.1816958 
-    ## Run 2 stress 0.1824443 
-    ## Run 3 stress 0.1743918 
-    ## Run 4 stress 0.1787274 
-    ## Run 5 stress 0.1660364 
+    ## Run 1 stress 0.1762131 
+    ## Run 2 stress 0.1877654 
+    ## Run 3 stress 0.1921898 
+    ## Run 4 stress 0.1679574 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.0377437  max resid 0.1695759 
-    ## Run 6 stress 0.1781953 
-    ## Run 7 stress 0.1857875 
-    ## Run 8 stress 0.176435 
-    ## Run 9 stress 0.1859313 
-    ## Run 10 stress 0.1792373 
-    ## Run 11 stress 0.1652082 
+    ## ... Procrustes: rmse 0.0270621  max resid 0.1480457 
+    ## Run 5 stress 0.1767816 
+    ## Run 6 stress 0.182444 
+    ## Run 7 stress 0.1875466 
+    ## Run 8 stress 0.1812572 
+    ## Run 9 stress 0.1708934 
+    ## Run 10 stress 0.1858401 
+    ## Run 11 stress 0.1686961 
+    ## Run 12 stress 0.1676846 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.01059606  max resid 0.0735846 
-    ## Run 12 stress 0.193935 
-    ## Run 13 stress 0.1845916 
-    ## Run 14 stress 0.176255 
-    ## Run 15 stress 0.1762603 
-    ## Run 16 stress 0.1819018 
-    ## Run 17 stress 0.1694971 
-    ## Run 18 stress 0.17924 
-    ## Run 19 stress 0.1860009 
-    ## Run 20 stress 0.1668548 
+    ## ... Procrustes: rmse 0.02597474  max resid 0.1330326 
+    ## Run 13 stress 0.184355 
+    ## Run 14 stress 0.1652064 
+    ## ... New best solution
+    ## ... Procrustes: rmse 0.02027715  max resid 0.1352165 
+    ## Run 15 stress 0.1758469 
+    ## Run 16 stress 0.1678794 
+    ## Run 17 stress 0.1897556 
+    ## Run 18 stress 0.1814523 
+    ## Run 19 stress 0.1802858 
+    ## Run 20 stress 0.166033 
     ## *** No convergence -- monoMDS stopping criteria:
-    ##      1: no. of iterations >= maxit
-    ##     19: stress ratio > sratmax
+    ##     20: stress ratio > sratmax
 
 #### Converging
 
@@ -783,7 +781,7 @@ know what versions of R and libraries you used!
 sessionInfo()
 ```
 
-    ## R version 3.6.1 (2019-07-05)
+    ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-pc-linux-gnu (64-bit)
     ## Running under: Ubuntu 18.04.3 LTS
     ## 
@@ -803,34 +801,36 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] phyloseq_1.28.0 vegan_2.5-6     lattice_0.20-38 permute_0.9-5  
-    ##  [5] forcats_0.4.0   stringr_1.4.0   dplyr_0.8.3     purrr_0.3.2    
-    ##  [9] readr_1.3.1     tidyr_0.8.3     tibble_2.1.3    ggplot2_3.2.1  
-    ## [13] tidyverse_1.2.1
+    ##  [1] phyloseq_1.30.0 vegan_2.5-6     lattice_0.20-38 permute_0.9-5  
+    ##  [5] forcats_0.4.0   stringr_1.4.0   dplyr_0.8.3     purrr_0.3.3    
+    ##  [9] readr_1.3.1     tidyr_1.0.0     tibble_2.1.3    ggplot2_3.2.1  
+    ## [13] tidyverse_1.3.0
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Biobase_2.44.0      httr_1.4.1          jsonlite_1.6       
-    ##  [4] splines_3.6.1       foreach_1.4.7       modelr_0.1.5       
-    ##  [7] assertthat_0.2.1    stats4_3.6.1        cellranger_1.1.0   
-    ## [10] yaml_2.2.0          pillar_1.4.2        backports_1.1.4    
-    ## [13] glue_1.3.1          digest_0.6.20       XVector_0.24.0     
-    ## [16] rvest_0.3.4         colorspace_1.4-1    htmltools_0.3.6    
-    ## [19] Matrix_1.2-17       plyr_1.8.4          pkgconfig_2.0.2    
-    ## [22] broom_0.5.2         haven_2.1.1         zlibbioc_1.30.0    
-    ## [25] scales_1.0.0        mgcv_1.8-28         generics_0.0.2     
-    ## [28] IRanges_2.18.2      withr_2.1.2         BiocGenerics_0.30.0
-    ## [31] lazyeval_0.2.2      cli_1.1.0           survival_2.44-1.1  
-    ## [34] magrittr_1.5        crayon_1.3.4        readxl_1.3.1       
-    ## [37] evaluate_0.14       nlme_3.1-141        MASS_7.3-51.4      
-    ## [40] xml2_1.2.2          data.table_1.12.2   tools_3.6.1        
-    ## [43] hms_0.5.1           Rhdf5lib_1.6.0      S4Vectors_0.22.0   
-    ## [46] munsell_0.5.0       cluster_2.1.0       Biostrings_2.52.0  
-    ## [49] ade4_1.7-13         compiler_3.6.1      rlang_0.4.0        
-    ## [52] rhdf5_2.28.0        grid_3.6.1          iterators_1.0.12   
-    ## [55] biomformat_1.12.0   rstudioapi_0.10     igraph_1.2.4.1     
-    ## [58] labeling_0.3        rmarkdown_1.15      multtest_2.40.0    
-    ## [61] gtable_0.3.0        codetools_0.2-16    reshape2_1.4.3     
-    ## [64] R6_2.4.0            lubridate_1.7.4     knitr_1.24         
-    ## [67] zeallot_0.1.0       ape_5.3             stringi_1.4.3      
-    ## [70] parallel_3.6.1      Rcpp_1.0.2          vctrs_0.2.0        
-    ## [73] tidyselect_0.2.5    xfun_0.9
+    ##  [1] nlme_3.1-143        fs_1.3.1            lubridate_1.7.4    
+    ##  [4] httr_1.4.1          tools_3.6.2         backports_1.1.5    
+    ##  [7] R6_2.4.1            DBI_1.1.0           lazyeval_0.2.2     
+    ## [10] BiocGenerics_0.32.0 mgcv_1.8-31         colorspace_1.4-1   
+    ## [13] ade4_1.7-13         withr_2.1.2         tidyselect_0.2.5   
+    ## [16] compiler_3.6.2      cli_2.0.1           rvest_0.3.5        
+    ## [19] Biobase_2.46.0      xml2_1.2.2          labeling_0.3       
+    ## [22] scales_1.1.0        digest_0.6.23       rmarkdown_2.1      
+    ## [25] XVector_0.26.0      pkgconfig_2.0.3     htmltools_0.4.0    
+    ## [28] dbplyr_1.4.2        rlang_0.4.2         readxl_1.3.1       
+    ## [31] rstudioapi_0.10     farver_2.0.3        generics_0.0.2     
+    ## [34] jsonlite_1.6        magrittr_1.5        biomformat_1.14.0  
+    ## [37] Matrix_1.2-18       Rcpp_1.0.3          munsell_0.5.0      
+    ## [40] S4Vectors_0.24.3    Rhdf5lib_1.8.0      fansi_0.4.1        
+    ## [43] ape_5.3             lifecycle_0.1.0     stringi_1.4.5      
+    ## [46] yaml_2.2.0          MASS_7.3-51.5       zlibbioc_1.32.0    
+    ## [49] rhdf5_2.30.1        plyr_1.8.5          grid_3.6.2         
+    ## [52] parallel_3.6.2      crayon_1.3.4        Biostrings_2.54.0  
+    ## [55] haven_2.2.0         splines_3.6.2       multtest_2.42.0    
+    ## [58] hms_0.5.3           zeallot_0.1.0       knitr_1.27         
+    ## [61] pillar_1.4.3        igraph_1.2.4.2      reshape2_1.4.3     
+    ## [64] codetools_0.2-16    stats4_3.6.2        reprex_0.3.0       
+    ## [67] glue_1.3.1          evaluate_0.14       data.table_1.12.8  
+    ## [70] modelr_0.1.5        vctrs_0.2.1         foreach_1.4.7      
+    ## [73] cellranger_1.1.0    gtable_0.3.0        assertthat_0.2.1   
+    ## [76] xfun_0.12           broom_0.5.3         survival_3.1-8     
+    ## [79] iterators_1.0.12    IRanges_2.20.2      cluster_2.1.0
