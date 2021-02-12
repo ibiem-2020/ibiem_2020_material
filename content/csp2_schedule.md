@@ -7,14 +7,15 @@
 |          |        | [Lecture: Beta Diversity](lectures/statistical_analysis_2.pdf)                                                 |              |      |
 |          | 11-12  | [Git: Conflicts](lessons/git_lessons/git_conflicts.md)                                                         |              |      |
 |          |        | [Git: Team Conflict](lessons/git_lessons/git_team_exercise.md)                                                 |              |      |
-| 2/12     | 10-11  | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                                 | Challenge 9  | 3/5  |
+| 2/12     | 10-11  | [Lecture: Beta Diversity](lectures/statistical_analysis_2.pdf)                                                 | Challenge 9  | 3/5  |
+|          |        | [Hands-on: Beta Diversity & Ordination](lessons/ordination.md)                                                 |              |      |
 |          | 11-12  | Robert Dickson (University of Michigan Medical School)                                                         |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/19     | 10-11  | *Group Presentations*: Project Background                                                                      | Challenge 10 | 3/12 |
 |          | 11-12  | Noah Fierer (University of Colorado at Boulder)                                                                |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 2/26     | 10-11  | TBD                                                                                                            |              |      |
-|          | 11-12  | Dana Hunt (Duke)                                                                                               |              |      |
+|          | 11-12  | Guest Speaker                                                                                                  |              |      |
 |          | 12-1   | Office Hours                                                                                                   |              |      |
 | 3/5      | 10-11  | [Git: Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)                     |              |      |
 |          |        | [Git: Stashing](https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning)                                |              |      |
