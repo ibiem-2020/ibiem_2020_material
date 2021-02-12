@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo=TRUE, include=TRUE)
 
 ## Data
 This tutorial uses the 10% Atacama subset data (note that for the demux and dada2 tutorial we used the 1% Atacama subset)
-There is a problem when running `ordinate` on the 1% dataset.  Not sure what it is!
+There is a problem when running `ordinate` on the 1% dataset.
 
 # Getting ready
 
@@ -78,9 +78,6 @@ atacama.even = transform_sample_counts(atacama.sample_prune, function(x) 1E6 * x
 atacama.st_prune.even = prune_taxa(prune.vec, atacama.even)
 ntaxa(atacama.st_prune.even)
 
-# plot_bar(atacama.ps)
-# plot_bar(atacama.sample_prune)
-# plot_bar(atacama.st_prune)
 plot_bar(atacama.st_prune.even)
 ```
 
