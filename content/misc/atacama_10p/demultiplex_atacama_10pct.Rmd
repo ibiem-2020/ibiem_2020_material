@@ -24,7 +24,7 @@ To keep the code readable and portable, it is nice to assign paths to variables.
 ```{r files_and_directories}
 # Directories
 data.dir = "/data/tutorial_data/atacama_10pct"
-output.dir = path.expand("/tmp/scratch/atacama_10pct")
+output.dir = path.expand("~/scratch/atacama_10pct")
 demux.dir = file.path(output.dir, "demux")
 
 # make directory for output
