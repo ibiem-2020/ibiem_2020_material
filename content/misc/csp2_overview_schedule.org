@@ -18,7 +18,7 @@
 | 3/5                     |      10-11 | [Git: Branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)                     |              |      |
 |                         |            | [Git: Stashing](https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning)                                |              |      |
 |                         |            | [Git: Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)                                              |              |      |
-|                         |      11-12 | Guest Speaker                                                                                                  |              |      |
+|                         |      11-12 | Robert Dickson (Michigan)                                                                                      |              |      |
 |                         |       12-1 | Office Hours                                                                                                   |              |      |
 | 3/12                    |      10-11 | *Group Presentations* on Project Progress                                                                      |              |      |
 |                         |      11-12 | Michael Shaffer (Colorado State University)                                                                    |              |      |
@@ -27,7 +27,7 @@
 |                         |      11-12 | Guest Speaker                                                                                                  |              |      |
 |                         |     12-1pm | office hours                                                                                                   |              |      |
 | 3/26                    |      10-11 | [Some Questions:](lectures/some_questions.pdf) [PERMANOVA](lessons/permanova.md) and [LEfSe](lessons/lefse.md) |              |      |
-|                         |      11-12 | Guest Speaker                                                                                                  |              |      |
+|                         |      11-12 | Amy Barto (Duke)                                                                                               |              |      |
 |                         |     12-1pm | office hours                                                                                                   |              |      |
 | 4/2                     |      10-11 | *Group Presentations*: Project Progress                                                                        |              |      |
 |                         |      11-12 | Guest Speaker                                                                                                  |              |      |
