@@ -13,6 +13,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE,  eval=FALSE)
 ```
 
+```{r}
+library(readr)
+library(dplyr)
+library(stringr)
+```
 
 # Setup ddsclient
 1. Generate a DDS key following instruction from: <https://github.com/Duke-GCB/DukeDSClient/wiki/Agent-User-Keys-(setup)>
@@ -109,8 +114,45 @@ md5sum *.fastq.gz > md5_checksum.txt
 ```
 
 
+# Fix/Merge plastic metadata
+200114_McCumber_16SFW_AS_200110_corrected_v6.txt" "200114_McCumber_16SFW_AS_200110.txt"   
 
 
+```{r}
+file.path(project_data_dir,"argonne_data","old_metadata", "200114_McCumber_16SFW_AS_200110.txt") %>%
+  read_tsv ->
+  original_metadata
+
+file.path(project_data_dir,"argonne_data","old_metadata", "200114_McCumber_16SFW_AS_200110_corrected_v6.txt") %>%
+  read_tsv ->
+  fixed_metadata
+```
+
+
+## Check sample matches
+```{r, results='asis'}
+left_join(fixed_metadata,original_metadata, by="BarcodeSequence") %>%
+  select(fixed_id=`#SampleID.x`, original_id=`#SampleID.y`) %>%
+  mutate(orig_under=str_replace(`original_id`, fixed("."), "_")) %>%
+  filter(fixed_id!=orig_under) %>%
+  select(fixed_id, original_id) %>%
+  write_tsv("/tmp/sample_mismatch.tsv")
+```
+
+## 
+
+```{r}
+fixed_metadata %>%
+  pull(BarcodeSequence) ->
+  plastic_barcodes
+```
+
+```{r}
+original_metadata %>%
+  filter(!BarcodeSequence %in% plastic_barcodes) %>%
+  bind_rows(fixed_metadata) %>%
+  write_tsv(file.path(project_data_dir,"argonne_data","200114_McCumber_16SFW_AS_200110_corrected_final.txt"))
+```
 
 
 
