@@ -113,6 +113,25 @@ gzip *.fastq
 md5sum *.fastq.gz > md5_checksum.txt
 ```
 
+# Download 16S data for SSMS project
+```{bash}
+ddsclient list -p Kim_6781_21021602
+```
+
+
+```{bash}
+ddsclient download -p Kim_6781_21021602 $PROJECT_DATA_DIR
+```
+
+```{bash}
+set -u
+ls $PROJECT_DATA_DIR
+```
+
+```{bash}
+set -u
+ls $PROJECT_DATA_DIR/ssms_raw_fastqs
+```
 
 # Fix/Merge plastic metadata
 200114_McCumber_16SFW_AS_200110_corrected_v6.txt" "200114_McCumber_16SFW_AS_200110.txt"   
