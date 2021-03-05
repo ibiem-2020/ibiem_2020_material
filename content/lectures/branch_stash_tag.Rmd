@@ -46,12 +46,10 @@ Git allows and encourages you to have multiple local branches that can be entire
 ## Tagging
 "Git has the ability to tag specific points in a repository’s history as being important. Typically, people use this functionality to mark release points (v1.0, v2.0 and so on)." - [Pro Git](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 
-## Tagging Hands-on
-[Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
-
-
 ## Tags in the Wild
 - In Rstudio: **History** Tab in Commit Window
 - In Github: [Project -> Code -> tags](https://github.com/knights-lab/SHOGUN/tags)
 - In GitLab: [Project -> Project Overview -> Tags](https://gitlab.oit.duke.edu/ibiem2020/docker_rstudio_ibiem2020/-/tags)
 
+## Tagging Hands-on
+[Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
