@@ -1,6 +1,9 @@
 ---
 title: "Branch, Stash, Tag"
-output: ioslides_presentation
+output:
+  md_document:
+    variant: markdown_github
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}

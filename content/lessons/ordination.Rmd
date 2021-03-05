@@ -50,6 +50,12 @@ As with relative abundance plots, before performing ordination we will want to p
 ### Prune 
 As with relative abundance plots, the decision about how to prune is important, we need to think about what we are throwing away, and how it might affect the analysis.  For starters, we will use the same parameters as last time - only include taxa that have at least 3 reads in at least 10% of samples
 ```{r}
+sample_sums(atacama.ps) %>% sort
+
+```
+
+
+```{r}
 sample_min_count = 50
 
 atacama.ps %>%
@@ -80,6 +86,10 @@ ntaxa(atacama.st_prune.even)
 
 plot_bar(atacama.st_prune.even)
 ```
+```{r}
+plot_bar(atacama.even)
+```
+# STOPPED HERE 2/12/2021
 
 ## Ordination
 For ordination plots we have at least two major decisions:
@@ -104,6 +114,12 @@ atacama.st_prune.even.nmds_bc <- ordinate(atacama.st_prune.even, "NMDS", "bray")
 ```
 
 We can try a different random seed . . .
+
+```{r}
+set.seed(6)
+runif(2)
+```
+
 
 ```{r}
 set.seed(6)
@@ -269,6 +285,8 @@ facet_grid(Vegetation~TransectName, labeller = "label_both") +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 ```
+
+# Stopped HERE 2/26/2021
 
 ### PCoA Plots
 There are many other ordination methods supported by phyloseq.  Let's make a PCoA plot using Bray-Curtis dissimilarity, coloring the data points by "Vegetation".
