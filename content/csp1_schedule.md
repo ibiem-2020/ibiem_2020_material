@@ -32,6 +32,7 @@
 |          | 12-1  | Office Hours                                                                                                      |             |       |
 | 9-Oct    |       | Class Cancelled: Mental Health Day                                                                                |             |       |
 | 16-Oct   | 10-11 | [Hands-on: Demultiplexing \#2](lessons/demultiplex_tutorial.md#putting-it-together-for-r1-and-r2)                 | Challenge 6 | 10/30 |
+|          |       | [Hands-on: Demultiplexing with fastq-multx](lessons/demultiplex_with_fastq_multx.md)                              |             |       |
 |          | 11-12 | [Lecture: Amplicon Bioinformatics Analysis \#2](lectures/dada2_pipeline.pdf)                                      |             |       |
 |          | 12-1  | Office Hours                                                                                                      |             |       |
 | 23-Oct   | 10-11 | [Hands-on: DADA2 \#1](lessons/dada2_tutorial_1_6.md)                                                              | Challenge 7 | 11/6  |

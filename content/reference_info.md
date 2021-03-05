@@ -17,3 +17,4 @@
 2. [Downloading Into IBIEM Environment](misc/downloading.md)
 3. [Miscellaneous Notes on Github, Bitbucket, and Gitlab](misc/github_notes.md)
 4. [GUide to STatistical Analysis in Microbial Ecology (GUSTA ME)](https://mb3is.megx.net/gustame)
+    - [(Dis)similarity wizard](https://mb3is.megx.net/gustame/wizards/-dis-similarity-wizard)
