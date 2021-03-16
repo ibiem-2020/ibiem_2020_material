@@ -23,20 +23,20 @@
 |          | 11-12  | Michael Shaffer (Colorado State University)                                                                    |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 3/19     | 10-11  | Figure Design (Eric Monson)                                                                                    |              |      |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+|          | 11-12  | Andreas Teske (UNC Chapel Hill)                                                                                |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 3/26     | 10-11  | [Hands-on: Branching, Stashing, Tagging](lectures/branch_stash_tag.md)                                         |              |      |
 |          |        | [Some Questions:](lectures/some_questions.pdf) [PERMANOVA](lessons/permanova.md) and [LEfSe](lessons/lefse.md) |              |      |
 |          | 11-12  | Amy Barto (Duke)                                                                                               |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
-| 4/2      | 10-11  | *Group Presentations*: Project Progress                                                                        |              |      |
-|          | 11-12  | Guest Speaker                                                                                                  |              |      |
+| 4/2      | 10-11  |                                                                                                                |              |      |
+|          | 11-12  | Courtney Gardner (Washington State University)                                                                 |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 4/9      | 10-11  | *Poster/Figure Critique* (Eric Monson)                                                                         |              |      |
-|          | 11-12  | Short Research Presentations?                                                                                  |              |      |
+|          | 11-12  |                                                                                                                |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 4/16     | 10-11  |                                                                                                                |              |      |
-|          | 11-12  | Short Research Presentations?                                                                                  |              |      |
+|          | 11-12  |                                                                                                                |              |      |
 |          | 12-1pm | office hours                                                                                                   |              |      |
 | 4/23     | 10-11  | *Group Presentations*: Final Posters                                                                           |              |      |
 |          | 11-12  | *Group Presentations*: Final Posters                                                                           |              |      |
