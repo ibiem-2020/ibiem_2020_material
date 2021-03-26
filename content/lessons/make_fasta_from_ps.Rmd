@@ -1,0 +1,49 @@
+---
+title: "Make FASTA from phyloseq"
+params:
+  atacama_ps_rds: /data/tutorial_data/atacama_1pct.rds
+  atacama_data_percent: 1
+  data_dir : /data/tutorial_data
+output:
+  md_document:
+     variant: markdown_github
+---
+# Getting ready
+
+First we load libraries.
+```{r libraries, message=FALSE, warning=FALSE}
+library(readr)
+library(phyloseq)
+library(ggplot2)
+library(dplyr)
+library(Biostrings)
+```
+
+
+
+```{r files_and_directories, include=FALSE}
+atacama.ps.rds = "/data/tutorial_data/atacama_1pct.rds"
+```
+
+```{r}
+atacama.ps = read_rds(atacama.ps.rds)
+print(atacama.ps)
+```
+
+```{r}
+tax_table(atacama.ps) %>%
+  as.data.frame %>%
+  rownames %>%
+  DNAStringSet ->
+  my_stringset
+
+seq(length(my_stringset)) %>%
+  paste("asv",., sep="_") ->
+  asv_names
+
+names(my_stringset) <- asv_names
+my_stringset
+
+writeXStringSet(my_stringset, "/home/guest/scratch/test.fasta")
+```
+
