@@ -10,6 +10,7 @@
   - [Data Visualization in R (SDS 375/395)](https://wilkelab.org/SDS375/schedule.html)
   - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz)
   - [Data Visualization: A Practical Introduction](https://socviz.co)
+  - [Chartable](https://blog.datawrapper.de)
   
 # Miscellaneous
 
