@@ -26,11 +26,11 @@
 |                         |      11-12 | Andreas Teske (UNC Chapel Hill)                                                           |                     |      |
 |                         |     12-1pm | office hours                                                                              |                     |      |
 | 3/26                    |      10-11 | [Hands-on: Branching, Stashing, Tagging](lectures/branch_stash_tag.md)                    | Figure for Critique | 4/2  |
-|                         |            | [HTS Revisted](lectures/hts_revisted.pdf)                                                 |                     |      |
+|                         |            | [HTS Revisted #1](lectures/hts_revisted.pdf)                                              |                     |      |
 |                         |      11-12 | Amy Barto (Duke)                                                                          |                     |      |
 |                         |     12-1pm | office hours                                                                              |                     |      |
-| 4/2                     |      10-11 |                                                                                           |                     |      |
-|                         |      11-12 | Courtney Gardner (Washington State University)                                            |                     |      |
+| 4/2                     |      10-11 | [HTS Revisted #2](lectures/hts_revisted.pdf)                                              |                     |      |
+|                         |      11-12 | [Computing After IBIEM](lectures/computing_after_ibiem.md)                                |                     |      |
 |                         |     12-1pm | office hours                                                                              |                     |      |
 | 4/9                     |      10-11 | *Poster/Figure Critique* (Eric Monson)                                                    |                     |      |
 |                         |      11-12 |                                                                                           |                     |      |
