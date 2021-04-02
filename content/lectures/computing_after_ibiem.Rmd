@@ -1,6 +1,10 @@
 ---
 title: "Computing After IBIEM"
-output: ioslides_presentation
+output:
+  md_document:
+    variant: markdown_github
+  beamer_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -73,18 +77,16 @@ RStudio Password:       PASSWORD
 
 ## Singularity on SLURM cluster: Details
 ### Partition and Account
-  To run the container on a specific container and account, use the `-A ACCOUNT -p PARTITION` for whatever partitions you have high-priority access to, for example:
-```
-srun -A chsi -p chsi singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password
-```
+  To run the container on a specific container and account, use the `-A ACCOUNT -p PARTITION` for whatever partitions you have high-priority access to, for example: 
+`srun -A chsi -p chsi singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
+
+## Singularity on SLURM cluster: Details
 ### Memory and CPUs
-  - You might want to request more memory or more CPUs for your container. 
-    - This is a balancing act. 
-      - More CPUs allow you to run tasks faster if they support paralelel processing
-      - You need to request at least as much memory as you will need, otherwise SLURM will kill your container
-      - But, if you request more resources than are currently available you will have to wait for your container to start
-```
-srun --mem=10G --cpus-per-task=5 singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password
-```
+  - You might want to request more memory or more CPUs for your container. This is a balancing act. 
+    - More CPUs allow you to run tasks faster if they support paralelel processing
+    - You need to request at least as much memory as you will need, otherwise SLURM will kill your container
+    - But, if you request more resources than are currently available you will have to wait for your container to start
+      
+`srun --mem=10G --cpus-per-task=5 singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
 
 
