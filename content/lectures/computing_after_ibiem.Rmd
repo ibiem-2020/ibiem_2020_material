@@ -1,0 +1,30 @@
+---
+title: "Computing After IBIEM"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# CyVerse
+## CyVerse Discovery Environment
+  - NSF funded computing Environment
+  - https://de.cyverse.org/de/
+
+## RStudio in CyVerse: Startup
+  1. Go to https://de.cyverse.org/de/
+  2. Click on **Apps**
+  3. Search for "rstudio"
+  4. Find **Rocker RStudio Verse 3.6.3**, click on the three dots and select **Quick Launch**
+  5. In the dialog box that pops up, click on **Rocker RStudio Verse 3.6.3** then the **triangle**
+  6. In the "Analysis" dialog that pops up, click on **Launch Analysis**
+  7. Click on the **Analyses** button in the top left corner
+  8. In the Analyses window that pops up, click on the square with a diagonal arrow. This should open a new tab or window in your web browser with the RStudio session.
+
+## RStudio in CyVerse: Shutdown
+  1. Click on the **File** menu *within RStudio* and select **Quit Session**
+  2. Close the RStudio tab
+  3. In Cyverse Discovery Environment go to the Analyses window
+  4. Find "Rocker_RStudio_Verse_3.6.3_analysis1", click on the three dots and select **Complete and Save Outputs**. Now status should change to **Completed**.
+  5. Click on the three dots and select **Delete**
