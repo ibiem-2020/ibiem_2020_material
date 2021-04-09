@@ -56,7 +56,6 @@ Singularity on a Server (demo)
     webbrowser.
 6.  Use the “RStudio Username:” and “RStudio Password:” for **Sign in to
     RStudio** in your webbrowser
-7.  
 
 Singularity on SLURM cluster
 ----------------------------
@@ -67,12 +66,17 @@ Singularity on SLURM cluster
     for example: `ssh josh@dcc-login-03.oit.duke.edu`
 3.  Start tmux session: `tmux new -s ibiem`
 4.  Start IBIEM image in singularity:
-    `srun singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
+
+<!-- -->
+
+    srun \
+      singularity exec \
+      docker://ibiem/docker_rstudio_ibiem2020 \
+      port_and_password
 
 Make note of the information printed
 
     RStudio URL:            http://COMPUTE_HOSTNAME:PORT/
-
     RStudio Username:       USERNAME
     RStudio Password:       PASSWORD
 
@@ -97,6 +101,9 @@ Singularity on SLURM cluster
 3.  To login to RStudio, use the USERNAME and PASSWORD that were printed
     when singularity started
 
+STOPPED HERE 4/2/2021
+---------------------
+
 Singularity on SLURM cluster: Shutdown
 --------------------------------------
 
@@ -105,20 +112,21 @@ Singularity on SLURM cluster: Shutdown
 2.  In the tmux session where singularity was started, do control-C
     **twice** so shutdown the IBIEM container
 
-Singularity on SLURM cluster: Details
--------------------------------------
-
-### Partition and Account
+Singularity on SLURM cluster: Partition and Account
+---------------------------------------------------
 
 To run the container on a specific container and account, use the
 `-A ACCOUNT -p PARTITION` for whatever partitions you have high-priority
 access to, for example:
-`srun -A chsi -p chsi singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
 
-Singularity on SLURM cluster: Details
--------------------------------------
+    srun \
+      -A chsi -p chsi \
+      singularity exec \
+      docker://ibiem/docker_rstudio_ibiem2020 \
+      port_and_password`
 
-### Memory and CPUs
+Singularity on SLURM cluster: Memory and CPUs
+---------------------------------------------
 
 -   You might want to request more memory or more CPUs for your
     container. This is a balancing act.
@@ -129,4 +137,55 @@ Singularity on SLURM cluster: Details
     -   But, if you request more resources than are currently available
         you will have to wait for your container to start
 
-`srun --mem=10G --cpus-per-task=5 singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
+<!-- -->
+
+    srun \
+      --mem=10G --cpus-per-task=5 \
+      singularity exec \
+      docker://ibiem/docker_rstudio_ibiem2020 \
+      port_and_password`
+
+Singularity: Accessing Host Directories
+---------------------------------------
+
+-   You might want to access files that are outside of your home
+    directory
+-   Within a singularity container your access to the host computer is
+    limited: by default, from inside the container you can only access
+    your home directory
+-   If you want to access directories that are outside your home
+    directory, you have to tell Singularity when you start the container
+    with the `--bind` command line argument.
+
+<!-- -->
+
+    srun \
+      singularity exec \
+      --bind /work/josh:/work/josh \
+      docker://ibiem/docker_rstudio_ibiem2020 \
+      port_and_password`
+
+Singularity: Putting it Together
+--------------------------------
+
+    srun \
+      -A chsi -p chsi \
+      --mem=10G --cpus-per-task=5 \
+      singularity exec \
+      --bind /work/josh:/work/josh \
+      docker://ibiem/docker_rstudio_ibiem2020 \
+      port_and_password
+
+Singularity Resources
+---------------------
+
+-   The IBIEM Docker image is at
+    <a href="https://hub.docker.com/r/ibiem/docker_rstudio_ibiem2020" class="uri">https://hub.docker.com/r/ibiem/docker_rstudio_ibiem2020</a>
+-   The Dockerfile for the IBIEM Docker is at
+    <a href="https://github.com/IBIEM/docker_rstudio_ibiem2020/blob/master/Dockerfile" class="uri">https://github.com/IBIEM/docker_rstudio_ibiem2020/blob/master/Dockerfile</a>
+    -   A Dockerfile is the instructions for building a docker image
+    -   This Dockerfile is very complicated, you can see a very simple
+        Dockerfile at
+        <a href="https://github.com/docker-library/hello-world/blob/master/amd64/hello-world/Dockerfile" class="uri">https://github.com/docker-library/hello-world/blob/master/amd64/hello-world/Dockerfile</a>
+    -   Instructions for building Singularity Images:
+        <a href="https://sylabs.io/guides/3.6/user-guide/quick_start.html" class="uri">https://sylabs.io/guides/3.6/user-guide/quick_start.html</a>
