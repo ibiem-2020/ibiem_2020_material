@@ -1,0 +1,49 @@
+---
+title: "Run Everything"
+output:
+  md_document:
+    variant: markdown_github
+  html_document:
+    df_print: paged
+---
+
+```{r load_libraries}
+library(here)
+library(dplyr)
+library(fs)
+library(rmarkdown)
+library(magrittr)
+```
+
+```{r choose_regerssion_rmds}
+regression_rmds_1pct = c("../misc/downloading/atacama_download.Rmd",
+                    "../misc/downloading/download_dada_references.Rmd",
+                    "./demultiplex_with_fastq_multx.Rmd",
+                    "./dada2_tutorial_1_6.Rmd",
+                    "./alpha_diversity.Rmd",
+                    "./absolute_abundance_plots.Rmd",
+                    "./relative_abundance.Rmd")
+
+render_params = list(
+  atacama_ps_rds=path_expand("~/scratch/atacama_1pct/dada2/atacama_1pct.rds")
+)
+```
+
+```{r run_render}
+render_outdir=path_expand("~/scratch/atacama_1pct_render_run")
+dir_create(render_outdir)
+for (cur_rmd in regression_rmds_1pct){
+  print(cur_rmd)
+  render(cur_rmd, 
+         output_format="html_document",
+         params=render_params,
+         output_dir=render_outdir)
+}
+```
+
+# SessionInfo
+```{r session_info}
+sessionInfo()
+```
+
+
