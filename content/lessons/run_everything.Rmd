@@ -58,7 +58,7 @@ render_params = list(
 ```
 
 ```{r run_render}
-render_outdir=path_real("~/scratch/atacama_1pct_render_run/")
+render_outdir=path_expand("~/scratch/atacama_1pct_render_run")
 dir_create(render_outdir)
 for (cur_rmd in regression_rmds_1pct){
   print(cur_rmd)
