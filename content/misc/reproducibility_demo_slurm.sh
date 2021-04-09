@@ -14,8 +14,6 @@ fi
 OUT_DIR=${1}
 BASE_DIR="${OUT_DIR}/reproducible_demo_`date +%s`_tmp"
 
-exit 0
-
 WORK_DIR="$BASE_DIR/work"
 DATA_DIR="$BASE_DIR/data"
 DOCKER_IMAGENAME="ibiem/docker_rstudio_ibiem2020"
@@ -40,7 +38,6 @@ srun singularity exec \
 
 printf "\n${SEP_STRING} FINISHED Pipeline ${SEP_STRING}"
 printf "\n${SEP_STRING} Results output to ${WORK_DIR}/scratch\n\n"
-exit 0
 
 printf "\n${SEP_STRING} To clean up: \n\n"
 echo "rm -rf $BASE_DIR"
