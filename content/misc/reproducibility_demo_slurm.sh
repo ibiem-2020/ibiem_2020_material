@@ -7,8 +7,6 @@ if [ $# -ne 1 ]; then
     printf "or if Docker is run with a memory cap. Docker Desktop on MacOS and Windows\n" >&2
     printf "seems to default to a value that is too low\n\n" >&2
     exit 1
-else
-    printf "Everything was peachy\n" >&2 
 fi
 
 OUT_DIR=${1}
@@ -25,14 +23,14 @@ mkdir -p $WORK_DIR $DATA_DIR
 srun git clone https://github.com/ibiem-2020/ibiem_2020_material.git  ${WORK_DIR}/demo
 
 
-printf "\n${SEP_STRING} Pulling docker image: $DOCKER_IMAGENAME ${SEP_STRING}"
+# printf "\n${SEP_STRING} Pulling docker image: $DOCKER_IMAGENAME ${SEP_STRING}"
 # docker pull $DOCKER_IMAGENAME
 
 
 printf "\n${SEP_STRING} STARTING Pipeline in Singularity ${SEP_STRING}"
 srun singularity exec \
-  -v ${WORK_DIR}:/home/guest \
-  -v ${DATA_DIR}:/data \
+  --bind ${WORK_DIR}:/home/guest \
+  --bind ${DATA_DIR}:/data \
   docker://${DOCKER_IMAGENAME} \
   Rscript -e "rmarkdown::render('/home/guest/demo/content/lessons/run_everything.Rmd')"
 
