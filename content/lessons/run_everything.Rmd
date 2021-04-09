@@ -52,12 +52,12 @@ regression_rmds_1pct = c("../misc/downloading/atacama_download.Rmd",
 # ,
 #                     "./ordination.Rmd"
 #                     )
+render_params = list(
+  atacama_ps_rds=path_expand("~/scratch/atacama_1pct/dada2/atacama_1pct.rds")
+)
 ```
 
 ```{r run_render}
-render_params = list(
-  atacama_ps_rds=path_real("~/scratch/atacama_1pct/dada2/atacama_1pct.rds")
-)
 render_outdir=path_real("~/scratch/atacama_1pct_render_run/")
 dir_create(render_outdir)
 for (cur_rmd in regression_rmds_1pct){
