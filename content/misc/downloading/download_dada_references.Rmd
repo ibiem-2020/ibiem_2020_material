@@ -2,6 +2,8 @@
 title: "Download Taxonomic References for DADA"
 params:
   data_dir : /data
+  atacama_data_percent: ""
+  atacama_ps_rds: ""
 output:
   html_document:
     toc: false
