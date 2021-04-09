@@ -1,5 +1,9 @@
 ---
 title: "Download Taxonomic References for DADA"
+params:
+  data_dir : /data
+  atacama_data_percent: ""
+  atacama_ps_rds: ""
 output:
   html_document:
     toc: false
@@ -29,7 +33,15 @@ suppressPackageStartupMessages(library(fs))
 
 # Set up directory to receive data
 ```{r}
-ref.dir = "/data/references/dada"
+
+if(exists("params") && 
+   !is.null(params[["data_dir"]])){
+  data.parent.dir=params[["data_dir"]]
+} else {
+  data.parent.dir = "/data"
+}
+
+ref.dir=file.path(data.parent.dir,"references/dada")
 md5.file = file.path(ref.dir, "md5sum.txt")
 
 Sys.setenv(REF_DIR=ref.dir)
