@@ -25,7 +25,8 @@ regression_rmds_1pct = c("../misc/downloading/atacama_download.Rmd",
                     "./relative_abundance.Rmd")
 
 render_params = list(
-  atacama_ps_rds=path_expand("~/scratch/atacama_1pct/dada2/atacama_1pct.rds")
+  atacama_ps_rds=path_expand("~/scratch/atacama_1pct/dada2/atacama_1pct.rds"),
+  data_dir=path_expand("~/scratch/data")
 )
 ```
 
