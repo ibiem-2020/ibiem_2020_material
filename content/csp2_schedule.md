@@ -35,10 +35,9 @@
 | 4/9      | 10-11  | *Poster/Figure Critique* (Eric Monson)                                                               |                     |      |
 |          | 11-12  | [Announcements](misc/announcements/announcements_0409.md)                                            |                     |      |
 |          |        | [Computing After IBIEM \#2](lectures/computing_after_ibiem.md#singularity-on-slurm-cluster-shutdown) |                     |      |
-|          |        | [Reproducibility Revisited](lectures/reproducibility_revisited.md)                                   |                     |      |
 |          | 12-1pm | office hours (TAs only)                                                                              |                     |      |
-| 4/16     | 10-11  |                                                                                                      |                     |      |
-|          | 11-12  | Lauren Redfern                                                                                       |                     |      |
+| 4/16     | 10-11  | [Reproducibility Revisited](lectures/reproducibility_revisited.md)                                   |                     |      |
+|          | 11-12  | Lauren Redfern (Florida Gulf Coast University)                                                       |                     |      |
 |          | 12-1pm | office hours                                                                                         |                     |      |
 | 4/23     | 10-11  | *Group Presentations*: Final Posters                                                                 |                     |      |
 |          | 11-12  | *Group Presentations*: Final Posters                                                                 |                     |      |
