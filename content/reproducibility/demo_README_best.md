@@ -1,5 +1,7 @@
 This project contains code for teaching a basic 16S rRNA amplicon analysis pipeline. Do the following to run this analysis.
 
+> Ideally this file would be named README.md in the top directory of the git repository
+
 ```
 wget https://raw.githubusercontent.com/ibiem-2020/ibiem_2020_material/master/content/misc/reproducibility_demo_slurm.sh
 bash reproducibility_demo_slurm.sh
@@ -50,5 +52,4 @@ Finally run (in the Docker image described above) the Rmarkdown documents listed
 5. relative_abundance.Rmd
 
 
-> Ideally this file would be named README.md in the top directory of the git repository
 

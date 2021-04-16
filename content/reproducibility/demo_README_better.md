@@ -1,5 +1,7 @@
 This project contains code for teaching a basic 16S rRNA amplicon analysis pipeline. Do the following to run this analysis.
 
+> Ideally this file would be named README.md and be in the top directory of the git repository
+
 # Computing Environment
 To replicate this analysis, a Docker container can be downloaded from [Docker Hub](https://hub.docker.com/r/ibiem/docker_rstudio_ibiem2020) using the command `docker pull ibiem/docker_rstudio_ibiem2020:2020_v004` (using Docker) or `singularity pull docker://ibiem/docker_rstudio_ibiem2020:2020_v004` (using Singularity).
 
@@ -42,5 +44,4 @@ Finally run (in the Docker image described above) the Rmarkdown documents listed
 5. relative_abundance.Rmd
 
 
-> Ideally this file would be named README.md in the top directory of the git repository
 
