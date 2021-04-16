@@ -1,10 +1,10 @@
 ---
 title: "Computing After IBIEM"
 output:
-  ioslides_presentation: default
-  beamer_presentation: default
   md_document:
     variant: markdown_github
+  beamer_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = FALSE)
   1. [Singularity](https://sylabs.io/docs/) must be installed!
   2. ssh to server
   3. Start tmux session: `tmux new -s ibiem`
-  4. Start IBIEM image in singularity: `singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
+  4. Start IBIEM image in singularity: `singularity run docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
   5. Copy the URL provided for "RStudio URL" and paste it in your webbrowser.
   6. Use the "RStudio Username:" and "RStudio Password:" for **Sign in to RStudio** in your webbrowser
 
@@ -49,10 +49,12 @@ knitr::opts_chunk$set(echo = FALSE)
   1. [Singularity](https://sylabs.io/docs/) must be installed!
   2. ssh to cluster login node: "ssh USERNAME@LOGIN_HOSTNAME", for example: `ssh josh@dcc-login-03.oit.duke.edu`
   3. Start tmux session: `tmux new -s ibiem`
+  4. Make a "private" tmp directory: `mkdir -p /work/${USER}/tmp`
   4. Start IBIEM image in singularity:
 ```
 srun \
-  singularity exec \
+  singularity run \
+  --bind /work/${USER}/tmp:/tmp \
   docker://ibiem/docker_rstudio_ibiem2020 \
   port_and_password
 ```
@@ -75,8 +77,6 @@ RStudio Password:       PASSWORD
   7. Open "http://localhost:8780/" in your webbrowser
   8. To login to RStudio, use the USERNAME and PASSWORD that were printed when singularity started  
 
-## STOPPED HERE 4/2/2021
-
 ## Singularity on SLURM cluster: Shutdown
   1. Click on the **File** menu *within RStudio* and select **Quit Session**
   2. In the tmux session where singularity was started, do control-C **twice** so shutdown the IBIEM container
@@ -86,7 +86,8 @@ RStudio Password:       PASSWORD
 ```
 srun \
   -A chsi -p chsi \
-  singularity exec \
+  singularity run \
+  --bind /work/${USER}/tmp:/tmp \
   docker://ibiem/docker_rstudio_ibiem2020 \
   port_and_password
 ```
@@ -100,7 +101,8 @@ srun \
 ```
 srun \
   --mem=10G --cpus-per-task=5 \
-  singularity exec \
+  singularity run \
+  --bind /work/${USER}/tmp:/tmp \
   docker://ibiem/docker_rstudio_ibiem2020 \
   port_and_password
 ```
@@ -112,7 +114,8 @@ srun \
 
 ```
 srun \
-  singularity exec \
+  singularity run \
+  --bind /work/${USER}/tmp:/tmp \
   --bind /work/josh:/work/josh \
   docker://ibiem/docker_rstudio_ibiem2020 \
   port_and_password
@@ -124,7 +127,8 @@ srun \
 srun \
   -A chsi -p chsi \
   --mem=10G --cpus-per-task=5 \
-  singularity exec \
+  singularity run \
+  --bind /work/${USER}/tmp:/tmp \
   --bind /work/josh:/work/josh \
   docker://ibiem/docker_rstudio_ibiem2020 \
   port_and_password

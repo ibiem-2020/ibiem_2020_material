@@ -51,7 +51,7 @@ Singularity on a Server (demo)
 2.  ssh to server
 3.  Start tmux session: `tmux new -s ibiem`
 4.  Start IBIEM image in singularity:
-    `singularity exec docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
+    `singularity run docker://ibiem/docker_rstudio_ibiem2020 port_and_password`
 5.  Copy the URL provided for “RStudio URL” and paste it in your
     webbrowser.
 6.  Use the “RStudio Username:” and “RStudio Password:” for **Sign in to
@@ -65,12 +65,14 @@ Singularity on SLURM cluster
     <a href="mailto:USERNAME@LOGIN_HOSTNAME" class="email">USERNAME@LOGIN_HOSTNAME</a>”,
     for example: `ssh josh@dcc-login-03.oit.duke.edu`
 3.  Start tmux session: `tmux new -s ibiem`
-4.  Start IBIEM image in singularity:
+4.  Make a “private” tmp directory: `mkdir -p /work/${USER}/tmp`
+5.  Start IBIEM image in singularity:
 
 <!-- -->
 
     srun \
-      singularity exec \
+      singularity run \
+      --bind /work/${USER}/tmp:/tmp \
       docker://ibiem/docker_rstudio_ibiem2020 \
       port_and_password
 
@@ -101,9 +103,6 @@ Singularity on SLURM cluster
 3.  To login to RStudio, use the USERNAME and PASSWORD that were printed
     when singularity started
 
-STOPPED HERE 4/2/2021
----------------------
-
 Singularity on SLURM cluster: Shutdown
 --------------------------------------
 
@@ -121,9 +120,10 @@ access to, for example:
 
     srun \
       -A chsi -p chsi \
-      singularity exec \
+      singularity run \
+      --bind /work/${USER}/tmp:/tmp \
       docker://ibiem/docker_rstudio_ibiem2020 \
-      port_and_password`
+      port_and_password
 
 Singularity on SLURM cluster: Memory and CPUs
 ---------------------------------------------
@@ -141,9 +141,10 @@ Singularity on SLURM cluster: Memory and CPUs
 
     srun \
       --mem=10G --cpus-per-task=5 \
-      singularity exec \
+      singularity run \
+      --bind /work/${USER}/tmp:/tmp \
       docker://ibiem/docker_rstudio_ibiem2020 \
-      port_and_password`
+      port_and_password
 
 Singularity: Accessing Host Directories
 ---------------------------------------
@@ -160,10 +161,11 @@ Singularity: Accessing Host Directories
 <!-- -->
 
     srun \
-      singularity exec \
+      singularity run \
+      --bind /work/${USER}/tmp:/tmp \
       --bind /work/josh:/work/josh \
       docker://ibiem/docker_rstudio_ibiem2020 \
-      port_and_password`
+      port_and_password
 
 Singularity: Putting it Together
 --------------------------------
@@ -171,7 +173,8 @@ Singularity: Putting it Together
     srun \
       -A chsi -p chsi \
       --mem=10G --cpus-per-task=5 \
-      singularity exec \
+      singularity run \
+      --bind /work/${USER}/tmp:/tmp \
       --bind /work/josh:/work/josh \
       docker://ibiem/docker_rstudio_ibiem2020 \
       port_and_password
