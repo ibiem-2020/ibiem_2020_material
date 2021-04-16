@@ -2,8 +2,9 @@
 title: "Demultiplex With fastq-multx"
 params:
   atacama_data_percent: 1
-  data_dir : /data/tutorial_data
+  data_dir : /data
   atacama_ps_rds: /data/tutorial_data/atacama_1pct.rds
+  
 output:
   md_document:
     variant: markdown_github
@@ -38,12 +39,19 @@ if(exists("params") &&
 } else {
   atacama.data.percent = "1"
 }
+
 if(exists("params") && 
    !is.null(params[["data_dir"]])){
-  data.dir=params[["data_dir"]]
+  data.parent.dir=params[["data_dir"]]
 } else {
-  data.dir = "/data/tutorial_data"
+  data.parent.dir = "/data"
 }
+
+data.dir=file.path(data.parent.dir,"tutorial_data")
+
+
+
+
 
 # Directories
 data.dir = file.path(data.dir, paste0("atacama_", atacama.data.percent, "pct"))

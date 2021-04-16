@@ -3,7 +3,7 @@ title: "Absolute Abundance Plots"
 params:
   atacama_ps_rds: /data/tutorial_data/atacama_1pct.rds
   atacama_data_percent: 1
-  data_dir : /data/tutorial_data
+  data_dir : ""
 output:
   md_document:
      variant: markdown_github
