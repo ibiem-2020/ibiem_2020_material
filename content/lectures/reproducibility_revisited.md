@@ -23,6 +23,9 @@ Good
     4.  Rmarkdown D.Rmd
     5.  Rmarkdown E.Rmd
 
+[Example Instructions for “Good”
+reproducibility](../reproducibility/demo_README_good.md)
+
 Better
 ------
 
@@ -32,6 +35,9 @@ Better
     2.  Download the **Docker Image** from . . .
     3.  Download the **Code** from . . .
     4.  Run Rmarkdown **meta.Rmd** using the Docker Image
+
+[Example Instructions for “Better”
+reproducibility](../reproducibility/demo_README_better.md)
 
 Best
 ----
@@ -50,3 +56,6 @@ Best
     2.  Download the **Docker Image** from . . .
     3.  Download the **Code** from . . .
     4.  Run Rmarkdown **meta.Rmd** using the Docker Image
+
+[Example Instructions for “Best”
+reproducibility](../reproducibility/demo_README_best.md)

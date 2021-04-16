@@ -24,16 +24,23 @@ regression_rmds_1pct = c("../misc/downloading/atacama_download.Rmd",
                     "./absolute_abundance_plots.Rmd",
                     "./relative_abundance.Rmd")
 
-regression_rmds_1pct=regression_rmds_1pct[1:4]
+# regression_rmds_1pct=regression_rmds_1pct[1:4]
 
+data_dir_path=path_expand("~/scratch/data")
+outdir=path_expand("~/scratch/atacama_1pct")
+atacama_ps_rds_path=file.path(outdir, "dada2/atacama_1pct.rds")
 render_params = list(
-  atacama_ps_rds=path_expand("~/scratch/atacama_1pct/dada2/atacama_1pct.rds"),
-  data_dir=path_expand("~/scratch/data")
+  atacama_ps_rds=atacama_ps_rds_path,
+  data_dir=data_dir_path
 )
+render_outdir=path_expand("~/scratch/atacama_1pct_render_run")
+```
+
+```{r}
+cat("Clean up output directories:\n", paste(data_dir_path, outdir, render_outdir, sep="\n"))
 ```
 
 ```{r run_render}
-render_outdir=path_expand("~/scratch/atacama_1pct_render_run")
 dir_create(render_outdir)
 for (cur_rmd in regression_rmds_1pct){
   print(cur_rmd)
@@ -48,5 +55,3 @@ for (cur_rmd in regression_rmds_1pct){
 ```{r session_info}
 sessionInfo()
 ```
-
-
