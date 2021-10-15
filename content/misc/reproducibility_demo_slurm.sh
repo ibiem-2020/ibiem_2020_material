@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ]; then
     printf "When running this script, please supply an output directory as a command line argument\n" >&2 
     printf "\n\nNOTE: Memory limitation can cause this to fail at the assignTaxonomy step.\n" >&2
     printf "This can be a problem if there is not enough memory on the host machine,\n" >&2
