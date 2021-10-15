@@ -20,7 +20,7 @@ SEP_STRING="\n--------------------------------------------------\n"
 echo "Outputting to: $BASE_DIR"
 mkdir -p $WORK_DIR $DATA_DIR
 
-srun git clone https://github.com/ibiem-2020/ibiem_2020_material.git  ${WORK_DIR}/demo
+srun $2 git clone https://github.com/ibiem-2020/ibiem_2020_material.git  ${WORK_DIR}/demo
 
 
 # printf "\n${SEP_STRING} Pulling docker image: $DOCKER_IMAGENAME ${SEP_STRING}"
