@@ -29,7 +29,7 @@ srun git clone https://github.com/ibiem-2020/ibiem_2020_material.git  ${WORK_DIR
 
 printf "\n${SEP_STRING} STARTING Pipeline in Singularity ${SEP_STRING}"
 # srun -A chsi -p chsi --mem=8G --cpus-per-task=10 singularity exec \
-srun --mem=8G --cpus-per-task=10 singularity exec \
+srun $2 --mem=8G --cpus-per-task=10 singularity exec \
   --bind ${WORK_DIR}:${HOME} \
   --bind ${DATA_DIR}:/data \
   docker://${DOCKER_IMAGENAME} \
