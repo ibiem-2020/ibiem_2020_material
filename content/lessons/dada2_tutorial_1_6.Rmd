@@ -71,6 +71,10 @@ data.dir = file.path(data.dir, paste0("atacama_", atacama.data.percent, "pct"))
 output.dir = path.expand(file.path("~/scratch", paste0("atacama_", atacama.data.percent, "pct")))
 demux.dir = file.path(output.dir, "demux")
 
+silva.ref = file.path(data.parent.dir, "references/dada/silva_nr_v132_train_set.fa.gz")
+silva.species.ref = file.path(data.parent.dir, "references/dada/silva_species_assignment_v132.fa.gz")
+
+
 list.files(demux.dir)
 ```
 
@@ -91,9 +95,6 @@ if (dir_exists(scratch.dir)) {
 }
 dir_create(scratch.dir)
 
-
-silva.ref = "/data/references/dada/silva_nr_v132_train_set.fa.gz"
-silva.species.ref = "/data/references/dada/silva_species_assignment_v132.fa.gz"
 ```
 
 &nbsp;
