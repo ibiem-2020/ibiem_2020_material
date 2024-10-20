@@ -272,7 +272,9 @@ atacama.prune_s.ps %>%
   noOutlineAbundancePlot(tax_level = "Phylum")
 ```
 
+```{r eval=FALSE, echo=FALSE}
 # Stopped Here 11/13/2020
+}
 
 ### Other Ways to Prune Taxa
 We can use the `filter_taxa` function to prune taxa by average fractional abundance, for example, we can choose to only show taxa that, on average across all samples, have a relative abundance of at least 1%.  

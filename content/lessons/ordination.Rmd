@@ -89,7 +89,10 @@ plot_bar(atacama.st_prune.even)
 ```{r}
 plot_bar(atacama.even)
 ```
+
+```{r eval=FALSE, echo=FALSE}
 # STOPPED HERE 2/12/2021
+}
 
 ## Ordination
 For ordination plots we have at least two major decisions:
@@ -286,7 +289,9 @@ facet_grid(Vegetation~TransectName, labeller = "label_both") +
         panel.grid.minor = element_blank())
 ```
 
+```{r eval=FALSE, echo=FALSE}
 # Stopped HERE 2/26/2021
+}
 
 ### PCoA Plots
 There are many other ordination methods supported by phyloseq.  Let's make a PCoA plot using Bray-Curtis dissimilarity, coloring the data points by "Vegetation".

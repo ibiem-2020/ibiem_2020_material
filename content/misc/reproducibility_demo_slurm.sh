@@ -39,6 +39,7 @@ printf "\n${SEP_STRING} FINISHED Pipeline ${SEP_STRING}"
 printf "\n${SEP_STRING} Results output to ${WORK_DIR}/scratch\n\n"
 
 printf "\n${SEP_STRING} To clean up: \n\n"
+echo "chmod -R u+w $BASE_DIR"
 echo "rm -rf $BASE_DIR"
 # echo "docker rm -f \`docker ps -aq\`"
 # echo "docker rmi \`docker images -aq\`"
